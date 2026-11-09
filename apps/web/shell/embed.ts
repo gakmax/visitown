@@ -3,6 +3,7 @@
 // 스냅샷→건물·이벤트 설정·해금(테마·레벨)·날씨·바이탈·세션, 이후 event·pages·unlocks·trails·weather·vitals. 배율은 iframe·OBS 소스를 꽉 채운다. 밝기가 바뀌면 아이콘을 다시 만든다
 import { TownStore, World, A, PAL, BUILDINGS, THEMES, W, H, THEME_KEY, SEASON, TOWN_LEVEL, layoutTown, buildAssets, buildIconUrls, setShellInfo, setEventConfig, placeDecor, setSeasonValue, seasonOf, setTownLevelValue, townLevelOf, buildGround } from '@visitown/engine';
 import type { StreamStatus } from '@visitown/ui/stream';
+import { L } from '@visitown/i18n';
 
 export type EmbedOptions = {
   me?: string;          // ?me=세션ID: 그 세션을 '나'(ME)로 그린다(랜딩·미니 위젯이 SDK 세션을 넘긴다)
@@ -59,7 +60,7 @@ export function createEmbedTown(root: HTMLElement, o: EmbedOptions): EmbedTownHa
     }
   }
   function status(s: StreamStatus) {
-    if (s.state === 'down') { store.frozen = true; if (!got) { errEl.textContent = '임베드 링크가 맞지 않거나 서버에 연결할 수 없어요. 대시보드의 임베드 버튼에서 링크를 다시 만들어 주세요.'; errEl.hidden = false; } }
+    if (s.state === 'down') { store.frozen = true; if (!got) { errEl.textContent = L("임베드 링크가 맞지 않거나 서버에 연결할 수 없어요. 대시보드의 임베드 버튼에서 링크를 다시 만들어 주세요."); errEl.hidden = false; } }
   }
   let last = performance.now(), raf = 0;
   const clock = () => { const d = new Date(); return (d.getHours() * 60 + d.getMinutes()) / 1440; };

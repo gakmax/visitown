@@ -16,6 +16,8 @@ before(async () => {
     if (!f.startsWith(ROOT) || !fs.existsSync(f)) { res.writeHead(200, { 'Content-Type': 'text/html' }); return res.end('<!doctype html><title>sdk</title>'); } res.writeHead(200, { 'Content-Type': MIME[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res); });
   await new Promise(r => sdkServer.listen(0, '127.0.0.1', r)); sdkBase = 'http://127.0.0.1:' + sdkServer.address().port;
   browser = await loadPlaywright().chromium.launch();
+  // 화면 언어(로드맵 60)는 Accept-Language로 정해진다. 헤드리스 기본은 en-US라 기존 테스트는 한국어로 고정하고, 영어 화면은 아래 i18n 테스트가 locale을 따로 준다
+  const newContext = browser.newContext.bind(browser); browser.newContext = (o = {}) => newContext({ locale: 'ko-KR', ...o });
 });
 after(async () => { await browser?.close(); sdkServer?.close(); web?.proc.kill(); });
 
@@ -278,4 +280,32 @@ test('접근성: axe 위반 0(/demo 밝게·어둡게·통계·도감, /app, /, 
   const rm = await rp.evaluate(() => { const vt = window.__vt; vt.sim.rain = true; vt.world.burst(100, 100, 'fireworks'); vt.world.update(0.05); return { flag: vt.world.reduceMotion, particles: vt.world.particles.length, chars: vt.world.chars.size, btn: parseFloat(getComputedStyle(document.querySelector('.btn')).transitionDuration) }; });
   assert.deepEqual({ flag: rm.flag, particles: rm.particles }, { flag: true, particles: 0 }); assert.ok(rm.btn < 0.001, 'CSS 전환 0.01ms: ' + rm.btn); assert.ok(rm.chars > 0, '캐릭터(내용)는 그대로 걷는다');
   await rctx.close();
+});
+
+// 영어(로드맵 60): Accept-Language가 en이면 서버가 <html lang="en">과 영어 마크업을 보내고, 셸·패널·엔진 이름도 영어. 숨은 메뉴·모달까지 화면 글자·속성에 한글이 남지 않는다(언어 토글의 '한국어'만 예외: lang="ko")
+test('영어(로드맵 60): /·/demo(통계·도감·피드 요약)·/app이 영어로 뜨고 한글이 남지 않으며 오류·CSP·axe 0, 토글로 한국어', async () => {
+  const ctx = await browser.newContext({ locale: 'en-US', viewport: { width: 1280, height: 800 } }); const page = await ctx.newPage(); const errors = [];
+  await page.addInitScript(() => { window.__csp = []; document.addEventListener('securitypolicyviolation', e => window.__csp.push(e.violatedDirective + ' ' + e.blockedURI)); });
+  page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); }); page.on('pageerror', e => errors.push('pageerror: ' + e.message));
+  const hangul = () => page.evaluate(() => { const H = /[가-힣]/, out = new Set(); const skip = el => !el || el.closest('[lang="ko"], script, style, noscript');
+    const w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT); let n; while ((n = w.nextNode())) if (!skip(n.parentElement) && H.test(n.nodeValue)) out.add(n.nodeValue.trim().slice(0, 50));
+    for (const el of document.querySelectorAll('[title],[aria-label],[placeholder],[alt]')) for (const a of ['title', 'aria-label', 'placeholder', 'alt']) { const v = el.getAttribute(a); if (v && H.test(v) && !skip(el)) out.add(a + '=' + v.slice(0, 50)); }
+    if (H.test(document.title)) out.add('title: ' + document.title); return [...out]; });
+  for (const u of ['/', '/app']) {
+    await page.goto(base + u, { waitUntil: 'load' }); await page.waitForTimeout(1500);
+    assert.equal(await page.evaluate(() => document.documentElement.lang), 'en', u); assert.deepEqual(await hangul(), [], u + ' 한글');
+  }
+  errors.length = 0; // 랜딩은 수집 서버(로컬 기본 8787)에 붙으므로 콘솔 오류는 서버가 필요 없는 /demo부터 센다(랜딩 오류는 위 '랜딩(/)' 테스트가 실제 서버로 본다)
+  await page.goto(base + '/demo', { waitUntil: 'load' }); await page.waitForTimeout(3500);
+  assert.deepEqual(await hangul(), [], '/demo 한글');
+  await page.evaluate(() => window.__vt.ui.announce()); await page.waitForTimeout(200);
+  assert.match(await page.evaluate(() => document.getElementById('feedLive').textContent), /^[\x20-\x7e·…]+$/, '피드 요약도 영어');
+  await page.evaluate(() => { window.__vt.sim.running = false; window.__vt.showStats('now'); }); await page.waitForTimeout(600); assert.deepEqual(await hangul(), [], '/demo 통계 한글'); await axeRun(page, '/demo en 통계');
+  await page.keyboard.press('Escape'); await page.evaluate(() => window.__vt.showDex()); await page.waitForTimeout(600); assert.deepEqual(await hangul(), [], '/demo 도감 한글');
+  await page.keyboard.press('Escape'); await page.waitForTimeout(300); await axeRun(page, '/demo en');
+  assert.deepEqual(await page.evaluate(() => window.__csp), [], 'CSP 위반'); assert.deepEqual(errors, []);
+  // 토글: 쿠키를 쓰고 새로고침 → 한국어
+  await page.evaluate(() => document.querySelector('[data-langpick="ko"]').click()); await page.waitForLoadState('load'); await page.waitForTimeout(1500);
+  assert.equal(await page.evaluate(() => document.documentElement.lang), 'ko', '토글 뒤 한국어'); assert.match(await page.evaluate(() => document.body.innerText), /접속자/);
+  await ctx.close();
 });

@@ -1,29 +1,30 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, mk, roof, scallop, shade, shadow } from '../map';
 import { FIXED_COMMON, ICON_ROWS, PAL, THEMES, human } from '../palette';
+import { L } from '@visitown/i18n';
 // 사이버펑크
 (()=>{
   // ---- 캐릭터
   const CY_SHAPES = [
-    human('후드 해커',
+    human(L("후드 해커"),
       ['.....oo.....','....oBBo....','...oBhBBo...','..oBhBBBBo..','.oBhppppBBo.','.oBrrrrrrBo.','.oBBppppBBo.','..oBBBBBBo..'],
       ['......oo....','.....oBBo...','....oBhBBo..','...oBhBBBBo.','..opppBBBBBo','..orrpBBBBBo','..opppBBBBo.','...oBBBBBBo.'],
       { down:['.oBBBBBBBBo.','.oBBBBBBBBo.','.oBBBBBBBBo.','.oBBbbbbBBo.','.onBBBBBBno.','..obbbbbbo..','...ff..gg...'],
         side:['..oBBBBBBBo.','.oBBBBBBBBo.','.oBBBBBBBBo.','.oBbbbbBBBo.','.onBBBBBBBo.','..obbbbbbo..','...ff..gg...'] }),
-    human('사이보그',
+    human(L("사이보그"),
       ['.....oo.....','....oLLo....','....oLLo....','..oooLLooo..','.oSSSSSkkko.','.oSeSSSkrko.','.oSSSSSkkko.','..oSSSSSko..'],
       ['.....ooo....','....oLLLo...','....oLLLLo..','..oooLLLLoo.','.oSSSSSSkko.','.oeSSSSSkko.','.oSSSSSSkko.','..oSSSSSSo..'],
       { down:['.oBBBhhBBkko','.oBBBBBBBkko','.oBBBBBBBkko','.oBBBBBBBkko','.onBBBBBBrko','..obbbbbbo..','...ff..gg...'],
         side:['..oBBBBBBo..','.oBBhBBBBBo.','.okkBBBBBBo.','.okkBBBBBBo.','.orkBBBBBBo.','..obbbbbbo..','...ff..gg...'] }),
-    { name:'네온 고양이',
+    { name:L("네온 고양이"),
       down:['.oo......oo.','.oBo....oBo.','.oBBo..oBBo.','.oBBBooBBBo.','oBBhBBBBBBBo','oBBwBBBBwBBo','oBBwBBBBwBBo','oBBBBppBBBBo','.oBBBBBBBBo.','.orrrrrrrro.','..obBBBBbo..','..oobbbboo..','...ff..gg...'],
       side:['.oo..oo.....','.oBooBo.....','.oBBBBBo.oo.','oBhBBBBBooBo','owBBBBBBooBo','owBBBBBBooBo','opBBBBBBooBo','.orrrrrrooBo','.oBBBBBBBBBo','.oBBBBBBBBbo','..obbbbbbbo.','..ooooooo...','...ff..gg...'] },
-    { name:'배달 드론',
+    { name:L("배달 드론"),
       down:['okkko..okkko','..o......o..','.oooooooooo.','.okBBBBBBko.','..oBhBBBBo..','..oBrrrrBo..','..oBBBBBBo..','..obbbbbbo..','...okkkko...','..oLLLLLLo..','..oLLkkLLo..','..oLLLLLLo..','..oooooooo..','...ff..gg...'],
       side:['okkko..okkko','..o......o..','.oooooooooo.','.okBBBBBBko.','..oBhBBBBo..','..orrBBBBo..','..oBBBBBBo..','..obbbbbbo..','...okkkko...','..oLLLLLLo..','..oLLkkLLo..','..oLLLLLLo..','..oooooooo..','...ff..gg...'] },
-    { name:'경비 로봇',
+    { name:L("경비 로봇"),
       down:['.....oo.....','....oLLo....','...oooooo...','..oBBhhBBo..','.oBhBBBBBBo.','.orrrrrrrro.','.oBBBBBBBBo.','oooooooooooo','okkBBBBBBkko','okoBBwwBBoko','okoBBBBBBoko','okoBbbbbBoko','ono.oBBo.ono','...oBBBBo...','..obboobbo..','...ff..gg...'],
       side:['.....oo.....','....oLLo....','...oooooo...','..oBBhhBBo..','.oBhBBBBBBo.','.orrrrBBBBo.','.oBBBBBBBBo.','..oooooooo..','..oBBkkkBo..','..oBBkkkBo..','..oBBkkkBo..','..oBbkkkbo..','...oBnnBo...','...oBBBBo...','..obboobbo..','...ff..gg...'] },
-    human('홀로그램',
+    human(L("홀로그램"),
       ['....hhhh....','...h....h...','.oo.oooo.oo.','oBBohhhhoBBo','oBBhhhhhhBBo','.oohSSSShoo.','..oSeSSeSo..','..oSSSSSSo..'],
       ['....hhhh....','...h....h...','....oooo.oo.','...ohhhhoBBo','..ohhhhhhBBo','.oSSShhhhoo.','.oSeSSSSho..','..oSSSSSo...'],
       { down:['..oBBhhBBo..','.ohhhhhhhho.','.oBBBBBBBBo.','..ohhhhhhhho','.onBBBBBBno.','..obbbbbbo..','...ff..gg...'],
@@ -32,19 +33,19 @@ import { FIXED_COMMON, ICON_ROWS, PAL, THEMES, human } from '../palette';
   const OUT = '#16121f';
 
   THEMES.cyber = {
-    name:'사이버펑크', order:6,
+    name:L("사이버펑크"), order:6,
     palette:{ outline:OUT, grass:'#4d4a66', grass2:'#47445f', grass3:'#3a3851', dirt:'#5f5c7c', dirt2:'#6f6c8f', stone:'#6c6a8c', stone2:'#57557a',
       water:'#5cf2ff', water2:'#1fa9d6', wall:'#b4b0d2', wall2:'#8e89b2', wood:'#8a5f7a', wood2:'#5a3d58',
       roofPink:'#ff4fa8', roofBlue:'#4a6cf0', roofGreen:'#3ef0a0', roofYellow:'#ffd23f', roofLilac:'#a56bff',
       white:'#f6f2ff', leaf:'#3fe08a', pink:'#ff7ac8', red:'#ff3d6e', gold:'#ffc23a', metal:'#a4a9c4', metal2:'#6b7090', skin:'#f0c8b0' },
     characters:{ shapes:CY_SHAPES, colors:[
-      { name:'네온 핑크', B:'#ff5fae', b:'#c8378a', h:'#ffa6d6' },{ name:'시안', B:'#4fe3f0', b:'#2aa6c0', h:'#b0f7ff' },{ name:'보라', B:'#9a6bff', b:'#6a44c8', h:'#c9b0ff' },
-      { name:'라임', B:'#a6f04a', b:'#6fb82e', h:'#d6ff9e' },{ name:'오렌지', B:'#ff9a3c', b:'#d0682a', h:'#ffc98a' },{ name:'크롬', B:'#b4b8cc', b:'#7e8298', h:'#e6e8f2' }],
+      { name:L("네온 핑크"), B:'#ff5fae', b:'#c8378a', h:'#ffa6d6' },{ name:L("시안"), B:'#4fe3f0', b:'#2aa6c0', h:'#b0f7ff' },{ name:L("보라"), B:'#9a6bff', b:'#6a44c8', h:'#c9b0ff' },
+      { name:L("라임"), B:'#a6f04a', b:'#6fb82e', h:'#d6ff9e' },{ name:L("오렌지"), B:'#ff9a3c', b:'#d0682a', h:'#ffc98a' },{ name:L("크롬"), B:'#b4b8cc', b:'#7e8298', h:'#e6e8f2' }],
       fixed:{ ...FIXED_COMMON, o:OUT, e:OUT, f:OUT, g:OUT, w:'#f6f2ff', p:'#3d2f45', S:'#f0c8b0', n:'#f0c8b0', H:'#e8e4ff', k:'#8a90ac', r:'#ff3b5c', L:'#ffb43a' },
       up:{ S:'H', e:'H', p:'B', w:'B', n:'B', r:'k' } },
-    kinds:{ plaza:['홀로그램 광장','cyber_plaza','star'], shop:['네온 마켓','cyber_shop','cart'], library:['데이터 센터','cyber_library','search'], community:['클럽','cyber_community','heart'],
-      home:['캡슐 호텔','cyber_home','house'], checkout:['코인 ATM','cyber_checkout','coin'], cafe:['라멘 노점','cyber_cafe','mug'], school:['해커 스쿨','cyber_school','monitor'],
-      clinic:['사이보그 클리닉','cyber_clinic','cross'], post:['드론 택배','cyber_post','mail'], factory:['로봇 공장','cyber_factory','robot'], park:['옥상 정원','cyber_park','flower'] },
+    kinds:{ plaza:[L("홀로그램 광장"),'cyber_plaza','star'], shop:[L("네온 마켓"),'cyber_shop','cart'], library:[L("데이터 센터"),'cyber_library','search'], community:[L("클럽"),'cyber_community','heart'],
+      home:[L("캡슐 호텔"),'cyber_home','house'], checkout:[L("코인 ATM"),'cyber_checkout','coin'], cafe:[L("라멘 노점"),'cyber_cafe','mug'], school:[L("해커 스쿨"),'cyber_school','monitor'],
+      clinic:[L("사이보그 클리닉"),'cyber_clinic','cross'], post:[L("드론 택배"),'cyber_post','mail'], factory:[L("로봇 공장"),'cyber_factory','robot'], park:[L("옥상 정원"),'cyber_park','flower'] },
     decor:{ tree:'cyber_tree', gate:'cyber_gate', pond:'cyber_pond', ground:'tile' },
   };
 

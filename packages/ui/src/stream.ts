@@ -4,6 +4,7 @@
 // - 티켓 요청이 401이면 백오프가 아니라 'auth' 상태를 주고 멈춘다(토큰 갱신·로그인은 쓰는 쪽이)
 // - cancelled: close() 뒤에 늦게 온 티켓·프레임은 버린다(사이트 전환, StrictMode 이중 effect)
 import { useEffect, useRef } from 'react';
+import { L } from '@visitown/i18n';
 
 export type StreamAuth = { embedKey: string } | { ticket: () => Promise<string> };
 export type StreamStatus =
@@ -60,7 +61,7 @@ export function useSiteStream(o: StreamOptions | null): void {
     if (!api || !siteId) return;
     const s = createSiteStream({
       api, siteId,
-      auth: embedKey ? { embedKey } : { ticket: () => { const a = latest.current?.auth; return a && 'ticket' in a ? a.ticket() : Promise.reject(new Error('티켓 함수가 없어요')); } },
+      auth: embedKey ? { embedKey } : { ticket: () => { const a = latest.current?.auth; return a && 'ticket' in a ? a.ticket() : Promise.reject(new Error(L("티켓 함수가 없어요"))); } },
       onFrame: (t, d, m) => latest.current?.onFrame(t, d, m),
       onStatus: st => latest.current?.onStatus?.(st),
       types: latest.current?.types, backoff: latest.current?.backoff,

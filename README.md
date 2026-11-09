@@ -15,6 +15,7 @@ Every visitor becomes a little character, every page becomes a building, and you
 - **React panels over an external store** (`packages/ui`): `useSyncExternalStore` with 250 ms batching for fast-changing counters. Selection has a single source of truth (`store.selectedId`). The SSE lifecycle lives in a `useSiteStream` hook (tickets, backoff, `lastEventId`, StrictMode-safe cleanup).
 - **Next 16 App Router** (`apps/web`): per-request nonce CSP with `'strict-dynamic'` and no `'unsafe-inline'`. Server-rendered public towns with OG metadata. Old embed URLs are kept alive with rewrites.
 - **Tracking SDK** (`sdk/visitown.js`): about 7 KiB gzipped (enforced by a test), batched sends, an offline queue with backoff, SPA route tracking and TypeScript types.
+- **English and Korean**: the whole UI (dashboard, landing, engine names, SDK widget) follows `Accept-Language` or a toggle, via a tiny gettext-style package (`packages/i18n`) whose dictionary is checked by tests.
 - **Accessibility**: 0 axe violations on every route (checked in CI), keyboard navigation of the canvas, and a 30-second screen-reader summary instead of a noisy live feed.
 - **Also**: horizontal scaling across instances via Supabase Realtime broadcast with a DB leader lease, a read-only MCP server (`server/mcp.js`), and 99 tests (`node:test`, fast-check property tests, Playwright smoke tests) in GitHub Actions.
 

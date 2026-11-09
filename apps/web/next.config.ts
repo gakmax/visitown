@@ -12,7 +12,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   // 워크스페이스 패키지는 TS 소스 그대로 가져온다(packages/engine·packages/ui의 exports.import)
-  transpilePackages: ['@visitown/engine', '@visitown/ui'],
+  transpilePackages: ['@visitown/engine', '@visitown/ui', '@visitown/i18n'],
   // 대시보드·디자인 시스템 마크업은 서버 컴포넌트가 fs로 읽는다(components/DashboardShell.tsx). 배포 번들에 같이 넣는다
   outputFileTracingIncludes: { '/app': ['./shell/*.html'], '/demo': ['./shell/*.html'], '/design-system': ['./shell/*.html'] },
   async headers() { return [{ source: '/(.*)', headers: SECURITY_HEADERS }]; },

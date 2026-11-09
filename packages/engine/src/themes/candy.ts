@@ -1,5 +1,6 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, door, glass, mk, roof, scallop, shade, shadow, win } from '../map';
 import { FIXED_COMMON, PAL, THEMES } from '../palette';
+import { L } from '@visitown/i18n';
 // 과자 마을
 (()=>{
   // ---- 과자 색(팔레트에 없는 포인트만)
@@ -23,40 +24,40 @@ import { FIXED_COMMON, PAL, THEMES } from '../palette';
   function wall(p,x,y,w,h,c1,c2){ p.r(x,y,w,h,c1); p.r(x+w-5,y,5,h,c2); p.o(x,y,w,h); }
 
   THEMES.candy = {
-    name:'과자 마을', order:7,
+    name:L("과자 마을"), order:7,
     palette:{ outline:'#4a2a38', grass:'#f4cbd5', grass2:'#ecb9c7', grass3:'#dd9db1', dirt:'#fbe5c2', dirt2:'#e2bb88', stone:'#fff2e2', stone2:'#ecc9b8',
       water:'#bdeee6', water2:'#5cc6b4', wall:'#fff3e3', wall2:'#efd6c0', wood:'#a3613d', wood2:'#6c3925',
       roofPink:'#f77fa6', roofBlue:'#7cc6f0', roofGreen:'#7fdcb8', roofYellow:'#ffcf5a', roofLilac:'#c08af0',
       white:'#ffffff', leaf:'#62cf96', pink:'#ff9cc0', red:'#e8435f', gold:'#ffbd3a', metal:'#e4d8e6', metal2:'#ad97b8', skin:'#ffe0c2' },
     characters:{
       shapes:[
-        { name:'마카롱',
+        { name:L("마카롱"),
           down:['............','............','............','...oooooo...','.oohhBBBBoo.','oBhBBBBBBBBo','oBBeBBBBeBBo','oBpBBBBBBpBo','obbbbbbbbbbo','oSSSSSSSSSSo','oBhBBBBBBBBo','.obbbbbbbbo.','..oooooooo..','...ff..gg...'],
           side:['............','............','............','...oooooo...','.oohhBBBBoo.','oBhBBBBBBBBo','oBeBBBBBBBBo','opBBBBBBBBBo','obbbbbbbbbbo','oSSSSSSSSSSo','oBhBBBBBBBBo','.obbbbbbbbo.','..oooooooo..','...ff..gg...'] },
-        { name:'젤리곰',
+        { name:L("젤리곰"),
           down:['............','.oo......oo.','oBBo....oBBo','oBhBooooBBBo','.oBhBBBBBBo.','.oBBeBBeBBo.','.oBpBhhBpBo.','..oBBBBBBo..','.ooBhBBBBoo.','oBBoBhBBoBBo','oBboBBBBobBo','.oooBBBBooo.','..obBBBBbo..','..oboooobo..','...ff..gg...'],
           side:['............','..oo....oo..','.oBBo..oBBo.','.oBhBooBBBo.','.oBhBBBBBBo.','.oBeBBBBBBo.','.ohhBBBBpBo.','..oBBBBBBo..','..oBhBBBBo..','..oBoBBBBo..','..oBoBBBbo..','..ooBBBBbo..','..obBBBBbo..','..oboooobo..','...ff..gg...'] },
-        { name:'푸딩',
+        { name:L("푸딩"),
           down:['............','.....oo.....','....orro....','...orwrro...','..ooHHHHoo..','.oHHHHHHHHo.','.oBHBHHBHBo.','.oBBeBBeBBo.','.oBpBBBBpBo.','oBhBBBBBBBBo','obBBBBBBBBbo','owwwwwwwwwwo','.oooooooooo.','...ff..gg...'],
           side:['............','.....oo.....','....orro....','...orwrro...','..ooHHHHoo..','.oHHHHHHHHo.','.oBHBHHBHBo.','.oeBBBBBBBo.','.opBBBBBBBo.','oBhBBBBBBBBo','obBBBBBBBBbo','owwwwwwwwwwo','.oooooooooo.','...ff..gg...'] },
-        { name:'컵케이크',
+        { name:L("컵케이크"),
           down:['............','.....oo.....','....oBho....','...oBBBBo...','..obbbbbbo..','.oBhBrBBrBo.','.oBBeBBeBBo.','oBBpBBBBpBBo','obbbbbbbbbbo','.okHkkkkHko.','.okHkkkkHko.','..okHkkHko..','..oooooooo..','...ff..gg...'],
           side:['............','.....oo.....','....oBho....','...oBBBBo...','..obbbbbbo..','.oBhBrBBrBo.','.oBeBBBBBBo.','oBpBBBBBBBBo','obbbbbbbbbbo','.okHkkkkHko.','.okHkkkkHko.','..okHkkHko..','..oooooooo..','...ff..gg...'] },
-        { name:'도넛',
+        { name:L("도넛"),
           down:['............','............','...oooooo...','..oBhBrBBo..','.oBhrBBBrBo.','oBrBeBBeBBBo','oBpBBooBBpBo','okBBo..oBBko','okBko..okBko','okkkkookkkko','.oHkkkkkkHo.','..oHHHHHHo..','...oooooo...','...ff..gg...'],
           side:['............','............','...oooooo...','..oBhBrBBo..','.oBhrBBBrBo.','oBeBBBBBrBBo','opBBBooBBBBo','okBBo..oBBko','okBko..okBko','okkkkookkkko','.oHkkkkkkHo.','..oHHHHHHo..','...oooooo...','...ff..gg...'] },
-        { name:'막대사탕',
+        { name:L("막대사탕"),
           down:['............','...oooooo...','..oBhwwBBo..','.oBhBBBBwBo.','oBwBeBBeBwBo','oBwBBBBBBwBo','oBwBpBBpBwBo','.oBwBBBBwBo.','..oBwwwwBo..','...oooooo...','.orrowworro.','..ooowwooo..','....owwo....','....owwo....','...ff..gg...'],
           side:['............','...oooooo...','..oBhwwBBo..','.oBhBBBBwBo.','oBeBBBBBBwBo','oBwBBBBBBwBo','opwBBBBBBwBo','.oBwBBBBwBo.','..oBwwwwBo..','...oooooo...','.orrowworro.','..ooowwooo..','....owwo....','....owwo....','...ff..gg...'] },
       ],
       colors:[
-        { name:'딸기', B:'#ff6f9c', b:'#d84a78', h:'#ffb4cc' },{ name:'민트', B:'#4fd3ad', b:'#2ea486', h:'#a6f0d9' },{ name:'레몬', B:'#ffd23d', b:'#dca522', h:'#fff09c' },
-        { name:'소다', B:'#5cb6ff', b:'#3a87d4', h:'#acdcff' },{ name:'포도', B:'#ad6ef0', b:'#814bc4', h:'#d8b6ff' },{ name:'초코', B:'#9a5636', b:'#6c3925', h:'#c98b62' }],
+        { name:L("딸기"), B:'#ff6f9c', b:'#d84a78', h:'#ffb4cc' },{ name:L("민트"), B:'#4fd3ad', b:'#2ea486', h:'#a6f0d9' },{ name:L("레몬"), B:'#ffd23d', b:'#dca522', h:'#fff09c' },
+        { name:L("소다"), B:'#5cb6ff', b:'#3a87d4', h:'#acdcff' },{ name:L("포도"), B:'#ad6ef0', b:'#814bc4', h:'#d8b6ff' },{ name:L("초코"), B:'#9a5636', b:'#6c3925', h:'#c98b62' }],
       fixed:{ ...FIXED_COMMON, o:'#4a2a38', e:'#4a2a38', f:'#4a2a38', g:'#4a2a38', p:'#ff86ad', S:'#fff1d9', n:'#fff1d9', H:'#b9652e', k:'#efb46a', r:'#e8435f', L:'#62cf96' },
       up:{ e:'B', p:'B', w:'w', n:'B', S:'S', r:'r' } },
-    kinds:{ plaza:['케이크 분수','candy_plaza','fountain'], shop:['사탕 가게','candy_shop','cart'], library:['쿠키 도서관','candy_library','book'], community:['파티 홀','candy_community','heart'],
-      home:['진저브레드 하우스','candy_home','house'], checkout:['초콜릿 동전 은행','candy_checkout','coin'], cafe:['디저트 카페','candy_cafe','mug'], school:['제과 학교','candy_school','bell'],
-      clinic:['반창고 약국','candy_clinic','cross'], post:['편지 봉투 우체국','candy_post','mail'], factory:['초콜릿 공장','candy_factory','gear'], park:['젤리 정원','candy_park','flower'] },
+    kinds:{ plaza:[L("케이크 분수"),'candy_plaza','fountain'], shop:[L("사탕 가게"),'candy_shop','cart'], library:[L("쿠키 도서관"),'candy_library','book'], community:[L("파티 홀"),'candy_community','heart'],
+      home:[L("진저브레드 하우스"),'candy_home','house'], checkout:[L("초콜릿 동전 은행"),'candy_checkout','coin'], cafe:[L("디저트 카페"),'candy_cafe','mug'], school:[L("제과 학교"),'candy_school','bell'],
+      clinic:[L("반창고 약국"),'candy_clinic','cross'], post:[L("편지 봉투 우체국"),'candy_post','mail'], factory:[L("초콜릿 공장"),'candy_factory','gear'], park:[L("젤리 정원"),'candy_park','flower'] },
     decor:{ tree:'candy_tree', gate:'candy_gate', pond:'candy_pond', ground:'grass' },
   };
 

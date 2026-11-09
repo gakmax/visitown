@@ -9,11 +9,11 @@
     "dev": "npm run dev -w @visitown/web --",
     "start": "npm run start -w @visitown/web",
     "test": "node --test tests/*.test.js",
-    "test:unit": "node --test tests/store.test.js tests/invariants.test.js tests/unlocks.test.js tests/sdk.test.js tests/engine.test.js tests/ui.test.js",
+    "test:unit": "node --test tests/store.test.js tests/invariants.test.js tests/unlocks.test.js tests/sdk.test.js tests/engine.test.js tests/ui.test.js tests/i18n.test.js",
     "test:api": "node --test tests/api.test.js tests/limits.test.js tests/sse.test.js tests/peers.test.js tests/mcp.test.js",
     "test:smoke": "node --test tests/smoke.test.js",
     "sdk:sri": "node -e \"const c=require('crypto'),f=require('fs');console.log('sha384-'+c.createHash('sha384').update(f.readFileSync('sdk/visitown.js')).digest('base64'))\"",
-    "typecheck": "tsc -p packages/engine && tsc -p packages/ui && tsc -p apps/web"
+    "typecheck": "tsc -p packages/i18n && tsc -p packages/engine && tsc -p packages/ui && tsc -p apps/web"
   },
   "engines": {
     "node": ">=20"

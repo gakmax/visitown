@@ -249,7 +249,7 @@ const server = http.createServer(async (req, res) => {
       // 배지: README·블로그에 붙이는 "지금 N명 보는 중" SVG(server/badge.js). ?format=json 은 랜딩·위젯이 숫자만 읽을 때. 누구나 볼 수 있으니 짧게 캐시
       if (m[2] === 'badge') { const online = st.counts().online;
         if (url.searchParams.get('format') === 'json') return json(res, 200, { online, name: site.name }, { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' });
-        res.writeHead(200, { 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'public, max-age=30, s-maxage=30', 'Access-Control-Allow-Origin': '*', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'" }); return res.end(badgeSvg(online, url.searchParams.get('label'))); } // SVG를 직접 열어도 스크립트가 돌지 않게(S-08)
+        res.writeHead(200, { 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'public, max-age=30, s-maxage=30', 'Access-Control-Allow-Origin': '*', 'X-Content-Type-Options': 'nosniff', 'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'" }); return res.end(badgeSvg(online, url.searchParams.get('label'), url.searchParams.get('lang'))); } // SVG를 직접 열어도 스크립트가 돌지 않게(S-08)
       // 멤버 목록(멤버 누구나) / 내보내기·나가기(주인은 누구든, 멤버는 자기만)
       if (m[2] === 'members') {
         if (req.method === 'GET') { const list = [...memberMap(site.id)].map(([user_id, v]) => ({ user_id, role: v.role, name: v.name, created_at: v.created_at }));

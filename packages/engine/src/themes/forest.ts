@@ -1,26 +1,27 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, door, iconMap, mk, roof, scallop, shade, shadow, timber, win } from '../map';
 import { FIXED_COMMON, ICON_ROWS, PAL, THEMES } from '../palette';
+import { L } from '@visitown/i18n';
 // 숲속 (forest)
 (()=>{
   const OL = '#2e2620';
   // ---- 캐릭터 6종: 다람쥐(큰 꼬리) · 부엉이(귀깃·둥근 눈) · 고슴도치(가시) · 개구리(위로 솟은 눈) · 무당벌레(더듬이·점) · 버섯 요정(점박이 갓)
   const SHAPES = [
-    { name:'다람쥐',
+    { name:L("다람쥐"),
       down:['.......oooo.','......ohhBBo','.o...oohBBbo','oBoooBoohBbo','oBBBBBBohBbo','oBeBBeBoBBbo','oBeBBeBoBBbo','opBSSBpoBBbo','.oBSSBoohBbo','.oBBBBBohBbo','.onSSSnoBBbo','.oBSSSBoBbo.','..oobbbbboo.','...ff..gg...'],
       side:['.......oooo.','......ohhBBo','....o.oohBbo','...oBo.ohBbo','..oBBBoohBbo','.oBBBBBohBbo','.oeBBBBoBBbo','ooSpBBBoBBbo','oSSBBBBohBbo','.oBBBBBohBbo','..onSSBoBBbo','..oBSSBoBbo.','..oobbbbboo.','...ff..gg...'] },
-    { name:'부엉이',
+    { name:L("부엉이"),
       down:['............','............','.oo......oo.','.oBo....oBo.','.oBBooooBBo.','oBBBBBBBBBBo','oBwwwBBwwwBo','oBwewBBwewBo','oBwwwrrwwwBo','obBSSrrSSBbo','obBSbSSbSBbo','.obBSSSSBbo.','..oobbbboo..','...ff..gg...'],
       side:['............','............','..oo....oo..','..oBo..oBo..','.oBBBooBBBo.','oBBBBBBBBBBo','oBwwwBBBBBbo','oBwewBBBBBbo','rrwwwBBBBBbo','oBSSSBBbbBbo','oBSbSBbBBbbo','.oSSSBbbbbo.','..oobbbboo..','...ff..gg...'] },
-    { name:'고슴도치',
+    { name:L("고슴도치"),
       down:['............','............','.o..o..o..o.','oBooBooBooBo','oBbBBbbBBbBo','obBbBBBBbBbo','oBbSSSSSSbBo','obSeSSSSeSbo','oBSeSSSSeSBo','obSpSeeSpSbo','.oBSSSSSSBo.','.obnSSSSnbo.','..oobbbboo..','...ff..gg...'],
       side:['............','............','....o..o..o.','...oBooBooBo','..oSBbBBbBBo','.oSSSBbBbBbo','.oeSSSBbBBbo','oSSSSSSBbBbo','ooSpSSBBbBbo','.oSSSSBbBbbo','..onSSBbBbo.','..oSSSbBbbo.','..oobbbboo..','...ff..gg...'] },
-    { name:'개구리',
+    { name:L("개구리"),
       down:['............','............','............','.ooo....ooo.','ohwwo..owwho','oBweBooBewBo','oBBBBBBBBBBo','opBBBBBBBBpo','oBeBBBBBBeBo','oBBeeeeeeBBo','.oBSSSSSSBo.','onBSSSSSSBno','.obbSSSSbbo.','..oobbbboo..','...ff..gg...'],
       side:['............','............','............','..ooo.......','.ohwwo......','.oewBoooooo.','oBBBBBBBBBBo','oBBBBBBBBBBo','opBBBBBBBBbo','oeeeeeBBBBbo','.oSSSSBBBBo.','..onSSBBBbo.','..obbbbbbbo.','..oobbbboo..','...ff..gg...'] },
-    { name:'무당벌레',
+    { name:L("무당벌레"),
       down:['............','.o........o.','..o......o..','...oooooo...','..oBhBBBBo..','.oBhBBBBBBo.','.oBeBBBBeBo.','.oBeBBBBeBo.','.opBBBBBBpo.','.okkkkkkkko.','ohBBBooBBBho','oBooBooBooBo','oBooBooBooBo','.oBBBooBBBo.','..oobbbboo..','...ff..gg...'],
       side:['............','..o.........','...o........','...ooooooo..','..oBhBBBBBo.','.oBhBBBBBBo.','.oeBBBBBBBo.','.oeBBBBBBBo.','.opBBBBBBBo.','..okkkkkkko.','.ohBBBBBBBo.','.oBooBBBooBo','.oBooBBBooBo','..oBBBBBBo..','..oobbbboo..','...ff..gg...'] },
-    { name:'버섯 요정',
+    { name:L("버섯 요정"),
       down:['....oooo....','..ooMMMMoo..','.oMWWMMMMMo.','oMMWWMMWWMMo','oMMMMMMWWMMo','oWWMMMMMMMMo','oMMMMMMMMWWo','.oooooooooo.','..oBBBBBBo..','..oBSSSSBo..','..oSeSSeSo..','..opSSSSpo..','...oLLLLo...','..onLLLLno..','..oLLLLLLo..','...ff..gg...'],
       side:['....oooo....','..ooMMMMoo..','.oMWWMMMMMo.','oMMWWMMWWMMo','oMMMMMMWWMMo','oWWMMMMMMMMo','oMMMMMMMMWWo','.oooooooooo.','..oBBBBBBo..','..oSSSBBBo..','..oeSSBBBo..','..oSpSBBBo..','...oLLLLo...','...onLLLo...','..oLLLLLLo..','...ff..gg...'] },
   ];
@@ -28,19 +29,19 @@ import { FIXED_COMMON, ICON_ROWS, PAL, THEMES } from '../palette';
   CHIMNEY.forest_home = 44; CHIMNEY.forest_factory = 53;
 
   THEMES.forest = {
-    name:'숲속', order:4,
+    name:L("숲속"), order:4,
     palette:{ outline:OL, grass:'#74ab5c', grass2:'#689f52', grass3:'#558b44', dirt:'#cfae78', dirt2:'#a9875a', stone:'#cfc9b2', stone2:'#a29b82',
       water:'#94cbd6', water2:'#5a9fb6', wall:'#f2e5c6', wall2:'#d8c49c', wood:'#b07a4c', wood2:'#7a5034',
       roofPink:'#e27d63', roofBlue:'#6d97b8', roofGreen:'#86bd5e', roofYellow:'#efc455', roofLilac:'#b39acb',
       white:'#fffbec', leaf:'#5fae58', pink:'#f0a0a4', red:'#d44a3c', gold:'#f2c042', metal:'#bdb8a6', metal2:'#8c8775', skin:'#f5d6ac' },
     characters:{ shapes:SHAPES, colors:[
-        { name:'도토리', B:'#b9773f', b:'#8a5328', h:'#dda56f' },{ name:'이끼', B:'#7fae55', b:'#5a8a3a', h:'#acd283' },{ name:'꿀', B:'#e5b34a', b:'#b98426', h:'#f6da8f' },
-        { name:'블루베리', B:'#6d83c4', b:'#4a5e98', h:'#a0b2e4' },{ name:'자두', B:'#9b6fb5', b:'#714a8c', h:'#c6a6da' },{ name:'단풍', B:'#e0713e', b:'#b14f25', h:'#f4a77f' }],
+        { name:L("도토리"), B:'#b9773f', b:'#8a5328', h:'#dda56f' },{ name:L("이끼"), B:'#7fae55', b:'#5a8a3a', h:'#acd283' },{ name:L("꿀"), B:'#e5b34a', b:'#b98426', h:'#f6da8f' },
+        { name:L("블루베리"), B:'#6d83c4', b:'#4a5e98', h:'#a0b2e4' },{ name:L("자두"), B:'#9b6fb5', b:'#714a8c', h:'#c6a6da' },{ name:L("단풍"), B:'#e0713e', b:'#b14f25', h:'#f4a77f' }],
       fixed:{ ...FIXED_COMMON, o:OL, e:OL, f:OL, g:OL, S:'#f6e7c8', n:'#f6e7c8', H:'#7a5034', k:'#3f3530', r:'#ec9a3c', L:'#6fbb55', M:'#d8483a', W:'#fff8ea' },
       up:{ S:'B', e:'B', p:'B', w:'B', n:'B', r:'B' } },
-    kinds:{ plaza:['큰 나무 광장','forest_plaza','star'], shop:['열매 가게','forest_shop','cart'], library:['부엉이 도서관','forest_library','book'], community:['모닥불 모임터','forest_community','heart'],
-      home:['버섯집','forest_home','house'], checkout:['도토리 저금통','forest_checkout','coin'], cafe:['꿀벌 찻집','forest_cafe','mug'], school:['나뭇잎 학교','forest_school','bell'],
-      clinic:['약초 오두막','forest_clinic','cross'], post:['다람쥐 우편함','forest_post','mail'], factory:['개미 공방','forest_factory','gear'], park:['꽃밭','forest_park','flower'] },
+    kinds:{ plaza:[L("큰 나무 광장"),'forest_plaza','star'], shop:[L("열매 가게"),'forest_shop','cart'], library:[L("부엉이 도서관"),'forest_library','book'], community:[L("모닥불 모임터"),'forest_community','heart'],
+      home:[L("버섯집"),'forest_home','house'], checkout:[L("도토리 저금통"),'forest_checkout','coin'], cafe:[L("꿀벌 찻집"),'forest_cafe','mug'], school:[L("나뭇잎 학교"),'forest_school','bell'],
+      clinic:[L("약초 오두막"),'forest_clinic','cross'], post:[L("다람쥐 우편함"),'forest_post','mail'], factory:[L("개미 공방"),'forest_factory','gear'], park:[L("꽃밭"),'forest_park','flower'] },
     decor:{ tree:'forest_tree', gate:'forest_gate', pond:'forest_pond', ground:'grass' },
   };
 

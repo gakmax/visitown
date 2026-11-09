@@ -5,6 +5,7 @@ import path from 'node:path';
 import '../shell/dashboard.css';
 import '../shell/shell.css';
 import DashboardBoot from './DashboardBoot';
+import { requestLocale, translateHtml } from '../lib/locale';
 
 const cache = new Map<string, string>();
 export function shellFile(name: string) {
@@ -12,8 +13,8 @@ export function shellFile(name: string) {
   const s = fs.readFileSync(path.join(process.cwd(), 'shell', name), 'utf8'); cache.set(name, s); return s;
 }
 
-export default function DashboardShell({ demo = false }: { demo?: boolean }) {
-  const html = shellFile('dashboard.html') + shellFile('dlg.html');
+export default async function DashboardShell({ demo = false }: { demo?: boolean }) {
+  const html = translateHtml(shellFile('dashboard.html') + shellFile('dlg.html'), await requestLocale()); // 영어면 마크업 글자를 서버에서 바꿔 보낸다(로드맵 60)
   return <>
     <div className="vt-shell" dangerouslySetInnerHTML={{ __html: html }} />
     <DashboardBoot demo={demo} />

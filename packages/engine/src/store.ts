@@ -1,22 +1,23 @@
 import type { VtEvent, Session, StoreChange, Listener, PageMapping, EventConfig } from './types';
 import { BUILDINGS, BY_PATH, FALLBACK_PATH } from './map';
 import { PAL } from './palette';
+import { L } from '@visitown/i18n';
 
 /* ---------- 4. STATE STORE (세션 맵 + 건물별 인원). 렌더러와 분리. 실제 SSE도 store.apply(event)만 호출하면 된다 ---------- */
-export const EVENT_LABEL = { session_start:'입장', page_view:'페이지 이동', heartbeat:'하트비트', page_leave:'퇴장', timeout:'연결 끊김' };
+export const EVENT_LABEL = { session_start:L("입장"), page_view:L("페이지 이동"), heartbeat:L("하트비트"), page_leave:L("퇴장"), timeout:L("연결 끊김") };
 // 커스텀 이벤트 표현. 내장 기본값(EV_DEFAULTS) 위에 사이트 설정(서버 sites.event_config, SSE snapshot.eventTypes·eventtypes)을 덮는다.
 // 처음 보는 이름은 이름 그대로 + 번개. 효과·소리 id는 server/store.js의 EFFECTS·SOUNDS와 같다
 export const SYS_EV = new Set(['session_start','page_view','heartbeat','page_leave']);
-export const EV_EFFECTS = { star:{ name:'별', icon:'star', burst:'stars' }, coin:{ name:'동전', icon:'coin', burst:'coins' }, firework:{ name:'폭죽', icon:'firework', burst:'fireworks' }, heart:{ name:'하트', icon:'heart', burst:'stars' }, cart:{ name:'장바구니', icon:'cart', burst:'stars' }, mail:{ name:'편지', icon:'mail', burst:'stars' }, search:{ name:'돋보기', icon:'search', burst:null }, bolt:{ name:'번개', icon:'bolt', burst:'stars' }, fire:{ name:'불 (건물에 불, 캐릭터 넘어짐)', icon:'fire', burst:'smoke' }, none:{ name:'지도에 안 보임', icon:null, burst:null } };
-export const EV_SOUNDS = { none:'소리 없음', coin:'동전', chime:'차임', blip:'삑' };
+export const EV_EFFECTS = { star:{ name:L("별"), icon:'star', burst:'stars' }, coin:{ name:L("동전"), icon:'coin', burst:'coins' }, firework:{ name:L("폭죽"), icon:'firework', burst:'fireworks' }, heart:{ name:L("하트"), icon:'heart', burst:'stars' }, cart:{ name:L("장바구니"), icon:'cart', burst:'stars' }, mail:{ name:L("편지"), icon:'mail', burst:'stars' }, search:{ name:L("돋보기"), icon:'search', burst:null }, bolt:{ name:L("번개"), icon:'bolt', burst:'stars' }, fire:{ name:L("불 (건물에 불, 캐릭터 넘어짐)"), icon:'fire', burst:'smoke' }, none:{ name:L("지도에 안 보임"), icon:null, burst:null } };
+export const EV_SOUNDS = { none:L("소리 없음"), coin:L("동전"), chime:L("차임"), blip:L("삑") };
 export const EV_BASE = { label:'', effect:'bolt', sound:'none', notify:false, value:false, feed:true };
-export const EV_DEFAULTS = { search:{ label:'검색', effect:'search' }, product_click:{ label:'상품 클릭', effect:'star' }, sign_up:{ label:'회원가입', effect:'firework', sound:'chime' }, purchase:{ label:'구매', effect:'coin', sound:'coin', notify:true, value:true }, js_error:{ label:'오류', effect:'fire' }, greet:{ label:'인사', effect:'none' } }; // greet: 미니 위젯 이모지 인사(로드맵 37). 지도 효과 대신 이모지 말풍선(p5.js customEffect)
+export const EV_DEFAULTS = { search:{ label:L("검색"), effect:'search' }, product_click:{ label:L("상품 클릭"), effect:'star' }, sign_up:{ label:L("회원가입"), effect:'firework', sound:'chime' }, purchase:{ label:L("구매"), effect:'coin', sound:'coin', notify:true, value:true }, js_error:{ label:L("오류"), effect:'fire' }, greet:{ label:L("인사"), effect:'none' } }; // greet: 미니 위젯 이모지 인사(로드맵 37). 지도 효과 대신 이모지 말풍선(p5.js customEffect)
 export let EV_CFG = new Map<string, EventConfig>();
 export function setEventConfig(list){ EV_CFG = new Map((list||[]).map(c=>[c.type,c])); }
 export function evDefault(type){ return { ...EV_BASE, label:type, ...(EV_DEFAULTS[type]||{}) }; }
 export function evMeta(type: string){ const d=evDefault(type), c: Partial<EventConfig>=EV_CFG.get(type)||{}; const m={ ...d }; for (const k of Object.keys(EV_BASE)) if (c[k]!==undefined && c[k]!=='') m[k]=c[k]; m.renamed=!!c.label; return m; }
 export function evLabel(type){ return EVENT_LABEL[type] || evMeta(type).label; }
-export const PROP_LABEL = { device:{ mobile:'모바일', desktop:'PC', tablet:'태블릿' }, referrer:{ search:'검색 유입', social:'SNS 유입', direct:'직접 방문', ad:'광고 유입' }, plan:{ pro:'유료 회원', free:'일반' } };
+export const PROP_LABEL = { device:{ mobile:L("모바일"), desktop:'PC', tablet:L("태블릿") }, referrer:{ search:L("검색 유입"), social:L("SNS 유입"), direct:L("직접 방문"), ad:L("광고 유입") }, plan:{ pro:L("유료 회원"), free:L("일반") } };
 export const BOTS = [ { name:'GOOGLE', ua:'Googlebot', w:5 }, { name:'BING', ua:'Bingbot', w:2 }, { name:'GPT', ua:'GPTBot', w:2 }, { name:'NAVER', ua:'Yeti', w:3 } ];
 // 캠페인 표식 이름: utm_campaign이 없으면 utm_source. 깃발 색은 이름의 해시로 정해 같은 캠페인은 같은 색
 export function campaignOf(pr){ const c=pr.utm_campaign||pr.utm_source; return c ? String(c).slice(0,40) : null; }
@@ -90,13 +91,13 @@ export const TRANSITIONS = {
 };
 // 희귀 방문자(로드맵 36) 종류. 판정은 서버(server/unlocks.js RARES, 같은 값)가 하고 세션 props.rare·visit_no로 온다. 데모는 randomProps가 가끔 섞는다
 export const RARE_DEFS = [
-  { key:'first', name:'첫 손님', text:'이 사이트의 첫 번째 방문자', icon:'heart' },
-  { key:'milestone', name:'기념 손님', text:'100 · 500 · 1,000 · 7,777번째처럼 특별한 번호의 방문자', icon:'star' },
-  { key:'pioneer', name:'개척자', text:'처음 보는 나라에서 온 첫 방문자', icon:'firework' },
-  { key:'owl', name:'올빼미', text:'새벽 3시대에 들어온 방문자', icon:'moon' },
+  { key:'first', name:L("첫 손님"), text:L("이 사이트의 첫 번째 방문자"), icon:'heart' },
+  { key:'milestone', name:L("기념 손님"), text:L("100 · 500 · 1,000 · 7,777번째처럼 특별한 번호의 방문자"), icon:'star' },
+  { key:'pioneer', name:L("개척자"), text:L("처음 보는 나라에서 온 첫 방문자"), icon:'firework' },
+  { key:'owl', name:L("올빼미"), text:L("새벽 3시대에 들어온 방문자"), icon:'moon' },
 ];
 export const RARE_BY_KEY = Object.fromEntries(RARE_DEFS.map(r=>[r.key,r]));
-export function rareLabel(pr){ const d=RARE_BY_KEY[pr?.rare]; if (!d) return ''; return pr.rare==='milestone'&&pr.visitNo ? `${pr.visitNo.toLocaleString()}번째 방문자` : d.name; }
+export function rareLabel(pr){ const d=RARE_BY_KEY[pr?.rare]; if (!d) return ''; return pr.rare==='milestone'&&pr.visitNo ? L("{0}번째 방문자", {0:pr.visitNo.toLocaleString()}) : d.name; }
 export const PERSONAS = [
   { name:'shopper',  w:4, bias:{ '/products':1.6, '/checkout':1.8, product_click:1.4, purchase:1.3, leave:.7 } },
   { name:'browser',  w:4, bias:{ '/search':1.4, search:1.4, '/products':1.2, leave:.9 } },

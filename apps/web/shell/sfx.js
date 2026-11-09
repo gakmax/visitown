@@ -1,4 +1,5 @@
 // 효과음 엔진(새 판): 파일 없이 Web Audio로 그 자리에서 합성하는 8비트 소리. 정의는 SOUNDS, 재생은 synth.play(이름). 디자인 시스템 페이지(/design-system, shell/ds.js)에서 들어 보고 고친다.
+import { L } from '@visitown/i18n';
 // 대시보드는 shell/dashboard.js의 sfx(이름)으로 부른다(켜짐·임베드·리플레이 확인 후 synth.play)
 // 목소리(voice) 하나 = 파형 w(pulse12·pulse25·square·triangle·saw·sine·noise), 높이 f(Hz·'E6' 같은 음이름, [시작,끝]이면 미끄러짐), 길이 d초, 시작 at초, 크기 v(0~1).
 // lp/hp(Hz)는 필터. 노이즈는 f 대신 lp/hp만, 음에 붙이면 배음을 깎는다(자주 나는 소리의 2kHz 위 찌르는 성분을 줄이는 용도). 같은 소리는 gap초(기본 .05) 안에 다시 울리지 않는다(방문자가 몰릴 때 겹침 방지)
@@ -8,24 +9,24 @@
 //  - 크기는 synth.render(정의)로 OfflineAudioContext에 그려 RMS·피크를 재서 맞춘다(마스터 .5 → 컴프레서까지 지난 값). 어택 4ms, 끝은 지수 감쇠, 피크 -1dBFS 아래
 export const SOUNDS={
   // inUse: 대시보드(p6.js sfx)가 실제로 내는 소리. coin·chime·blip은 이벤트 설정(event_config)에 저장되는 이름이라 키를 바꾸지 않는다
-  enter:    { label:'방문자 입장', desc:'새 방문자가 마을에 들어올 때. E5→A5', inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'E5',d:.06,v:.22,lp:2400},{w:'square',f:'A5',d:.09,at:.06,v:.22,lp:2400}] },
-  coin:     { label:'코인', desc:'이벤트 설정에서 고르는 소리(구매 등). C6→E6', inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C6',d:.07,v:.2},{w:'square',f:'E6',d:.16,at:.07,v:.2}] },
-  chime:    { label:'차임', desc:'이벤트 설정에서 고르는 소리(가입 등). C5·E5·G5', inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C5',d:.05,v:.17},{w:'square',f:'E5',d:.05,at:.05,v:.17},{w:'square',f:'G5',d:.14,at:.1,v:.17}] },
-  blip:     { label:'블립', desc:'이벤트 설정에서 고르는 소리(짧은 알림). C6', inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C6',d:.05,v:.45}] },
-  enter2:   { label:'입장(펄스)', desc:'입장 소리 후보. 더 얇은 펄스파, C6→G6', tier:'visit', gap:.08, voices:[{w:'pulse25',f:'C6',d:.06,v:.35,lp:3200},{w:'pulse25',f:'G6',d:.12,at:.06,v:.35,lp:3200}] },
-  leave:    { label:'방문자 퇴장', desc:'방문자가 마을을 떠날 때. G5→C5', inUse:true, tier:'visit', gap:.08, voices:[{w:'triangle',f:'G5',d:.07,v:.3},{w:'triangle',f:'C5',d:.14,at:.07,v:.3}] },
-  bot:      { label:'봇 방문', desc:'봇으로 분류된 방문자가 들어올 때. C5·C6·C5', inUse:true, tier:'visit', gap:.1, voices:[{w:'square',f:'C5',d:.04,v:.2},{w:'square',f:'C6',d:.04,at:.05,v:.2},{w:'square',f:'C5',d:.04,at:.1,v:.2}] },
-  click:    { label:'버튼 누름', desc:'버튼을 누를 때. E6→A5로 짧게', inUse:true, tier:'ui', voices:[{w:'square',f:['E6','A5'],d:.025,v:.22,lp:2600}] },
-  tick:     { label:'항목 이동', desc:'드롭다운·탭에서 항목을 옮길 때. C7(유일하게 2kHz 위)', inUse:true, tier:'ui', voices:[{w:'pulse12',f:'C7',d:.015,v:.6,lp:4500}] },
-  on:       { label:'켜기', desc:'토글·체크박스를 켤 때. C6→G6', inUse:true, tier:'ui', voices:[{w:'pulse25',f:['C6','G6'],d:.06,v:.42}] },
-  off:      { label:'끄기', desc:'토글·체크박스를 끌 때. G5→C5', inUse:true, tier:'ui', voices:[{w:'pulse25',f:['G5','C5'],d:.06,v:.41}] },
-  open:     { label:'패널 열기', desc:'모달·확인창·메뉴가 열릴 때. D4→A5', inUse:true, tier:'ui', voices:[{w:'triangle',f:['D4','A5'],d:.06,v:.37}] },
-  close:    { label:'패널 닫기', desc:'모달·확인창·메뉴가 닫힐 때. A5→D4', inUse:true, tier:'ui', voices:[{w:'triangle',f:['A5','D4'],d:.06,v:.37}] },
-  save:     { label:'저장 완료', desc:'"저장했어요"가 뜰 때. C6·E6·G6', inUse:true, tier:'accent', voices:[{w:'pulse25',f:'C6',d:.05,v:.59},{w:'pulse25',f:'E6',d:.05,at:.05,v:.59},{w:'pulse25',f:'G6',d:.12,at:.1,v:.59}] },
-  error:    { label:'실패', desc:'저장·요청이 실패했을 때. D3→A2', inUse:true, tier:'accent', voices:[{w:'square',f:'D3',d:.1,v:.33},{w:'square',f:'A2',d:.18,at:.12,v:.33}] },
-  remove:   { label:'지우기', desc:'건물·사이트를 지울 때. 노이즈 + G4→E2', inUse:true, tier:'accent', voices:[{w:'noise',lp:3500,d:.12,v:.9},{w:'square',f:['G4','E2'],d:.14,v:.6}] },
-  shutter:  { label:'사진 찍기', desc:'마을 사진을 찍을 때. 노이즈 둘', inUse:true, tier:'accent', voices:[{w:'noise',hp:3000,d:.03,v:.84},{w:'noise',hp:1800,d:.05,at:.06,v:.67}] },
-  unlock:   { label:'테마 해금', desc:'새 테마가 열릴 때. C5·E5·G5·C6→E6+G6', inUse:true, tier:'accent', gap:.5, voices:[{w:'pulse25',f:'C5',d:.06,v:.24},{w:'pulse25',f:'E5',d:.06,at:.06,v:.24},{w:'pulse25',f:'G5',d:.06,at:.12,v:.24},{w:'pulse25',f:'C6',d:.06,at:.18,v:.24},{w:'pulse25',f:'E6',d:.32,at:.26,v:.22},{w:'pulse12',f:'G6',d:.32,at:.26,v:.13},{w:'triangle',f:'C4',d:.4,at:.26,v:.48}] },
+  enter:    { label:L("방문자 입장"), desc:L("새 방문자가 마을에 들어올 때. E5→A5"), inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'E5',d:.06,v:.22,lp:2400},{w:'square',f:'A5',d:.09,at:.06,v:.22,lp:2400}] },
+  coin:     { label:L("코인"), desc:L("이벤트 설정에서 고르는 소리(구매 등). C6→E6"), inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C6',d:.07,v:.2},{w:'square',f:'E6',d:.16,at:.07,v:.2}] },
+  chime:    { label:L("차임"), desc:L("이벤트 설정에서 고르는 소리(가입 등). C5·E5·G5"), inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C5',d:.05,v:.17},{w:'square',f:'E5',d:.05,at:.05,v:.17},{w:'square',f:'G5',d:.14,at:.1,v:.17}] },
+  blip:     { label:L("블립"), desc:L("이벤트 설정에서 고르는 소리(짧은 알림). C6"), inUse:true, tier:'visit', gap:.08, voices:[{w:'square',f:'C6',d:.05,v:.45}] },
+  enter2:   { label:L("입장(펄스)"), desc:L("입장 소리 후보. 더 얇은 펄스파, C6→G6"), tier:'visit', gap:.08, voices:[{w:'pulse25',f:'C6',d:.06,v:.35,lp:3200},{w:'pulse25',f:'G6',d:.12,at:.06,v:.35,lp:3200}] },
+  leave:    { label:L("방문자 퇴장"), desc:L("방문자가 마을을 떠날 때. G5→C5"), inUse:true, tier:'visit', gap:.08, voices:[{w:'triangle',f:'G5',d:.07,v:.3},{w:'triangle',f:'C5',d:.14,at:.07,v:.3}] },
+  bot:      { label:L("봇 방문"), desc:L("봇으로 분류된 방문자가 들어올 때. C5·C6·C5"), inUse:true, tier:'visit', gap:.1, voices:[{w:'square',f:'C5',d:.04,v:.2},{w:'square',f:'C6',d:.04,at:.05,v:.2},{w:'square',f:'C5',d:.04,at:.1,v:.2}] },
+  click:    { label:L("버튼 누름"), desc:L("버튼을 누를 때. E6→A5로 짧게"), inUse:true, tier:'ui', voices:[{w:'square',f:['E6','A5'],d:.025,v:.22,lp:2600}] },
+  tick:     { label:L("항목 이동"), desc:L("드롭다운·탭에서 항목을 옮길 때. C7(유일하게 2kHz 위)"), inUse:true, tier:'ui', voices:[{w:'pulse12',f:'C7',d:.015,v:.6,lp:4500}] },
+  on:       { label:L("켜기"), desc:L("토글·체크박스를 켤 때. C6→G6"), inUse:true, tier:'ui', voices:[{w:'pulse25',f:['C6','G6'],d:.06,v:.42}] },
+  off:      { label:L("끄기"), desc:L("토글·체크박스를 끌 때. G5→C5"), inUse:true, tier:'ui', voices:[{w:'pulse25',f:['G5','C5'],d:.06,v:.41}] },
+  open:     { label:L("패널 열기"), desc:L("모달·확인창·메뉴가 열릴 때. D4→A5"), inUse:true, tier:'ui', voices:[{w:'triangle',f:['D4','A5'],d:.06,v:.37}] },
+  close:    { label:L("패널 닫기"), desc:L("모달·확인창·메뉴가 닫힐 때. A5→D4"), inUse:true, tier:'ui', voices:[{w:'triangle',f:['A5','D4'],d:.06,v:.37}] },
+  save:     { label:L("저장 완료"), desc:L("\"저장했어요\"가 뜰 때. C6·E6·G6"), inUse:true, tier:'accent', voices:[{w:'pulse25',f:'C6',d:.05,v:.59},{w:'pulse25',f:'E6',d:.05,at:.05,v:.59},{w:'pulse25',f:'G6',d:.12,at:.1,v:.59}] },
+  error:    { label:L("실패"), desc:L("저장·요청이 실패했을 때. D3→A2"), inUse:true, tier:'accent', voices:[{w:'square',f:'D3',d:.1,v:.33},{w:'square',f:'A2',d:.18,at:.12,v:.33}] },
+  remove:   { label:L("지우기"), desc:L("건물·사이트를 지울 때. 노이즈 + G4→E2"), inUse:true, tier:'accent', voices:[{w:'noise',lp:3500,d:.12,v:.9},{w:'square',f:['G4','E2'],d:.14,v:.6}] },
+  shutter:  { label:L("사진 찍기"), desc:L("마을 사진을 찍을 때. 노이즈 둘"), inUse:true, tier:'accent', voices:[{w:'noise',hp:3000,d:.03,v:.84},{w:'noise',hp:1800,d:.05,at:.06,v:.67}] },
+  unlock:   { label:L("테마 해금"), desc:L("새 테마가 열릴 때. C5·E5·G5·C6→E6+G6"), inUse:true, tier:'accent', gap:.5, voices:[{w:'pulse25',f:'C5',d:.06,v:.24},{w:'pulse25',f:'E5',d:.06,at:.06,v:.24},{w:'pulse25',f:'G5',d:.06,at:.12,v:.24},{w:'pulse25',f:'C6',d:.06,at:.18,v:.24},{w:'pulse25',f:'E6',d:.32,at:.26,v:.22},{w:'pulse12',f:'G6',d:.32,at:.26,v:.13},{w:'triangle',f:'C4',d:.4,at:.26,v:.48}] },
 };
 export const synth=(()=>{
   let ctx=null, out=null, comp=null, ana=null, vol=.5; const last={}, waves={}, noises=new WeakMap();
@@ -72,11 +73,11 @@ export const synth=(()=>{
 // ambient: 노이즈 + 필터 + LFO를 계속 틀고, 새·귀뚜라미·물방울 같은 짧은 소리를 난수 간격으로 예약한다
 // 예약은 Web Audio 시간축: 25ms마다 currentTime+0.1초(탭이 뒤에 있으면 +1.2초. 타이머가 1초에 한 번으로 느려지므로)까지의 음을 미리 잡아 둔다. 박자는 타이머가 아니라 AudioContext 시계가 정한다
 export const TRACKS={
-  day:        { label:'낮 배경음', desc:'IV–V–iii–vi로 도는 밝은 아르페지오. 84 BPM', kind:'music', bpm:84, seed:7, prog:['IV','V','iii','vi','IV','V','I','vi'], oct:5, rest:.12, bassTwice:true, hat:[.5,.3], lead:0 },
-  night:      { label:'밤 배경음', desc:'I–iii–IV–iv로 가라앉는 느린 아르페지오와 긴 사인 음. 72 BPM', kind:'music', bpm:72, seed:11, prog:['I','iii','IV','iv','I','iii','vi','iv'], oct:4, rest:.22, bassTwice:false, hat:[0,.25], lead:1 },
-  'amb-day':  { label:'낮 환경음', desc:'바람(저역 노이즈 + LFO)과 가끔 새소리(사인 처프)', kind:'ambient', seed:3, wind:{ lp:520, v:1, lfo:[[.11,260],[.037,140]] }, birds:{ every:[2.5,7], v:.55 } },
-  'amb-night':{ label:'밤 환경음', desc:'귀뚜라미(4~5kHz 사인 펄스)와 낮은 바람', kind:'ambient', seed:5, wind:{ lp:220, v:1.45, lfo:[[.07,80]] }, crickets:{ f:[4300,4700], every:[.45,.8], v:.5 } },
-  'amb-rain': { label:'비', desc:'대역 필터 노이즈 + 난수 물방울(장5음계)', kind:'ambient', seed:9, rain:{ bp:2400, q:.6, v:1, lfo:[[.23,.3],[.051,.2]] }, drops:{ every:[.05,.3], v:.6 } },
+  day:        { label:L("낮 배경음"), desc:L("IV–V–iii–vi로 도는 밝은 아르페지오. 84 BPM"), kind:'music', bpm:84, seed:7, prog:['IV','V','iii','vi','IV','V','I','vi'], oct:5, rest:.12, bassTwice:true, hat:[.5,.3], lead:0 },
+  night:      { label:L("밤 배경음"), desc:L("I–iii–IV–iv로 가라앉는 느린 아르페지오와 긴 사인 음. 72 BPM"), kind:'music', bpm:72, seed:11, prog:['I','iii','IV','iv','I','iii','vi','iv'], oct:4, rest:.22, bassTwice:false, hat:[0,.25], lead:1 },
+  'amb-day':  { label:L("낮 환경음"), desc:L("바람(저역 노이즈 + LFO)과 가끔 새소리(사인 처프)"), kind:'ambient', seed:3, wind:{ lp:520, v:1, lfo:[[.11,260],[.037,140]] }, birds:{ every:[2.5,7], v:.55 } },
+  'amb-night':{ label:L("밤 환경음"), desc:L("귀뚜라미(4~5kHz 사인 펄스)와 낮은 바람"), kind:'ambient', seed:5, wind:{ lp:220, v:1.45, lfo:[[.07,80]] }, crickets:{ f:[4300,4700], every:[.45,.8], v:.5 } },
+  'amb-rain': { label:L("비"), desc:L("대역 필터 노이즈 + 난수 물방울(장5음계)"), kind:'ambient', seed:9, rain:{ bp:2400, q:.6, v:1, lfo:[[.23,.3],[.051,.2]] }, drops:{ every:[.05,.3], v:.6 } },
 };
 export const bgm=(()=>{
   const CHORD={ I:[0,4,7], ii:[2,5,9], iii:[4,7,11], IV:[5,9,12], V:[7,11,14], vi:[9,12,16], iv:[5,8,12] };   // C 기준 반음 간격(C장조 + 빌려온 iv)

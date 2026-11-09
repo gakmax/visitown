@@ -1,5 +1,6 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, iconMap, mk, shade, shadow } from '../map';
 import { FIXED_COMMON, ICON_ROWS, PAL, THEMES, human } from '../palette';
+import { L } from '@visitown/i18n';
 // 우주 정거장 (space)
 (()=>{
   const O=()=>PAL.outline;
@@ -25,37 +26,37 @@ import { FIXED_COMMON, ICON_ROWS, PAL, THEMES, human } from '../palette';
   const ENGI_BODY  = { down:['..oBBooBBo..','.oBbBBBBbBo.','.oBbBBBBbBo.','.okkkkrkkko.','.onoBBBBono.','..obbbbbbo..','...ff..gg...'],
                        side:['..oBBBBBBo..','.oBbBBBBBBo.','.oBbBBBBBBo.','.okkkkkkkko.','.onBBBBBBBo.','..obbbbbbo..','...ff..gg...'] };
   const SHAPES = [
-    human('우주인', SH.astro, SH.astroS, ASTRO_BODY),
-    { name:'외계인',
+    human(L("우주인"), SH.astro, SH.astroS, ASTRO_BODY),
+    { name:L("외계인"),
       down:['..oo....oo..','.orro..orro.','..oko..oko..','...okooko...','..oBBBBBBo..','.oBhBBBBBBo.','oBhBBBBBBBBo','oBBeeBBeeBBo','oBBeeBBeeBBo','.oBBBBBBBBo.','..oBBBBBBo..','...oooooo...','..okBBBBko..','.oBoBBBBoBo.','..obbbbbbo..','...ff..gg...'],
       side:['..oo....oo..','.orro..orro.','..oko..oko..','...okooko...','..oBBBBBBo..','.oBhBBBBBBo.','oBhBBBBBBBBo','oeeBBBBBBBBo','oeeBBBBBBBBo','.oBBBBBBBBo.','..oBBBBBBo..','...oooooo...','..okBBBBko..','..oBoBBBBo..','..obbbbbbo..','...ff..gg...'] },
-    { name:'문어 외계인',
+    { name:L("문어 외계인"),
       down:['............','............','....oooo....','..ooBBBBoo..','.oBhhBBBBBo.','oBhBBBBBBBBo','oBhBBBBBBBBo','oBBBBBBBBBBo','oBBeeBBeeBBo','oBBeeBBeeBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','obBoBBBBoBbo','ob.obbbbo.bo','oo.oo..oo.oo','...ff..gg...'],
       side:['............','............','....oooo....','..ooBBBBoo..','.oBhhBBBBBo.','oBhBBBBBBBBo','oBhBBBBBBBBo','oBBBBBBBBBBo','oeeBBBBBBBBo','oeeBBBBBBBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','obBoBBBBoBbo','ob.obbbbo.bo','oo.oo..oo.oo','...ff..gg...'] },
-    { name:'탐사 로봇',
+    { name:L("탐사 로봇"),
       down:['.......oo...','......orro..','..oooooooo..','.ohBBBBBBBo.','okeeeeeeeeko','okewweewweko','okeeeeeeeeko','.oBBBBBBBBo.','..oooooooo..','....okko....','..oooooooo..','.oBhBrrBBBo.','.oBBBBBBBBo.','.okkkkkkkko.','..obbbbbbo..','...ff..gg...'],
       side:['.......oo...','......orro..','..oooooooo..','.ohBBBBBBBo.','.oeeeeBBBko.','.oewweBBBko.','.oeeeeBBBko.','.oBBBBBBBBo.','..oooooooo..','....okko....','..oooooooo..','.oBhBBBBBBo.','.oBBBBBBkko.','.okkkkkkkko.','..obbbbbbo..','...ff..gg...'] },
-    { name:'우주 고양이',
+    { name:L("우주 고양이"),
       down:['...oooooo...','..owLLLLLo..','.oLoLLLLoLo.','oLoBooooBoLo','oLoBBBBBBoLo','oLoBeBBeBoLo','oLoBBhhBBoLo','.oLooooooLo.','.okkkkkkkko.','..oBBBBBBo..','.oBBBwwBBBo.','.oBBBBBBBBo.','.oBoBBBBoBo.','..obbbbbbo..','...ff..gg...'],
       side:['...oooooo...','..owLLLLLo..','.oLoLLLLoLo.','oLoBooooBoLo','oLoBBBBBBoLo','oLoeBBBBBoLo','oLhhBBBBBoLo','.oLooooooLo.','.okkkkkkkko.','..oBBBBBBo..','.oBBBBBBkko.','.oBBBBBBkko.','.oBBBoBBBBo.','..obbbbbbo..','...ff..gg...'] },
-    human('엔지니어', ['....oooo....','..ooBhBBoo..','.oBBhBBBBBo.','obBBBBBBBBbo','.oooooooooo.','.okppkkppko.','.oSSSSSSSSo.','..oSSSSSSo..'],
+    human(L("엔지니어"), ['....oooo....','..ooBhBBoo..','.oBBhBBBBBo.','obBBBBBBBBbo','.oooooooooo.','.okppkkppko.','.oSSSSSSSSo.','..oSSSSSSo..'],
                      ['....oooo....','..ooBhBBoo..','.oBBhBBBBBo.','obBBBBBBBBbo','.oooooooooo.','.okppkHHHHo.','.oSSSSHHHHo.','..oSSSHHHo..'], ENGI_BODY),
   ];
 
   THEMES.space = {
-    name:'우주 정거장', order:9,
+    name:L("우주 정거장"), order:9,
     palette:{ outline:'#232a3d', grass:'#8e9bb2', grass2:'#8492aa', grass3:'#6c7a93', dirt:'#b6c0d0', dirt2:'#8f9ab0', stone:'#cfd7e3', stone2:'#a4afc2',
       water:'#9fe8f2', water2:'#3fb6d6', wall:'#eef1f6', wall2:'#c8d0dd', wood:'#8a95ab', wood2:'#5c667e',
       roofPink:'#ee8a5c', roofBlue:'#5b78c9', roofGreen:'#55c49c', roofYellow:'#f4c45a', roofLilac:'#a68be0',
       white:'#ffffff', leaf:'#6fd17e', pink:'#f59bb0', red:'#ec5b5b', gold:'#ffb84a', metal:'#c6cdd9', metal2:'#8b95a8', skin:'#ffd9b3' },
     characters:{ shapes:SHAPES, colors:[
-      { name:'주황', B:'#f08a4b', b:'#c4652e', h:'#ffbb8c' },{ name:'시안', B:'#4fc3d9', b:'#2f93ab', h:'#a4e8f3' },{ name:'초록', B:'#7dcf6a', b:'#55a548', h:'#b9eaa9' },
-      { name:'보라', B:'#a07ad8', b:'#7756ad', h:'#cbb2ef' },{ name:'은색', B:'#c5ccd8', b:'#939cae', h:'#eef1f6' },{ name:'남색', B:'#4b5d9a', b:'#33416f', h:'#7d8fcb' }],
+      { name:L("주황"), B:'#f08a4b', b:'#c4652e', h:'#ffbb8c' },{ name:L("시안"), B:'#4fc3d9', b:'#2f93ab', h:'#a4e8f3' },{ name:L("초록"), B:'#7dcf6a', b:'#55a548', h:'#b9eaa9' },
+      { name:L("보라"), B:'#a07ad8', b:'#7756ad', h:'#cbb2ef' },{ name:L("은색"), B:'#c5ccd8', b:'#939cae', h:'#eef1f6' },{ name:L("남색"), B:'#4b5d9a', b:'#33416f', h:'#7d8fcb' }],
       fixed:{ ...FIXED_COMMON, o:'#232a3d', e:'#232a3d', f:'#232a3d', g:'#232a3d', p:'#4a6fb5', S:'#ffd9b3', n:'#e6eaf1', H:'#5a3a2a', k:'#e6eaf1', r:'#ff8a3d', L:'rgba(190,235,255,.45)' },
       up:{ e:'B', w:'k', p:'k', S:'H', r:'r', n:'n' } },
-    kinds:{ plaza:['도킹 허브','space_plaza','star'], shop:['보급 상점','space_shop','cart'], library:['데이터 아카이브','space_library','book'], community:['승무원 라운지','space_community','heart'],
-      home:['거주 모듈','space_home','house'], checkout:['크레딧 교환소','space_checkout','coin'], cafe:['우주 카페','space_cafe','coffee'], school:['훈련 시뮬레이터','space_school','bell'],
-      clinic:['의무 모듈','space_clinic','cross'], post:['통신 안테나','space_post','mail'], factory:['엔진룸','space_factory','gear'], park:['온실 돔','space_park','flower'] },
+    kinds:{ plaza:[L("도킹 허브"),'space_plaza','star'], shop:[L("보급 상점"),'space_shop','cart'], library:[L("데이터 아카이브"),'space_library','book'], community:[L("승무원 라운지"),'space_community','heart'],
+      home:[L("거주 모듈"),'space_home','house'], checkout:[L("크레딧 교환소"),'space_checkout','coin'], cafe:[L("우주 카페"),'space_cafe','coffee'], school:[L("훈련 시뮬레이터"),'space_school','bell'],
+      clinic:[L("의무 모듈"),'space_clinic','cross'], post:[L("통신 안테나"),'space_post','mail'], factory:[L("엔진룸"),'space_factory','gear'], park:[L("온실 돔"),'space_park','flower'] },
     decor:{ tree:'space_tree', gate:'space_gate', pond:'space_pond', ground:'tile' },
   };
 

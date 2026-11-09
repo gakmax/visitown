@@ -1,5 +1,6 @@
 // 디자인 시스템 헬퍼(예전 src/p6.js에서 build.sh가 /design-system으로 뽑던 부분): esc, 픽셀 드롭다운(pxSelect), 모션 헬퍼(showEl/hideEl/pop/say), errText, 확인창(ask/note).
 // 효과음은 쓰는 쪽이 hooks.sfx에 넣는다(대시보드 sfx는 켜짐·리플레이를 거르고, 디자인 시스템은 헤더 토글). 규칙은 CLAUDE.md·docs/motion.md
+import { L } from '@visitown/i18n';
 const $ = id => document.getElementById(id);
 export const hooks = { sfx(){} };
 export function esc(s){ return String(s??'').replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -31,10 +32,10 @@ export function hideEl(el, snd='close'){ if (el.hidden || el.classList.contains(
 export function pop(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
 export function say(el, text, err){ if (err) hooks.sfx('error'); else if (/^저장했어요/.test(text)) hooks.sfx('save'); el.textContent=text; el.classList.toggle('err', !!err); if (text) pop(el,'fade'); } // err면 빨간 글씨(패널 안 실패 문구)
 // 서버·네트워크 오류를 해요체 문구로. 서버가 한국어로 준 문구는 그대로, 영어 코드(unauthorized 등)는 상태 코드로 바꾼다
-export function errText(e, what='요청을 처리하지 못했어요'){ const m=e?.message||'', s=e?.status; if (/[가-힣]/.test(m)) return m;
-  return s===401?'로그인이 만료됐어요. 다시 로그인해 주세요.':s===403?'권한이 없어요.':s===404?`${what}. 대상이 없어졌어요. 새로고침해 주세요.`:s===429?'요청이 너무 많아요. 잠시 뒤 다시 해 주세요.':s>=500?`${what}. 서버에 문제가 생겼어요. 잠시 뒤 다시 해 주세요.`:e instanceof TypeError?'서버에 연결하지 못했어요. 네트워크를 확인해 주세요.':`${what}${m?` (${m})`:''}.`; }
+export function errText(e, what=L("요청을 처리하지 못했어요")){ const m=e?.message||'', s=e?.status; if (/[가-힣]/.test(m)) return L(m); /* 서버의 한국어 문구도 사전에 있으면 번역(로드맵 60) */
+  return s===401?L("로그인이 만료됐어요. 다시 로그인해 주세요."):s===403?L("권한이 없어요."):s===404?L("{0}. 대상이 없어졌어요. 새로고침해 주세요.", {0:what}):s===429?L("요청이 너무 많아요. 잠시 뒤 다시 해 주세요."):s>=500?L("{0}. 서버에 문제가 생겼어요. 잠시 뒤 다시 해 주세요.", {0:what}):e instanceof TypeError?L("서버에 연결하지 못했어요. 네트워크를 확인해 주세요."):`${what}${m?` (${m})`:''}.`; }
 // 기본 alert·confirm 대신 쓰는 픽셀 확인창(#dlg). 확인이면 true. danger면 확인 버튼이 분홍이고 처음 포커스는 취소에. note는 확인 버튼 하나
-export function ask(text, { ok='확인', cancel='취소', danger=false }={}){ const d=$('dlg'), y=$('dlgOk'), n=$('dlgNo'), back=document.activeElement; d._done?.(false);
+export function ask(text, { ok=L("확인"), cancel=L("취소"), danger=false }={}){ const d=$('dlg'), y=$('dlgOk'), n=$('dlgNo'), back=document.activeElement; d._done?.(false);
   $('dlgMsg').textContent=text; y.textContent=ok; y.className='btn '+(danger?'pink':'primary'); n.textContent=cancel; n.hidden=!cancel; showEl(d); (cancel&&danger?n:y).focus();
   return new Promise(res=>{ const done=d._done=v=>{ d._done=d.onkeydown=d.onclick=y.onclick=n.onclick=null; hideEl(d, v&&danger?'remove':'close'); back?.focus?.(); res(v); };
     y.onclick=()=>done(true); n.onclick=()=>done(false); d.onclick=e=>{ if (e.target===d) done(false); };

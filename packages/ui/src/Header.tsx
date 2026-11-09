@@ -2,6 +2,7 @@
 import { useSyncExternalStore } from 'react';
 import { useCtx } from './context';
 import { useStore } from './store';
+import { L } from '@visitown/i18n';
 
 function Num({ id, v }: { id: string; v: number }) { return <b id={id} key={v} className="bump">{v}</b>; }
 
@@ -13,9 +14,9 @@ export function HeaderStats() {
   const events = useSyncExternalStore(sub.slow, () => store.totalEvents, () => store.totalEvents);
   const I = engine.A.iconUrl || {};
   return <>
-    <div className="stat" title="실시간 접속자"><img id="icoPerson" src={I.person} alt="" />접속자 <Num id="stOnline" v={online} /></div>
-    <div className="stat" title="마을 시간 (데모에서는 150초가 하루)"><img id="icoClock" src={I.spark} alt="" />마을 시간 <b id="stClock" style={{ minWidth: '5ch' }}>{clock}</b>{weather ? <span id="stWeather" className="muted" title={weatherTitle}>{weather}</span> : null}</div>
-    <div className="stat" title="크롤러·봇 (접속자 수에 포함하지 않음)"><img id="icoRobot" src={I.robot} alt="" />봇 <Num id="stBots" v={bots} /></div>
-    <div className="stat" title="누적 이벤트"><img id="icoBolt" src={I.bolt} alt="" />이벤트 <Num id="stEvents" v={events} /></div>
+    <div className="stat" title={L("실시간 접속자")}><img id="icoPerson" src={I.person} alt="" />{L("접속자")} <Num id="stOnline" v={online} /></div>
+    <div className="stat" title={L("마을 시간 (데모에서는 150초가 하루)")}><img id="icoClock" src={I.spark} alt="" />{L("마을 시간")} <b id="stClock" style={{ minWidth: '5ch' }}>{clock}</b>{weather ? <span id="stWeather" className="muted" title={weatherTitle}>{weather}</span> : null}</div>
+    <div className="stat" title={L("크롤러·봇 (접속자 수에 포함하지 않음)")}><img id="icoRobot" src={I.robot} alt="" />{L("봇")} <Num id="stBots" v={bots} /></div>
+    <div className="stat" title={L("누적 이벤트")}><img id="icoBolt" src={I.bolt} alt="" />{L("이벤트")} <Num id="stEvents" v={events} /></div>
   </>;
 }

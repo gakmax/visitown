@@ -4,6 +4,7 @@ import type * as Engine from '@visitown/engine';
 import type { TownStore, World } from '@visitown/engine';
 import type { FeedStore } from './feedStore';
 import type { Subscribe, createStore } from './store';
+import { L } from '@visitown/i18n';
 
 export type EngineApi = typeof Engine;
 export interface UiState { rev: number; follow: boolean; clock: string; weather: string; weatherTitle: string; }
@@ -14,7 +15,7 @@ export interface Ctx { engine: EngineApi; store: TownStore; world: World; feed: 
   sub: { store: Subscribe; slow: Subscribe; version: () => number }; }
 
 export const UiContext = createContext<Ctx | null>(null);
-export function useCtx(): Ctx { const c = useContext(UiContext); if (!c) throw new Error('UiContext가 없어요. mount() 안에서만 쓸 수 있어요'); return c; }
+export function useCtx(): Ctx { const c = useContext(UiContext); if (!c) throw new Error(L("UiContext가 없어요. mount() 안에서만 쓸 수 있어요")); return c; }
 // 스토어가 바뀌면(250ms로 묶어) 다시 그린다. 값은 렌더 중에 store에서 직접 읽는다
 export function useStoreVersion(): number { const { sub } = useCtx(); return useSyncExternalStore(sub.slow, sub.version, sub.version); }
 export function useSelectedId(): string | null { const { sub, store } = useCtx(); return useSyncExternalStore(sub.store, () => store.selectedId, () => store.selectedId); }

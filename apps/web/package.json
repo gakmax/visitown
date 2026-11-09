@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@visitown/engine": "*",
+    "@visitown/i18n": "*",
     "@visitown/ui": "*",
     "next": "16.4.5",
     "react": "^19.3.1",

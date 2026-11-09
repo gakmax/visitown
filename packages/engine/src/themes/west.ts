@@ -1,5 +1,6 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, door, mk, roof, shade, shadow, win } from '../map';
 import { DIGIT_ROWS, FIXED_COMMON, PAL, THEMES, human } from '../palette';
+import { L } from '@visitown/i18n';
 // 서부 개척 마을
 (()=>{
   // ---- 작은 글자(3×5). DIGIT_ROWS에 없는 글자만 보탠다
@@ -19,19 +20,19 @@ import { DIGIT_ROWS, FIXED_COMMON, PAL, THEMES, human } from '../palette';
   const dark = '#3a2622';
 
   THEMES.west = {
-    name:'서부', order:5,
+    name:L("서부"), order:5,
     palette:{ outline:'#3a2a24', grass:'#dcc287', grass2:'#cfb276', grass3:'#a99a52', dirt:'#c99467', dirt2:'#a6764d', stone:'#e3c9a0', stone2:'#c3a27a',
       water:'#8fc6d8', water2:'#5b9cba', wall:'#ecdcbc', wall2:'#d4bf98', wood:'#ab7a4c', wood2:'#7a5034',
       roofPink:'#b9573b', roofBlue:'#6886a0', roofGreen:'#7f975c', roofYellow:'#dca94a', roofLilac:'#977a96',
       white:'#fff7e6', leaf:'#6f9a4c', pink:'#e8957c', red:'#bf4336', gold:'#efbc45', metal:'#bcb6a8', metal2:'#857f74', skin:'#f2c9a0' },
     characters:{ shapes:[], colors:[
-      { name:'적갈', B:'#b8603e', b:'#88422a', h:'#dc8c66' },{ name:'청바지', B:'#5d7fae', b:'#425d84', h:'#8ea9cf' },{ name:'모래', B:'#d9b273', b:'#ad874e', h:'#f0d5a0' },
-      { name:'세이지', B:'#809c66', b:'#5d7549', h:'#abc391' },{ name:'자두', B:'#8f5070', b:'#673750', h:'#b87e9a' },{ name:'먹색', B:'#5e504a', b:'#3f3430', h:'#8a7a72' }],
+      { name:L("적갈"), B:'#b8603e', b:'#88422a', h:'#dc8c66' },{ name:L("청바지"), B:'#5d7fae', b:'#425d84', h:'#8ea9cf' },{ name:L("모래"), B:'#d9b273', b:'#ad874e', h:'#f0d5a0' },
+      { name:L("세이지"), B:'#809c66', b:'#5d7549', h:'#abc391' },{ name:L("자두"), B:'#8f5070', b:'#673750', h:'#b87e9a' },{ name:L("먹색"), B:'#5e504a', b:'#3f3430', h:'#8a7a72' }],
       fixed:{ ...FIXED_COMMON, o:'#3a2a24', e:'#3a2a24', f:'#3a2a24', g:'#3a2a24', w:'#fff7e6', S:'#f2c9a0', n:'#f2c9a0', p:'#e8957c', H:'#6a4228', k:'#8a5a34', r:'#efbc45', L:'#6aa04e', W:'#fff7e6', Q:'#a8a296' },
       up:{ S:'H', e:'H', p:'H', w:'B', n:'B', r:'k' } },
-    kinds:{ plaza:['급수탑 광장','west_plaza','fountain'], shop:['잡화점','west_shop','cart'], library:['신문사','west_library','book'], community:['살룬','west_community','mug'],
-      home:['통나무집','west_home','house'], checkout:['은행','west_checkout','coin'], cafe:['커피 마차','west_cafe','coffee'], school:['단칸 교실','west_school','bell'],
-      clinic:['의사 진료소','west_clinic','cross'], post:['역마차 정류장','west_post','mail'], factory:['광산 입구','west_factory','gear'], park:['목장 울타리','west_park','flower'] },
+    kinds:{ plaza:[L("급수탑 광장"),'west_plaza','fountain'], shop:[L("잡화점"),'west_shop','cart'], library:[L("신문사"),'west_library','book'], community:[L("살룬"),'west_community','mug'],
+      home:[L("통나무집"),'west_home','house'], checkout:[L("은행"),'west_checkout','coin'], cafe:[L("커피 마차"),'west_cafe','coffee'], school:[L("단칸 교실"),'west_school','bell'],
+      clinic:[L("의사 진료소"),'west_clinic','cross'], post:[L("역마차 정류장"),'west_post','mail'], factory:[L("광산 입구"),'west_factory','gear'], park:[L("목장 울타리"),'west_park','flower'] },
     decor:{ tree:'west_tree', gate:'west_gate', pond:'west_pond', ground:'grass' },
   };
 
@@ -45,17 +46,17 @@ import { DIGIT_ROWS, FIXED_COMMON, PAL, THEMES, human } from '../palette';
   const BODY_MINER = { down:['..oBBooBBo..','.oBkBwwBkBo.','.oBkBwwBkBo.','.oBkBBBBkBo.','.onoBBBBono.','..obbbbbbo..','...ff..gg...'],
                        side:['..oBBBBBBo..','.oBBwBBkBBo.','.oBBwBBkBBo.','.oBBBBBkBBo.','.onBBBBBBBo.','..obbbbbbo..','...ff..gg...'] };
   const SHAPES = [
-    human('카우보이', ['....oooo....','...oBhBBo...','..obbbbbbo..','oooBBBBBBooo','oBBBBBBBBBBo','.oHSSSSSSHo.','.oSeSSSSeSo.','..opSSSSpo..'],
+    human(L("카우보이"), ['....oooo....','...oBhBBo...','..obbbbbbo..','oooBBBBBBooo','oBBBBBBBBBBo','.oHSSSSSSHo.','.oSeSSSSeSo.','..opSSSSpo..'],
                      ['....oooo....','...oBhBBo...','..obbbbbbo..','oooBBBBBBooo','oBBBBBBBBBBo','.oSSSHHHHHo.','.oSeSSHHHHo.','..opSSHHHo..'], BODY_BELT),
-    human('보안관', ['...oooooo...','...oWWWWo...','...oWrWWo...','ooooWWWWoooo','oWWWWWWWWWWo','.oSeSSSSeSo.','.oSHHHHHHSo.','..oSSSSSSo..'],
+    human(L("보안관"), ['...oooooo...','...oWWWWo...','...oWrWWo...','ooooWWWWoooo','oWWWWWWWWWWo','.oSeSSSSeSo.','.oSHHHHHHSo.','..oSSSSSSo..'],
                    ['...oooooo...','...oWWWWo...','...oWrWWo...','ooooWWWWoooo','oWWWWWWWWWWo','.oSeSSHHHHo.','.oHHHSHHHHo.','..oSSSSSSo..'], BODY_VEST),
-    human('광부', ['....oooo....','...orwrQo...','..oQQQQQQo..','.oQQQQQQQQo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSHHHHHHSo.','..oHHHHHHo..'],
+    human(L("광부"), ['....oooo....','...orwrQo...','..oQQQQQQo..','.oQQQQQQQQo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSHHHHHHSo.','..oHHHHHHo..'],
                  ['....oooo....','..orrQQQo...','..oQQQQQQo..','.oQQQQQQQQo.','.oSSSHHHHHo.','.oSeSSHHHHo.','.oHHHHHHHHo.','..oHHHHHHo..'], BODY_MINER),
-    human('정착민', ['...oooooo...','..ohhhhhho..','.ohhhhhhhho.','.ohbHHHHbho.','.ohSeSSeSho.','.ohpSSSSpho.','.ohhSSSShho.','..oobwwboo..'],
+    human(L("정착민"), ['...oooooo...','..ohhhhhho..','.ohhhhhhhho.','.ohbHHHHbho.','.ohSeSSeSho.','.ohpSSSSpho.','.ohhSSSShho.','..oobwwboo..'],
                    ['...oooooo...','..ohhhhhho..','.ohhhhhhhho.','.obSSHhhhho.','.obeSShhhho.','.obpSShhhho.','.ohSSShhhho.','..oowwboo...'], BODY_DRESS),
-    { name:'말', down:['..oo....oo..','..oBo..oBo..','..oBBHHBBo..','..oBHHHHBo..','.oBBBHHBBBo.','.oBeBBBBeBo.','..oBBwwBBo..','..okkkkkko..','..oBBwwBBo..','..oSSSSSSo..','..oSeSSeSo..','...oSSSSo...','.oBBooooBBo.','oBBBBBBBBBBo','.obbbbbbbbo.','...ff..gg...'],
+    { name:L("말"), down:['..oo....oo..','..oBo..oBo..','..oBBHHBBo..','..oBHHHHBo..','.oBBBHHBBBo.','.oBeBBBBeBo.','..oBBwwBBo..','..okkkkkko..','..oBBwwBBo..','..oSSSSSSo..','..oSeSSeSo..','...oSSSSo...','.oBBooooBBo.','oBBBBBBBBBBo','.obbbbbbbbo.','...ff..gg...'],
               side:['....oo......','...oBo......','..oBBBoo....','.oBBBBHHo...','.oBeBBBHHo..','oBBBBBBBHo..','oSSSBBBBHo..','oSeSoBBBBHo.','oSSSooBBBHo.','.ooo.oBBBBo.','.....oBBBBo.','..ooBBBBBBoo','.oBBBBBBBBBo','.obbBBBBbbbo','..oobbbboo..','...ff..gg...'] },
-    { name:'선인장', down:['.....oo.....','....oBBo....','...oBrrBo...','...ooBBoo...','..oLLLLLLo..','o.oLLLLLLo.o','oLoLeLLeLoLo','oLoLpLLpLoLo','oLLLLoLLLLLo','.ooLLLLLLoo.','..oLLoLLLo..','.oBBBBBBBBo.','..oBhBBBBo..','..obbbbbbo..','...ff..gg...'],
+    { name:L("선인장"), down:['.....oo.....','....oBBo....','...oBrrBo...','...ooBBoo...','..oLLLLLLo..','o.oLLLLLLo.o','oLoLeLLeLoLo','oLoLpLLpLoLo','oLLLLoLLLLLo','.ooLLLLLLoo.','..oLLoLLLo..','.oBBBBBBBBo.','..oBhBBBBo..','..obbbbbbo..','...ff..gg...'],
                  side:['.....oo.....','....oBBo....','...oBrrBo...','...ooBBoo...','..oLLLLLLo..','o.oLLLLLLo.o','oLoeLLLLLoLo','oLopLLLLLoLo','oLLLLLoLLLLo','.ooLLLLLLoo.','..oLLLoLLo..','.oBBBBBBBBo.','..oBhBBBBo..','..obbbbbbo..','...ff..gg...'] },
   ];
   THEMES.west.characters.shapes = SHAPES;

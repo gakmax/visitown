@@ -1,5 +1,6 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, mk, shade, shadow } from '../map';
 import { FIXED_COMMON, PAL, THEMES } from '../palette';
+import { L } from '@visitown/i18n';
 // 한옥 장터
 (()=>{
   // ---------- 한옥 전용 색(PAL에 없는 것만) ----------
@@ -297,30 +298,30 @@ import { FIXED_COMMON, PAL, THEMES } from '../palette';
                  side:['..oBBBBBBo..','.oBwwBBBBBo.','.orrrrrrrro.','.onBBBBBBBo.','.oBBBBBBBBo.','.obbbbbbbbbo','...ff..gg...'] };
   const sh = (name, down, side) => ({ name, down, side, human:true });
   const SHAPES = [
-    sh('선비',
+    sh(L("선비"),
       ['....oooo....','...okkkko...','...okkkko...','ooookkkkoooo','okkkkkkkkkko','oooHSSSSHooo','..oSeSSeSo..','..opSSSSpo..','...oSHHSo...', ...BODY.down],
       ['....oooo....','...okkkko...','...okkkko...','ooookkkkoooo','okkkkkkkkkko','oooSSSHHHooo','..oSeSSHHo..','..oSSSSSHo..','..oHHSSSo...', ...BODY.side]),
-    sh('상인',
+    sh(L("상인"),
       ['....oooo....','...oLLLLo...','..owLLLLwo..','.oLLLLLLLLo.','oLLLLLLLLLLo','oooHSSSSHooo','..oSeSSeSo..','..opSSSSpo..','...oSSSSo...',
        '..orBwwBro..','.oBBrwwrBBo.','.okkkkkkkko.','onBBBBBBBBno','.obbbbbbbbo.','..obboobbo..','...ff..gg...'],
       ['....oooo....','...oLLLLo...','..owLLLLwo..','.oLLLLLLLLo.','oLLLLLLLLLLo','oooSSSHHHooo','..oSeSSHHo..','..oSSSSSHo..','...oSSSSooo.',
        '..oBBBBBBrro','.oBwwBBBBrro','.okkkkkkkrro','.onBBBBBBooo','.obbbbbbbbo.','..obboobbo..','...ff..gg...']),
-    sh('아낙',
+    sh(L("아낙"),
       ['............','............','....oooo....','..ooHHHHoo..','.oHHHHHHHHo.','.oHHSSSSHHo.','.oHSeSSeSHo.','.oHpSSSSpHo.','..ooSSSSoo..',
        '..ohhrrhho..','.onhhhrhhno.','.oBBBBBBBBo.','oBBBBBBBBBBo','oBBBBBBBBBBo','obbbbbbbbbbo','...ff..gg...'],
       ['............','............','...ooooo....','..oHHHHHo...','.oHHHHHHHo..','.oSSSHHHHoo.','.oSeSSHHkHHk','.opSSSHHoHHo','..oSSSSHooo.',
        '..orhhhhho..','.onhhhhhhho.','.oBBBBBBBBo.','oBBBBBBBBBBo','oBBBBBBBBBBo','obbbbbbbbbbo','...ff..gg...']),
-    sh('포졸',
+    sh(L("포졸"),
       ['.....oo...w.','....orro..w.','...okrrko.r.','..okkkkkkoo.','okkkkkkkkkko','oooHSSSSHooo','..oSeSSeSoo.','..opSSSSpoo.','...oSSSSo.o.',
        '..oBBwwBBoo.','.oBBBwwBBBo.','.okkkkkkkko.','onBBBBBBBBno','.oBBBBBBBBo.','obbbbbbbbbbo','...ff..gg...'],
       ['.....oo...w.','....orro..w.','...okrrko.r.','..okkkkkkoo.','okkkkkkkkkko','oooSSSHHHooo','..oSeSSHHoo.','..oSSSSSHoo.','...oSSSSo.o.',
        '..oBBBBBBoo.','.oBwwBBBBBo.','.okkkkkkkko.','.onBBBBBBno.','.oBBBBBBBBo.','.obbbbbbbbbo','...ff..gg...']),
-    sh('동자',
+    sh(L("동자"),
       ['............','............','............','....oooo....','..ooHHHHoo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.opSSSSSSpo.','..ooSSSSoo..',
        '..oBBwwBBo..','.onBrrrrBno.','..oBBBBBBo..','..obbbbbbo..','..obboobbo..','...ff..gg...'],
       ['............','............','............','....oooo....','..ooHHHHoo..','.oHHHHHHHHo.','.oSSSHHHHHo.','.oSeSSHHHHo.','.opSSSHHHHo.','..oSSSSoHo..',
        '..oBBBBBoHo.','.onBrrrrorro','..oBBBBBBoo.','..obbbbbbo..','..obboobbo..','...ff..gg...']),
-    { name:'도깨비',
+    { name:L("도깨비"),
       down:['.o........o.','oLo......oLo','oLLo....oLLo','.oLLooooLLo.','oHHHHHHHHHHo','oHBBHBBHBBHo','oBBweBBewBBo','oBBweBBewBBo','oBBBBBBBBBBo','.oBwBBBBwBo.',
             'onBBBBBBBBno','.oBBBBBBBBo.','.oLoLLLoLLo.','.oLLoLLLoLo.','..oBBooBBo..','...ff..gg...'],
       side:['.o........o.','oLo......oLo','oLLo....oLLo','.oLLooooLLo.','oHHHHHHHHHHo','oBBBHHHHHHHo','owwBBHHHHHHo','oweBBBHHHHHo','oBBBBBBHHHHo','.owBBBBBBBo.',
@@ -328,19 +329,19 @@ import { FIXED_COMMON, PAL, THEMES } from '../palette';
   ];
 
   THEMES.hanok = {
-    name:'한옥 장터', order:3,
+    name:L("한옥 장터"), order:3,
     palette:{ outline:'#3a3036', grass:'#b5d39c', grass2:'#a5c68a', grass3:'#86ad70', dirt:'#d9c39d', dirt2:'#bea37b', stone:'#e3ddcf', stone2:'#c2b9a6',
       water:'#9dd0d6', water2:'#62a6b4', wall:'#f4ecd8', wall2:'#dccfb2', wood:'#bb875a', wood2:'#8a5c3d',
       roofPink:'#d98a7a', roofBlue:'#7c8aad', roofGreen:'#8cc0a0', roofYellow:'#e3c378', roofLilac:'#b8a7d4',
       white:'#fffaf0', leaf:'#6aa868', pink:'#eea3a8', red:'#c9564a', gold:'#e9b949', metal:'#b5b7bf', metal2:'#888c99', skin:'#f8d8b8' },
     characters:{ shapes:SHAPES, colors:[
-        { name:'옥색', B:'#a8d8c8', b:'#7db4a2', h:'#d2eee4' },{ name:'쪽빛', B:'#4f6fa8', b:'#384f80', h:'#7f9bd0' },{ name:'다홍', B:'#e0604f', b:'#b04437', h:'#f0907f' },
-        { name:'송화', B:'#efd77a', b:'#c8ad52', h:'#f8eab0' },{ name:'연분홍', B:'#f4b8c4', b:'#d690a0', h:'#fbdce2' },{ name:'먹색', B:'#55505e', b:'#3e3a46', h:'#7d7888' }],
+        { name:L("옥색"), B:'#a8d8c8', b:'#7db4a2', h:'#d2eee4' },{ name:L("쪽빛"), B:'#4f6fa8', b:'#384f80', h:'#7f9bd0' },{ name:L("다홍"), B:'#e0604f', b:'#b04437', h:'#f0907f' },
+        { name:L("송화"), B:'#efd77a', b:'#c8ad52', h:'#f8eab0' },{ name:L("연분홍"), B:'#f4b8c4', b:'#d690a0', h:'#fbdce2' },{ name:L("먹색"), B:'#55505e', b:'#3e3a46', h:'#7d7888' }],
       fixed:{ ...FIXED_COMMON, o:'#3a3036', e:'#3a3036', f:'#3a3036', g:'#3a3036', S:'#f8d8b8', n:'#f8d8b8', H:'#2f2a33', k:'#5d5a72', r:'#b8403a', L:'#e2c06a', w:'#fffaf0' },
       up:{ S:'H', e:'H', p:'H', w:'B', n:'B', r:'r' } },
-    kinds:{ plaza:['정자 광장','hanok_plaza','star'], shop:['저잣거리','hanok_shop','cart'], library:['서고','hanok_library','book'], community:['주막','hanok_community','mug'],
-      home:['초가집','hanok_home','house'], checkout:['전당포','hanok_checkout','coin'], cafe:['찻집','hanok_cafe','coffee'], school:['서당','hanok_school','bell'],
-      clinic:['약방','hanok_clinic','cross'], post:['파발소','hanok_post','mail'], factory:['대장간','hanok_factory','gear'], park:['연못 정원','hanok_park','flower'] },
+    kinds:{ plaza:[L("정자 광장"),'hanok_plaza','star'], shop:[L("저잣거리"),'hanok_shop','cart'], library:[L("서고"),'hanok_library','book'], community:[L("주막"),'hanok_community','mug'],
+      home:[L("초가집"),'hanok_home','house'], checkout:[L("전당포"),'hanok_checkout','coin'], cafe:[L("찻집"),'hanok_cafe','coffee'], school:[L("서당"),'hanok_school','bell'],
+      clinic:[L("약방"),'hanok_clinic','cross'], post:[L("파발소"),'hanok_post','mail'], factory:[L("대장간"),'hanok_factory','gear'], park:[L("연못 정원"),'hanok_park','flower'] },
     decor:{ tree:'hanok_tree', gate:'hanok_gate', pond:'hanok_pond', ground:'grass' },
   };
 })();

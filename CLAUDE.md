@@ -13,7 +13,7 @@
 - 이름은 Visitown(폴더명만 예전 `website-town`). SDK는 `sdk/visitown.js`(전역 `window.visitown`), 내부 약어는 `vt`(저장 키 `vt_*`, 환경변수 `NEXT_PUBLIC_VT_*`). `packages/engine/src/map.ts`의 `WT`는 웨이포인트 이름이라 상관없다.
 - 비밀값은 `server/.env`·`demo-site/.env.local`에만 둔다(`.gitignore`가 `.env*`를 막고 `.env.example`만 추적). service_role 키·JWT 시크릿·터널 토큰을 대화나 코드에 적지 않는다. `.env`는 `sed -E 's/=.*/=<hidden>/'`로 키 이름만 보고, 저장소 전체 grep에는 `--exclude='.env*'`를 붙인다.
 - 커밋·푸시·배포는 사용자가 요청할 때만 한다.
-- 사용자에게 보이는 문구는 한국어 해요체.
+- 사용자에게 보이는 문구는 한국어 해요체. 영어도 지원한다(로드맵 60, `packages/i18n`): 한국어 원문을 그대로 키로 쓰는 gettext 방식이라 새 문구는 `L('한국어 {0}', {0:값})`으로 감싸고(셸·React 패널·엔진, `t`는 시간 변수와 겹쳐 `L`), 서버 렌더링(Next 페이지·`generateMetadata`)은 전역 언어를 쓰지 말고 `serverT()`/`tr(locale, …)`, 클라이언트 컴포넌트는 서버가 준 `locale` prop을 쓴다. 영어 값은 `packages/i18n/src/en.ts`에 넣는다(`node tests/i18n-keys.cjs --missing`이 빠진 키를 보여 주고 `tests/i18n.test.js`가 막는다). 대시보드 마크업(`shell/dashboard.html`)은 서버가 `translateHtml`로 번역하니 글자만 쓰면 된다. 조사(이/가)는 영어에서 빈 문자열이 되게(`who()`처럼) 문장 템플릿으로. 언어는 `vt_lang` 쿠키 → `Accept-Language`, `<html lang>`에 들어간다. 날짜·나라 이름은 `intlLocale()`. 디자인 시스템(`/design-system`)·웹훅 알림·아침 요약은 아직 한국어만.
 - 브라우저 기본 `alert`·`confirm`·`prompt`는 쓰지 않는다. 확인은 `await ask(문구, { ok:'지우기', danger:true })`, 알림은 `note(문구)`(`apps/web/shell/helpers.js`, 픽셀 확인창 `#dlg`). 패널 안 저장·요청 실패는 그 패널의 상태 문구에 `say(el, errText(e, '저장하지 못했어요'), true)`로 빨갛게 띄운다. `errText`는 영어 서버 오류를 해요체로 바꾼다.
 - 화면의 `<select>`는 그냥 네이티브로 쓰면 `pxSelect`(`shell/helpers.js`, `initPxSelect()`가 MutationObserver로 새 select도 감싼다)가 자동으로 픽셀 드롭다운으로 감싼다. 값·change는 숨겨진 select가 그대로 들고 있으니 테스트에서는 `select_option` 대신 `selectedIndex` 지정 + `change` 디스패치로 바꾼다.
 - 버튼·드롭다운·확인창·색 토큰의 쓰임과 복사용 코드는 `/design-system`(`apps/web/shell/ds.html`·`ds.js`·`ds.css`)에 있다. 대시보드와 같은 `shell.css`·`helpers.js`·`sfx.js`를 import하므로 따로 뽑을 게 없다.

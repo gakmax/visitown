@@ -1,21 +1,22 @@
 import { BASE_PAL, BOT_COLOR, BOT_SHAPE, DIGIT_ROWS, FIXED_COMMON, FLAG_PAL, FLAG_ROWS, H, ICON_LEGEND, ICON_ROWS, KINDS, ME_COLOR, PAL, SEASON_PAL, SEASON_ROWS, THEMES, W } from './palette';
+import { L } from '@visitown/i18n';
 
 /* ---------- 2. MAP: 자리(슬롯) 표. 활성 건물에 따라 길 그래프·장식을 다시 만든다 ---------- */
 // 자리 0은 항상 광장. 1~5는 안쪽 고리, 6~11은 바깥 고리(양 끝 기둥). x,y는 건물 바닥 중앙, node는 길 노드, roads는 그 자리까지 필요한 길.
 // maxW/maxH는 그 자리에 놓을 수 있는 건물 크기 한도(바깥 고리는 작은 건물만).
 export const SLOTS = [
-  { id:0,  name:'중앙 광장',        x:240, y:162, node:'PLAZA', maxW:80, maxH:66, roads:[] },
-  { id:1,  name:'위 가운데',        x:240, y:86,  node:'N1',  maxW:80, maxH:80, roads:[['PN','N1']] },
-  { id:2,  name:'왼쪽 위',          x:132, y:118, node:'NW',  maxW:80, maxH:80, roads:[['PW','W1'],['W1','NW']] },
-  { id:3,  name:'오른쪽 위',        x:348, y:118, node:'NE',  maxW:80, maxH:80, roads:[['PE','E1'],['E1','NE']] },
-  { id:4,  name:'왼쪽 아래',        x:134, y:210, node:'SW',  maxW:80, maxH:66, roads:[['S1','SW']] },
-  { id:5,  name:'오른쪽 아래',      x:346, y:210, node:'SE',  maxW:80, maxH:66, roads:[['S1','SE']] },
-  { id:6,  name:'왼쪽 끝 위',       x:40,  y:66,  node:'WT',  maxW:68, maxH:60, roads:[['PW','W1'],['W1','AW'],['AW','AWT'],['AWT','WT']] },
-  { id:7,  name:'오른쪽 끝 위',     x:440, y:66,  node:'ET',  maxW:68, maxH:60, roads:[['PE','E1'],['E1','AE'],['AE','AET'],['AET','ET']] },
-  { id:8,  name:'왼쪽 끝 가운데',   x:40,  y:144, node:'WM',  maxW:68, maxH:60, roads:[['PW','W1'],['W1','AW'],['AW','WM']] },
-  { id:9,  name:'오른쪽 끝 가운데', x:440, y:144, node:'EM',  maxW:68, maxH:60, roads:[['PE','E1'],['E1','AE'],['AE','EM']] },
-  { id:10, name:'왼쪽 끝 아래',     x:40,  y:240, node:'WB',  maxW:68, maxH:60, roads:[['S1','SW'],['SW','AWB'],['AWB','AWB2'],['AWB2','WB']] },
-  { id:11, name:'오른쪽 끝 아래',   x:440, y:240, node:'EB',  maxW:68, maxH:60, roads:[['S1','SE'],['SE','AEB'],['AEB','AEB2'],['AEB2','EB']] },
+  { id:0,  name:L("중앙 광장"),        x:240, y:162, node:'PLAZA', maxW:80, maxH:66, roads:[] },
+  { id:1,  name:L("위 가운데"),        x:240, y:86,  node:'N1',  maxW:80, maxH:80, roads:[['PN','N1']] },
+  { id:2,  name:L("왼쪽 위"),          x:132, y:118, node:'NW',  maxW:80, maxH:80, roads:[['PW','W1'],['W1','NW']] },
+  { id:3,  name:L("오른쪽 위"),        x:348, y:118, node:'NE',  maxW:80, maxH:80, roads:[['PE','E1'],['E1','NE']] },
+  { id:4,  name:L("왼쪽 아래"),        x:134, y:210, node:'SW',  maxW:80, maxH:66, roads:[['S1','SW']] },
+  { id:5,  name:L("오른쪽 아래"),      x:346, y:210, node:'SE',  maxW:80, maxH:66, roads:[['S1','SE']] },
+  { id:6,  name:L("왼쪽 끝 위"),       x:40,  y:66,  node:'WT',  maxW:68, maxH:60, roads:[['PW','W1'],['W1','AW'],['AW','AWT'],['AWT','WT']] },
+  { id:7,  name:L("오른쪽 끝 위"),     x:440, y:66,  node:'ET',  maxW:68, maxH:60, roads:[['PE','E1'],['E1','AE'],['AE','AET'],['AET','ET']] },
+  { id:8,  name:L("왼쪽 끝 가운데"),   x:40,  y:144, node:'WM',  maxW:68, maxH:60, roads:[['PW','W1'],['W1','AW'],['AW','WM']] },
+  { id:9,  name:L("오른쪽 끝 가운데"), x:440, y:144, node:'EM',  maxW:68, maxH:60, roads:[['PE','E1'],['E1','AE'],['AE','EM']] },
+  { id:10, name:L("왼쪽 끝 아래"),     x:40,  y:240, node:'WB',  maxW:68, maxH:60, roads:[['S1','SW'],['SW','AWB'],['AWB','AWB2'],['AWB2','WB']] },
+  { id:11, name:L("오른쪽 끝 아래"),   x:440, y:240, node:'EB',  maxW:68, maxH:60, roads:[['S1','SE'],['SE','AEB'],['AEB','AEB2'],['AEB2','EB']] },
 ];
 export const MAX_BUILDINGS = SLOTS.length;
 export const NODES = {
@@ -100,9 +101,9 @@ export function townLevelOf(visits){ return visits>=100000?5:visits>=10000?4:vis
 export const TOWN_LEVEL_AT=[0,0,100,1000,10000,100000];
 // 계절 이벤트(로드맵 38): 날짜로 정해지는 한정 장식. 할로윈·크리스마스는 양력 구간, 설날은 음력이라 연도별 표(연휴 ±span일). p6 tickSeason()이 1분마다 seasonOf()를 보고 SEASON을 바꾼다(?season=키로 강제)
 export const SEASONS: Record<string, any> = {
-  halloween: { name:'할로윈', from:[10,24], to:[10,31], decor:[[5,'pumpkin'],[3,'pumpkin_s']], feed:'호박 등불을 놓았어요. 밤에는 박쥐가 날아요.' },
-  xmas: { name:'크리스마스', from:[12,15], to:[12,31], decor:[[2,'snowman'],[4,'gift']], feed:'눈이 내리고 나무에 전구를 달았어요.' },
-  seol: { name:'설날', days:{ 2026:[2,17], 2027:[2,6], 2028:[1,26], 2029:[2,13], 2030:[2,3], 2031:[1,23], 2032:[2,11], 2033:[1,31], 2034:[2,19], 2035:[2,8] }, span:2, decor:[[5,'pouch']], feed:'복주머니를 놓고 가로등에 등불을 달았어요. 새해 복 많이 받으세요.' },
+  halloween: { name:L("할로윈"), from:[10,24], to:[10,31], decor:[[5,'pumpkin'],[3,'pumpkin_s']], feed:L("호박 등불을 놓았어요. 밤에는 박쥐가 날아요.") },
+  xmas: { name:L("크리스마스"), from:[12,15], to:[12,31], decor:[[2,'snowman'],[4,'gift']], feed:L("눈이 내리고 나무에 전구를 달았어요.") },
+  seol: { name:L("설날"), days:{ 2026:[2,17], 2027:[2,6], 2028:[1,26], 2029:[2,13], 2030:[2,3], 2031:[1,23], 2032:[2,11], 2033:[1,31], 2034:[2,19], 2035:[2,8] }, span:2, decor:[[5,'pouch']], feed:L("복주머니를 놓고 가로등에 등불을 달았어요. 새해 복 많이 받으세요.") },
 };
 export function seasonOf(d=new Date()){ const y=d.getFullYear(), m=d.getMonth()+1, day=d.getDate(), md=m*100+day;
   for (const [k,s] of Object.entries(SEASONS)){ if (s.from){ if (md>=s.from[0]*100+s.from[1] && md<=s.to[0]*100+s.to[1]) return k; continue; }

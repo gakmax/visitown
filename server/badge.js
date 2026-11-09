@@ -6,8 +6,8 @@ const COL = { o: '#3b2f3a', p: '#f4a9bb', c: '#fff5e3', b: '#a9d9f1', k: '#c98d5
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 // 글자 폭 추정(픽셀 폰트가 없을 때도 잘리지 않게 textLength로 맞춘다): 한글·전각 13px, 그 밖에 8px
 const textW = s => [...s].reduce((w, ch) => w + (ch.charCodeAt(0) > 0x2e7f ? 13 : 8), 0);
-function badgeSvg(online, label) {
-  const n = Math.max(0, online | 0), text = (label ? String(label).slice(0, 20) : '지금 ' + n + '명 보는 중');
+function badgeSvg(online, label, lang) {
+  const n = Math.max(0, online | 0), text = (label ? String(label).slice(0, 20) : lang === 'en' ? n + ' viewing now' : '지금 ' + n + '명 보는 중'); // lang=en은 영어 문구(로드맵 60)
   // 오른쪽 끝의 작은 "Visitown"은 브랜드 표시(로드맵 19). 배지 자체가 랜딩 링크라 글자만 둔다. 유료 플랜 숨김은 플랜이 생기면
   const BRAND = 'Visitown', bw = BRAND.length * 6 + 6;
   const S = 2, ICON = 12 * S, PAD = 6, tw = textW(text), left = ICON + PAD * 2, w = left + tw + PAD * 2 + bw, h = ICON + PAD * 2;

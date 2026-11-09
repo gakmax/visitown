@@ -1,49 +1,50 @@
 import { BUILD, CHIMNEY, DECOR_KIND, NO_LIGHT, PX, door, glass, iconMap, mk, roof, scallop, shade, shadow, timber, win } from '../map';
 import { FIXED_COMMON, ICON_ROWS, PAL, THEMES, human } from '../palette';
+import { L } from '@visitown/i18n';
 // 농장 (farm)
 (()=>{
   const SPOT='#4e3a2d', HAY='#e2bf62', HAY2='#c49c45', PUMP='#d9822b', DARK='#4a3528', BURLAP='#cdb48a';
 
   // ---- 캐릭터: 농부(밀짚모자)·소·돼지·닭·양·강아지
   // 고정 글자: k 밀짚 r 부리(뒷모습에선 몸색) R 빨강(볏·띠·목걸이, 뒷모습에도 남음) Y 뿔 K 얼룩 T 셔츠 n 농부 눈·장갑
-  const FARMER = human('농부',
+  const FARMER = human(L("농부"),
     ['....oooo....','...okkkko...','.ooRRRRRRoo.','okkkkkkkkkko','.oHSSSSSSHo.','.oHSnSSnSHo.','.oHSSSSSSHo.','..oSSSSSSo..'],
     ['....oooo....','...okkkko...','.ooRRRRRRoo.','okkkkkkkkkko','.oSSSSHHHHo.','.oSnSSHHHHo.','.oSSSSHHHHo.','..oSSSSSSo..'],
     { down:['..oTTooTTo..','.oTBBBBBBTo.','.oTBwBBwBTo.','.oTBBBBBBTo.','.onoBBBBono.','..obbbbbbo..','...ff..gg...'],
       side:['..oTTTTTTo..','.oBBTBBBBBo.','.oBBTBBBBBo.','.oBBBBBBBBo.','.onBBBBBBBo.','..obbbbbbo..','...ff..gg...'] });
   const SHAPES = [
     FARMER,
-    { name:'소',
+    { name:L("소"),
       down:['.oo......oo.','oYYo....oYYo','.ooYooooYoo.','.oBBBBBBKKo.','oBBBBBBBKKBo','oBBeBBBBeBBo','oKBeBBBBeBBo','oKKBBBBBBBBo','oBppppppppBo','oBpeppppepBo','.oBppppppBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
       side:['..oo....oo..','.oYYo..oYYo.','..ooYooYoo..','.oBBBBBBKKo.','oBBBBBBBKKBo','oBeBBBBBBBBo','oBeBBBBBBKBo','oBBBBBBBKKBo','oppppBBBBBBo','oopppBBBBBBo','.opppBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-    { name:'돼지',
+    { name:L("돼지"),
       down:['............','oooo....oooo','obbBo..oBbbo','.obBBooBBbo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBBBppppBBBo','oBBpeppepBBo','oBBBppppBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
       side:['............','oooo....oooo','obbBo..oBbbo','.obBBooBBbo.','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeBBBBBBBBo','opppBBBBBBBo','pepBBBBBBBBo','opppBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-    { name:'닭',
+    { name:L("닭"),
       down:['...o.oo.o...','..oRoRRoRo..','..oRRRRRRo..','..ooBBBBoo..','.oBBBBBBBBo.','.oBeBBBBeBo.','.oBBBrrBBBo.','oBBBBppBBBBo','ohBBBBBBBBho','oBbBBBBBBbBo','.obBBBBBBbo.','..obbbbbbo..','...ff..gg...'],
       side:['...o.oo.....','..oRoRRo....','..oRRRRo....','.ooBBBBoo...','.oBBBBBBo.o.','.oBeBBBBooBo','orrBBBBBBBBo','.opBBhhhBBBo','.oBBBhhhBBo.','.oBBBBBBBBo.','.obBBBBBbo..','..obbbbbo...','...ff..gg...'] },
-    { name:'양',
+    { name:L("양"),
       down:['............','..oo.oo.oo..','.oBhoBBoBBo.','oBhBBBBBBBBo','oBBewwwweBBo','oBewewweweBo','oBewwwwwweBo','oBewwppwweBo','oBBewwwweBBo','oBBBeeeeBBBo','oBhBBBBBBBBo','.oBBBBBBBBo.','.obBbBBbBbo.','..oooooooo..','...ff..gg...'],
       side:['............','..oo.oo.oo..','.oBhoBBoBBo.','oBhBBBBBBBBo','owwoBBBBBBBo','oewwoBBBBBBo','owwwoBBBBBBo','pwwwoBBBBBBo','owwoBBBBBBBo','oooBBBBBBBBo','oBhBBBBBBBBo','.oBBBBBBBBo.','.obBbBBbBbo.','..oooooooo..','...ff..gg...'] },
-    { name:'강아지',
+    { name:L("강아지"),
       down:['............','...oooooo...','.ooBhBBBBoo.','oHHoBBBBoHHo','oHHBBBBBBHHo','oHHBeBBeBHHo','oHHBeBBeBHHo','oHHBwwwwBHHo','.oHBweewBHo.','.ooBBwwBBoo.','.oRRRRRRRRo.','.obBBBBBBbo.','..oobbbboo..','...ff..gg...'],
       side:['............','...ooooo....','..oBhBBBoo..','.oBBBBBoHHo.','.oBBBBBoHHo.','.oBeBBBoHHo.','ooBeBBBBoHo.','ewwBBBBBBoo.','owwwBBBBBBo.','.owwBBBBBBo.','.oRRRRRRRRo.','.obBBBBBBbo.','..oobbbboo..','...ff..gg...'] },
   ];
 
   THEMES.farm = {
-    name:'농장', order:8,
+    name:L("농장"), order:8,
     palette:{ outline:'#3a2c22', grass:'#b9c98c', grass2:'#a8b97b', grass3:'#8ba264', dirt:'#d9c08f', dirt2:'#b99c6a', stone:'#ddd4be', stone2:'#b7ab91',
       water:'#9cc6cf', water2:'#6a9fb2', wall:'#f2e7cd', wall2:'#dccaa4', wood:'#b27c4c', wood2:'#7d5133',
       roofPink:'#b84a3a', roofBlue:'#7d97ab', roofGreen:'#8aa766', roofYellow:'#e0b85a', roofLilac:'#cf8556',
       white:'#fbf6ea', leaf:'#7aa957', pink:'#e3998b', red:'#c4483c', gold:'#e6b443', metal:'#bdb9ad', metal2:'#8c887c', skin:'#f2cba0' },
     characters:{ shapes:SHAPES, colors:[
-      { name:'크림', B:'#efe4c8', b:'#cbbd98', h:'#fbf6e8' },{ name:'밀짚', B:'#e2c47c', b:'#bd9c52', h:'#f3dfa8' },{ name:'황토', B:'#cf9a62', b:'#a6733f', h:'#e8c191' },
-      { name:'적갈', B:'#b0614a', b:'#86432f', h:'#cf8a72' },{ name:'청회', B:'#8399ac', b:'#5f7487', h:'#adbecd' },{ name:'흑갈', B:'#6f5644', b:'#4e3a2d', h:'#967b66' }],
+      { name:L("크림"), B:'#efe4c8', b:'#cbbd98', h:'#fbf6e8' },{ name:L("밀짚"), B:'#e2c47c', b:'#bd9c52', h:'#f3dfa8' },{ name:L("황토"), B:'#cf9a62', b:'#a6733f', h:'#e8c191' },
+      { name:L("적갈"), B:'#b0614a', b:'#86432f', h:'#cf8a72' },{ name:L("청회"), B:'#8399ac', b:'#5f7487', h:'#adbecd' },{ name:L("흑갈"), B:'#6f5644', b:'#4e3a2d', h:'#967b66' }],
       fixed:{ ...FIXED_COMMON, o:'#3a2c22', e:'#3a2c22', f:'#3a2c22', g:'#3a2c22', w:'#fbf6ea', p:'#e8a092', S:'#f2cba0', n:'#4a3426', H:'#7a5236', k:'#e6c46a', r:'#e39a3c', R:'#c4483c', Y:'#f1e5c4', K:SPOT, T:'#c25a48', L:'#7aa957' },
       up:{ S:'H', n:'H' } },
-    kinds:{ plaza:['마을 장터','farm_plaza','fountain'], shop:['농산물 직판장','farm_shop','cart'], library:['마을 문고','farm_library','book'], community:['마을 회관','farm_community','heart'],
-      home:['농가','farm_home','house'], checkout:['저울 계산대','farm_checkout','coin'], cafe:['우유 가판대','farm_cafe','mug'], school:['시골 분교','farm_school','bell'],
-      clinic:['동물 병원','farm_clinic','cross'], post:['시골 우체국','farm_post','mail'], factory:['풍차 방앗간','farm_factory','gear'], park:['과수원','farm_park','flower'] },
+    kinds:{ plaza:[L("마을 장터"),'farm_plaza','fountain'], shop:[L("농산물 직판장"),'farm_shop','cart'], library:[L("마을 문고"),'farm_library','book'], community:[L("마을 회관"),'farm_community','heart'],
+      home:[L("농가"),'farm_home','house'], checkout:[L("저울 계산대"),'farm_checkout','coin'], cafe:[L("우유 가판대"),'farm_cafe','mug'], school:[L("시골 분교"),'farm_school','bell'],
+      clinic:[L("동물 병원"),'farm_clinic','cross'], post:[L("시골 우체국"),'farm_post','mail'], factory:[L("풍차 방앗간"),'farm_factory','gear'], park:[L("과수원"),'farm_park','flower'] },
     decor:{ tree:'farm_tree', gate:'farm_gate', pond:'farm_pond', ground:'grass' },
   };
 

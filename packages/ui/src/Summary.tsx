@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useCtx } from './context';
 import type { FeedEntry } from './feedStore';
 import type { Readable } from './store';
+import { L } from '@visitown/i18n';
 
 export interface FeedCounts { enter: number; move: number; leave: number; timeout: number; bot: number; event: number; sys: number; }
 export const EMPTY_COUNTS: FeedCounts = { enter: 0, move: 0, leave: 0, timeout: 0, bot: 0, event: 0, sys: 0 };
@@ -21,10 +22,10 @@ export function countEntry(c: FeedCounts, e: FeedEntry): FeedCounts {
 }
 export function summarizeFeed(c: FeedCounts, online: number, secs = 30): string | null {
   const parts: string[] = [];
-  if (c.enter) parts.push(`입장 ${c.enter}명`); if (c.leave) parts.push(`떠남 ${c.leave}명`); if (c.move) parts.push(`페이지 이동 ${c.move}번`);
-  if (c.event) parts.push(`이벤트 ${c.event}건`); if (c.timeout) parts.push(`연결 끊김 ${c.timeout}명`); if (c.bot) parts.push(`봇 ${c.bot}건`); if (c.sys) parts.push(`알림 ${c.sys}건`);
+  if (c.enter) parts.push(L("입장 {0}명", {0:c.enter})); if (c.leave) parts.push(L("떠남 {0}명", {0:c.leave})); if (c.move) parts.push(L("페이지 이동 {0}번", {0:c.move}));
+  if (c.event) parts.push(L("이벤트 {0}건", {0:c.event})); if (c.timeout) parts.push(L("연결 끊김 {0}명", {0:c.timeout})); if (c.bot) parts.push(L("봇 {0}건", {0:c.bot})); if (c.sys) parts.push(L("알림 {0}건", {0:c.sys}));
   if (!parts.length) return null;
-  return `지난 ${secs}초: ${parts.join(', ')}. 지금 접속자 ${online}명.`;
+  return L("지난 {0}초: {1}. 지금 접속자 {2}명.", {0:secs, 1:parts.join(', '), 2:online});
 }
 
 // every ms마다 그동안 쌓인 줄을 한 문장으로. flush 스토어의 번호가 오르면 바로 한 번 말한다(테스트·"지금 읽어 줘")

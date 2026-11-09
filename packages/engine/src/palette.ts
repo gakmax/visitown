@@ -1,3 +1,4 @@
+import { L } from '@visitown/i18n';
 /* =====================================================================
    Visitown — prototype demo (Canvas 2D, 480x270 internal, integer scale)
    1 palette+sprites(테마별) · 2 map · 3 asset builders · 4 store · 5 simulator · 6 world/renderer · 7 UI
@@ -106,20 +107,20 @@ export const FLAG_ROWS = {
 
 // ---- 건물 종류(kind)는 테마와 무관한 의미 id. 테마는 종류마다 이름·생김새(빌더)·간판을 정하므로 테마를 바꿔도 사이트 설정은 그대로다
 export const KINDS = ['plaza','shop','library','community','home','checkout','cafe','school','clinic','post','factory','park'];
-export const KIND_LABEL = { plaza:'광장', shop:'상점', library:'도서관', community:'커뮤니티', home:'집', checkout:'계산대', cafe:'카페', school:'학교', clinic:'병원', post:'우체국', factory:'공방', park:'공원' };
+export const KIND_LABEL = { plaza:L("광장"), shop:L("상점"), library:L("도서관"), community:L("커뮤니티"), home:L("집"), checkout:L("계산대"), cafe:L("카페"), school:L("학교"), clinic:L("병원"), post:L("우체국"), factory:L("공방"), park:L("공원") };
 // ---- 캐릭터. 공통 범례: . 투명 o 외곽선 B 몸색 b 그림자 h 하이라이트 e 눈 w 흰 p 볼 S 피부/주둥이 r 장식 k 금속·액세서리 L 잎 H 머리카락 n 손 f/g 발
 export const COZY_SHAPES = [
-  { name:'블롭', down:['....oooo....','..ooBBBBoo..','.oBhhBBBBBo.','.oBhBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBBBBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("블롭"), down:['....oooo....','..ooBBBBoo..','.oBhhBBBBBo.','.oBhBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBBBBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['....oooo....','..ooBBBBoo..','.oBhhBBBBBo.','.oBhBBBBBBo.','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeBBBBBBBBo','opBBBBBBBBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-  { name:'고양이', down:['.oo......oo.','.oBo....oBo.','.oBpo..opBo.','.oBBBooBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBrrBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("고양이"), down:['.oo......oo.','.oBo....oBo.','.oBpo..opBo.','.oBBBooBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBrrBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['.oo......oo.','.oBo....oBo.','.oBpo..opBo.','.oBBBooBBBo.','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeBBBBBBBBo','orBBBBBBBBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-  { name:'곰', down:['.ooo....ooo.','oBpBo..oBpBo','oBBBooooBBBo','.oBBBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBSSBeBBo','oBpBSrrSBpBo','oBBBBSSBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("곰"), down:['.ooo....ooo.','oBpBo..oBpBo','oBBBooooBBBo','.oBBBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBSSBeBBo','oBpBSrrSBpBo','oBBBBSSBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['.ooo....ooo.','oBpBo..oBpBo','oBBBooooBBBo','.oBBBBBBBBo.','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeSSBBBBBBo','orSSBBBBBBBo','oBSSBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-  { name:'토끼', down:['..oo....oo..','.oBpo..opBo.','.oBpo..opBo.','.oBpo..opBo.','.oBBo..oBBo.','.oBBBooBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBrrBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("토끼"), down:['..oo....oo..','.oBpo..opBo.','.oBpo..opBo.','.oBpo..opBo.','.oBBo..oBBo.','.oBBBooBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBrrBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['....oo..oo..','...oBpo.opBo','...oBpo.opBo','...oBpo.opBo','...oBBo.oBBo','.oooBBoooBBo','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeBBBBBBBBo','orBBBBBBBBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-  { name:'로봇', down:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBbwwbbbwwBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBBBBooBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("로봇"), down:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBbwwbbbwwBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBBBBooBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBwwbbbbbbBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBooBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
-  { name:'새싹', down:['......ooo...','.....oLLLo..','....oLLLLo..','....oLLoo...','.....oo.....','..ooBBBBoo..','.oBhBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBBBBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+  { name:L("새싹"), down:['......ooo...','.....oLLLo..','....oLLLLo..','....oLLoo...','.....oo.....','..ooBBBBoo..','.oBhBBBBBBo.','oBBBBBBBBBBo','oBBeBBBBeBBo','oBBeBBBBeBBo','oBpBBBBBBpBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
     side:['......ooo...','.....oLLLo..','....oLLLLo..','....oLLoo...','.....oo.....','..ooBBBBoo..','.oBhBBBBBBo.','oBBBBBBBBBBo','oBeBBBBBBBBo','oBeBBBBBBBBo','opBBBBBBBBBo','oBBBBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] },
 ];
 // 사람형 공통 몸통(머리 8줄은 형태별로 다르게 붙인다)
@@ -128,64 +129,64 @@ export const HUMAN_BODY = { down:['..oBBooBBo..','.oBBBwwBBBo.','.oBBBwwBBBo.','
 export const human = (name, headDown, headSide, body=HUMAN_BODY) => ({ name, down:[...headDown, ...body.down], side:[...headSide, ...body.side], human:true });
 export const RPG_BODY_ARMOR = { down:['..okkookko..','.okkkwwkkko.','.okkkwwkkko.','.okkkkkkkko.','.onokkkkono.','..obbbbbbo..','...ff..gg...'], side:['..okkkkkko..','.okkwkkkkko.','.okkwkkkkko.','.okkkkkkkko.','.onkkkkkkko.','..obbbbbbo..','...ff..gg...'] };
 export const RPG_SHAPES = [
-  human('기사', ['....oooo....','...okkkkko..','..okkkkkkko.','..okkkkkkko.','..oSeSSeSSo.','..okkkkkkko.','..okkkkkkko.','...oooooo...'],
+  human(L("기사"), ['....oooo....','...okkkkko..','..okkkkkkko.','..okkkkkkko.','..oSeSSeSSo.','..okkkkkkko.','..okkkkkkko.','...oooooo...'],
                ['....oooo....','...okkkkko..','..okkkkkkko.','..okkkkkkko.','..oSeSSkkko.','..okkkkkkko.','..okkkkkkko.','...oooooo...'], RPG_BODY_ARMOR),
-  human('마법사', ['.....oo.....','....oBBo....','....oBBo....','...oBgBBo...','..oBBBBBBo..','.oooooooooo.','..oSeSSeSSo.','..owwwwwwo..'],
+  human(L("마법사"), ['.....oo.....','....oBBo....','....oBBo....','...oBgBBo...','..oBBBBBBo..','.oooooooooo.','..oSeSSeSSo.','..owwwwwwo..'],
                  ['.....oo.....','....oBBo....','....oBBo....','...oBgBBo...','..oBBBBBBo..','.oooooooooo.','..oSeSSHHHo.','..owwwHHHo..']),
-  human('궁수', ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBBSSSSBBo.','.oBSeSSeSBo.','.oBSSSSSSBo.','.oBpSSSSpBo.','..oSSSSSSo..'],
+  human(L("궁수"), ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBBSSSSBBo.','.oBSeSSeSBo.','.oBSSSSSSBo.','.oBpSSSSpBo.','..oSSSSSSo..'],
                ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBSSSBBBBo.','.oBSeSSBBBo.','.oBSSSSBBBo.','.oBpSSSBBBo.','..oSSSSSSo..']),
-  human('도적', ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSkkkkkkSo.','.oSkeSSekSo.','.oSSSSSSSSo.','..oSSSSSSo..'],
+  human(L("도적"), ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSkkkkkkSo.','.oSkeSSekSo.','.oSSSSSSSSo.','..oSSSSSSo..'],
                ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oSSSHHHHHo.','.okkkkHHHHo.','.okekkHHHHo.','.oSSSSHHHHo.','..oSSSSSSo..']),
-  human('사제', ['...oooooo...','..owwwwwwo..','.owwwwwwwwo.','.owwSSSSwwo.','.owSeSSeSwo.','.owSSSSSSwo.','.owSSSSSSwo.','..oSSSSSSo..'],
+  human(L("사제"), ['...oooooo...','..owwwwwwo..','.owwwwwwwwo.','.owwSSSSwwo.','.owSeSSeSwo.','.owSSSSSSwo.','.owSSSSSSwo.','..oSSSSSSo..'],
                ['...oooooo...','..owwwwwwo..','.owwwwwwwwo.','.owSSSwwwwo.','.owSeSSwwwo.','.owSSSSwwwo.','.owSSSSwwwo.','..oSSSSSSo..']),
   COZY_SHAPES[0],
 ];
 export const OFFICE_SHAPES = [
-  human('정장', ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
+  human(L("정장"), ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
                ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oSSSHHHHHo.','.oSeSSHHHHo.','.oSSSSHHHHo.','.opSSSHHHHo.','..oSSSSSSo..'],
                { down:['..oBBooBBo..','.oBBBrrBBBo.','.oBBBrrBBBo.','.oBBBBrBBBo.','.onoBBBBono.','..obbbbbbo..','...ff..gg...'], side:HUMAN_BODY.side }),
-  human('긴머리', ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHHSSSSHHo.','.oHSeSSeSHo.','.oHSSSSSSHo.','.oHpSSSSpHo.','.oHoSSSSoHo.'],
+  human(L("긴머리"), ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHHSSSSHHo.','.oHSeSSeSHo.','.oHSSSSSSHo.','.oHpSSSSpHo.','.oHoSSSSoHo.'],
                  ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oSSSHHHHHo.','.oSeSSHHHHo.','.oSSSSHHHHo.','.opSSSHHHHo.','.oHoSSoHHHo.']),
-  human('안경', ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSkkSSkkSo.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
+  human(L("안경"), ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oHSSSSSSHo.','.oSkkSSkkSo.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
                ['...oooooo...','..oHHHHHHo..','.oHHHHHHHHo.','.oSSSHHHHHo.','.okkSSHHHHo.','.oSSSSHHHHo.','.opSSSHHHHo.','..oSSSSSSo..']),
-  human('후드', ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBBSSSSBBo.','.oBSeSSeSBo.','.oBSSSSSSBo.','.oBpSSSSpBo.','..oSSSSSSo..'],
+  human(L("후드"), ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBBSSSSBBo.','.oBSeSSeSBo.','.oBSSSSSSBo.','.oBpSSSSpBo.','..oSSSSSSo..'],
                ['...oooooo...','..oBBBBBBo..','.oBBBBBBBBo.','.oBSSSBBBBo.','.oBSeSSBBBo.','.oBSSSSBBBo.','.oBpSSSBBBo.','..oSSSSSSo..']),
-  human('팀장', ['...oooooo...','..oSSSSSSo..','.oHSSSSSSHo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSSSSSSSSo.','.oSHHHHHHSo.','..oHHHHHHo..'],
+  human(L("팀장"), ['...oooooo...','..oSSSSSSo..','.oHSSSSSSHo.','.oHSSSSSSHo.','.oSeSSSSeSo.','.oSSSSSSSSo.','.oSHHHHHHSo.','..oHHHHHHo..'],
                ['...oooooo...','..oSSSSSSo..','.oSSSSSSSHo.','.oSSSSSSSHo.','.oSeSSSSSHo.','.oSSSSSSSHo.','.oHHHSSSSHo.','..oHHHSSSo..'],
                { down:['..oBBooBBo..','.oBBBrrBBBo.','.oBBBrrBBBo.','.oBBBBrBBBo.','.onoBBBBono.','..obbbbbbo..','...ff..gg...'], side:HUMAN_BODY.side }),
-  human('상담원', ['...oooooo...','..okkkkkko..','.oHHHHHHHHo.','.okSSSSSSko.','.okeSSSSeko.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
+  human(L("상담원"), ['...oooooo...','..okkkkkko..','.oHHHHHHHHo.','.okSSSSSSko.','.okeSSSSeko.','.oSSSSSSSSo.','.opSSSSSSpo.','..oSSSSSSo..'],
                  ['...oooooo...','..okkkkkko..','.oHHHHHHHHo.','.okSSHHHHko.','.okeSSHHHko.','.oSSSSHHHHo.','.opSSSHHHHo.','..oSSSSSSo..']),
 ];
-export const BOT_SHAPE = { name:'봇', down:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBbwwbbbwwBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBBBBooBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
+export const BOT_SHAPE = { name:L("봇"), down:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBbwwbbbwwBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBBBBooBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'],
   side:['....oooo....','....orro....','....oooo....','.....oo.....','.oooooooooo.','oBhBBBBBBBBo','oBBBBBBBBBBo','oBbbbbbbbbBo','oBwwbbbbbbBo','oBbbbbbbbbBo','oBBBBBBBBBBo','oBooBBBBBBBo','.oBBBBBBBBo.','.obbBBBBbbo.','..oobbbboo..','...ff..gg...'] };
-export const BOT_COLOR = { name:'봇', B:'#c3c6d1', b:'#8d91a0', h:'#eceef3' };
+export const BOT_COLOR = { name:L("봇"), B:'#c3c6d1', b:'#8d91a0', h:'#eceef3' };
 // 주인 NPC(props.me): 테마와 상관없이 금빛 옷에 진홍 안감, 머리에 왕관(ICON_ROWS.crown). 형태는 테마의 것을 그대로 쓴다(p3.js buildAssets → A.me)
-export const ME_COLOR = { name:'주인', B:'#f0c04a', b:'#c0392b', h:'#fff0b8' };
+export const ME_COLOR = { name:L("주인"), B:'#f0c04a', b:'#c0392b', h:'#fff0b8' };
 
 export const FIXED_COMMON = { o:'#3b2f3a', e:'#3b2f3a', w:'#ffffff', p:'#f29ba0', S:'#ffd9b3', n:'#ffd9b3', f:'#3b2f3a', g:'#3b2f3a' };
 export const THEMES: Record<string, any> = {
-  cozy: { name:'아늑', palette:{},
+  cozy: { name:L("아늑"), palette:{},
     characters:{ shapes:COZY_SHAPES, colors:[
-      { name:'핑크', B:'#f7a8bd', b:'#df7d99', h:'#ffd3df' },{ name:'하늘', B:'#93c0f0', b:'#6a98cc', h:'#c6def8' },{ name:'민트', B:'#9fdcb8', b:'#6fb98f', h:'#d0f0dd' },
-      { name:'노랑', B:'#f6d574', b:'#d8ad48', h:'#fbe8a8' },{ name:'라일락', B:'#c9b0ee', b:'#a287cc', h:'#e4d6f8' },{ name:'살구', B:'#f9b98a', b:'#d88e5c', h:'#fdd9bb' }],
+      { name:L("핑크"), B:'#f7a8bd', b:'#df7d99', h:'#ffd3df' },{ name:L("하늘"), B:'#93c0f0', b:'#6a98cc', h:'#c6def8' },{ name:L("민트"), B:'#9fdcb8', b:'#6fb98f', h:'#d0f0dd' },
+      { name:L("노랑"), B:'#f6d574', b:'#d8ad48', h:'#fbe8a8' },{ name:L("라일락"), B:'#c9b0ee', b:'#a287cc', h:'#e4d6f8' },{ name:L("살구"), B:'#f9b98a', b:'#d88e5c', h:'#fdd9bb' }],
       fixed:{ ...FIXED_COMMON, S:'#fff1d9', r:'#e8707f', k:'#e8707f', L:'#78c77a' }, up:{ S:'B', e:'B', p:'B', r:'B', w:'b', n:'B' } },
-    kinds:{ plaza:['메인 광장','fountain','fountain'], shop:['상점','shop','cart'], library:['도서관','library','book'], community:['커뮤니티 센터','community','heart'], home:['작은 집','house','house'], checkout:['계산대','stall','coin'],
-      cafe:['카페','cafe','mug'], school:['학교','school','bell'], clinic:['병원','clinic','cross'], post:['우체국','post','mail'], factory:['공방','workshop','gear'], park:['공원','park','flower'] },
+    kinds:{ plaza:[L("메인 광장"),'fountain','fountain'], shop:[L("상점"),'shop','cart'], library:[L("도서관"),'library','book'], community:[L("커뮤니티 센터"),'community','heart'], home:[L("작은 집"),'house','house'], checkout:[L("계산대"),'stall','coin'],
+      cafe:[L("카페"),'cafe','mug'], school:[L("학교"),'school','bell'], clinic:[L("병원"),'clinic','cross'], post:[L("우체국"),'post','mail'], factory:[L("공방"),'workshop','gear'], park:[L("공원"),'park','flower'] },
     decor:{ tree:'round', pond:'pond', gate:'wood', ground:'grass' } },
   rpg: { name:'RPG', palette:{ grass:'#8fc47c', grass2:'#7bb068', grass3:'#5f9a52', dirt:'#c9a87a', dirt2:'#a8875c', stone:'#cfcac0', stone2:'#a39d92', wall:'#efe3c8', wall2:'#d9c9a6', wood:'#a86f45', wood2:'#7a4b2c', roofBlue:'#6f7fc4', roofPink:'#c76a5c', roofGreen:'#7aa86a', roofYellow:'#d9b45a', water:'#7fb7df', water2:'#4f8fc0' },
     characters:{ shapes:RPG_SHAPES, colors:[
-      { name:'진홍', B:'#c9556a', b:'#933a4c', h:'#e58a9a' },{ name:'감청', B:'#4f73b8', b:'#36508a', h:'#86a6e0' },{ name:'숲', B:'#5f9e63', b:'#3f6f45', h:'#95c898' },
-      { name:'황금', B:'#d9a846', b:'#a67a2c', h:'#f0cf86' },{ name:'보라', B:'#8a63b8', b:'#5f4186', h:'#b79ad8' },{ name:'흑단', B:'#5a4a5c', b:'#3b2f3a', h:'#8a7a8c' }],
+      { name:L("진홍"), B:'#c9556a', b:'#933a4c', h:'#e58a9a' },{ name:L("감청"), B:'#4f73b8', b:'#36508a', h:'#86a6e0' },{ name:L("숲"), B:'#5f9e63', b:'#3f6f45', h:'#95c898' },
+      { name:L("황금"), B:'#d9a846', b:'#a67a2c', h:'#f0cf86' },{ name:L("보라"), B:'#8a63b8', b:'#5f4186', h:'#b79ad8' },{ name:L("흑단"), B:'#5a4a5c', b:'#3b2f3a', h:'#8a7a8c' }],
       fixed:{ ...FIXED_COMMON, H:'#5a3a2a', k:'#b9bcc8', r:'#e8707f', L:'#78c77a' }, up:{ S:'H', e:'H', p:'H', w:'B', n:'B' } },
-    kinds:{ plaza:['마을 우물','well','fountain'], shop:['무기 상점','armory','sword'], library:['마법사의 탑','tower','tower'], community:['여관 겸 길드','inn','mug'], home:['오두막','cabin','house'], checkout:['보물 환전소','treasury','chest'],
-      cafe:['선술집','tavern','mug'], school:['수련장','academy','bell'], clinic:['치유사의 집','healer','cross'], post:['전령 비둘기장','dovecote','mail'], factory:['대장간','smithy','gear'], park:['약초 정원','garden','flower'] },
+    kinds:{ plaza:[L("마을 우물"),'well','fountain'], shop:[L("무기 상점"),'armory','sword'], library:[L("마법사의 탑"),'tower','tower'], community:[L("여관 겸 길드"),'inn','mug'], home:[L("오두막"),'cabin','house'], checkout:[L("보물 환전소"),'treasury','chest'],
+      cafe:[L("선술집"),'tavern','mug'], school:[L("수련장"),'academy','bell'], clinic:[L("치유사의 집"),'healer','cross'], post:[L("전령 비둘기장"),'dovecote','mail'], factory:[L("대장간"),'smithy','gear'], park:[L("약초 정원"),'garden','flower'] },
     decor:{ tree:'pine', pond:'pond', gate:'stone', ground:'grass' } },
-  office: { name:'오피스', palette:{ grass:'#dfe3ea', grass2:'#d3d8e1', grass3:'#c2c8d3', dirt:'#9aa3b5', dirt2:'#7f889b', stone:'#eef0f4', stone2:'#c9cfdb', wall:'#f7f8fb', wall2:'#dfe3ec', wood:'#c9a27a', wood2:'#8f6e4d', roofBlue:'#5b6b8f', roofPink:'#e9a1a1', roofGreen:'#86c3a5', roofYellow:'#f0c85b', water:'#bcd8f3', water2:'#7fb0e0', leaf:'#73b77a' },
+  office: { name:L("오피스"), palette:{ grass:'#dfe3ea', grass2:'#d3d8e1', grass3:'#c2c8d3', dirt:'#9aa3b5', dirt2:'#7f889b', stone:'#eef0f4', stone2:'#c9cfdb', wall:'#f7f8fb', wall2:'#dfe3ec', wood:'#c9a27a', wood2:'#8f6e4d', roofBlue:'#5b6b8f', roofPink:'#e9a1a1', roofGreen:'#86c3a5', roofYellow:'#f0c85b', water:'#bcd8f3', water2:'#7fb0e0', leaf:'#73b77a' },
     characters:{ shapes:OFFICE_SHAPES, colors:[
-      { name:'네이비', B:'#3f4f7a', b:'#2b3656', h:'#6a7ba8' },{ name:'차콜', B:'#5a5a66', b:'#3b3b45', h:'#8a8a98' },{ name:'그레이', B:'#9aa2b4', b:'#6f7789', h:'#c4cad8' },
-      { name:'베이지', B:'#d8c4a6', b:'#ab9777', h:'#efe2cc' },{ name:'버건디', B:'#8e3f54', b:'#632838', h:'#b86a7e' },{ name:'올리브', B:'#6f8a5a', b:'#4d623c', h:'#9ab285' }],
+      { name:L("네이비"), B:'#3f4f7a', b:'#2b3656', h:'#6a7ba8' },{ name:L("차콜"), B:'#5a5a66', b:'#3b3b45', h:'#8a8a98' },{ name:L("그레이"), B:'#9aa2b4', b:'#6f7789', h:'#c4cad8' },
+      { name:L("베이지"), B:'#d8c4a6', b:'#ab9777', h:'#efe2cc' },{ name:L("버건디"), B:'#8e3f54', b:'#632838', h:'#b86a7e' },{ name:L("올리브"), B:'#6f8a5a', b:'#4d623c', h:'#9ab285' }],
       fixed:{ ...FIXED_COMMON, H:'#4a3328', k:'#3b2f3a', r:'#d85a6a', L:'#78c77a' }, up:{ S:'H', e:'H', p:'H', w:'B', r:'B', n:'B' } },
-    kinds:{ plaza:['로비','lobby','fountain'], shop:['쇼룸','showroom','cart'], library:['자료실','archive','book'], community:['회의실','meeting','heart'], home:['내 자리','desk','desk'], checkout:['결제 창구','cashier','coin'],
-      cafe:['카페테리아','cafeteria','coffee'], school:['교육실','training','bell'], clinic:['의무실','medical','cross'], post:['우편실','mailroom','mail'], factory:['서버실','serverroom','gear'], park:['휴게 라운지','lounge','flower'] },
+    kinds:{ plaza:[L("로비"),'lobby','fountain'], shop:[L("쇼룸"),'showroom','cart'], library:[L("자료실"),'archive','book'], community:[L("회의실"),'meeting','heart'], home:[L("내 자리"),'desk','desk'], checkout:[L("결제 창구"),'cashier','coin'],
+      cafe:[L("카페테리아"),'cafeteria','coffee'], school:[L("교육실"),'training','bell'], clinic:[L("의무실"),'medical','cross'], post:[L("우편실"),'mailroom','mail'], factory:[L("서버실"),'serverroom','gear'], park:[L("휴게 라운지"),'lounge','flower'] },
     decor:{ tree:'pot', pond:'lounge', gate:'glass', ground:'tile' } },
 };
