@@ -28,4 +28,4 @@ primary_region = "nrt"
 
 [[vm]]
   size = "shared-cpu-1x"
-  memory = "512mb"   # 256MB는 SSE 수백 개에 빠듯. 월 1~2달러 차이라 상시 512
+  memory = "256mb"   # 평소 256. 레딧 게시 당일만 `fly scale memory 512 -a visitown-api`, 잠잠해지면 256으로(로드맵 61)
