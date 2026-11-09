@@ -8,6 +8,10 @@ primary_region = "nrt"
 
 [env]
   PORT = "8787"
+  # 레딧 등 몰림 대비(로드맵 61). 랜딩 방문자마다 임베드 SSE 하나라 사이트당 상한을 올리고(넘으면 랜딩이 데모 마을로 바꾼다),
+  # 방문자 1명 ≈ 분당 이벤트 4~5개(하트비트 포함)라 사이트당 분당 이벤트 상한도 올린다. 둘 다 server/index.js 기본값(200·6000)을 덮는다
+  MAX_SSE_PER_SITE = "1000"
+  SITE_EVENTS_PER_MIN = "20000"
 
 [http_service]
   internal_port = 8787
@@ -24,4 +28,4 @@ primary_region = "nrt"
 
 [[vm]]
   size = "shared-cpu-1x"
-  memory = "256mb"
+  memory = "512mb"   # 256MB는 SSE 수백 개에 빠듯. 월 1~2달러 차이라 상시 512

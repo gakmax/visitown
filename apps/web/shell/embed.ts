@@ -42,7 +42,7 @@ export function createEmbedTown(root: HTMLElement, o: EmbedOptions): EmbedTownHa
   const force = /^(halloween|xmas|seol)$/.test(o.seasonForce || '') ? o.seasonForce! : ''; let seasonAcc = 60;
   function tickSeason(dt: number) { seasonAcc += dt; if (seasonAcc < 60) return; seasonAcc = 0; const k = force || seasonOf(); if (k === SEASON) return; setSeasonValue(k); placeDecor(); world.flakes.length = 0; world.seasonAcc = 12; }
   const ro = new ResizeObserver(() => { const r = stage.getBoundingClientRect(); root.style.setProperty('--s', String(Math.max(.5, Math.min(r.width / W, r.height / H)))); }); ro.observe(stage);
-  let got = false;
+  let got = false, downs = 0;
   function frame(type: string, d: any) {
     switch (type) {
       case 'snapshot': got = true; errEl.hidden = true; store.reset(); store.frozen = false;
@@ -60,7 +60,7 @@ export function createEmbedTown(root: HTMLElement, o: EmbedOptions): EmbedTownHa
     }
   }
   function status(s: StreamStatus) {
-    if (s.state === 'down') { store.frozen = true; if (!got) { errEl.textContent = L("임베드 링크가 맞지 않거나 서버에 연결할 수 없어요. 대시보드의 임베드 버튼에서 링크를 다시 만들어 주세요."); errEl.hidden = false; } }
+    if (s.state === 'down') { store.frozen = true; if (!got && ++downs === 2 && parent !== window) parent.postMessage({ vt: 'embed-down' }, location.origin); if (!got) { errEl.textContent = L("임베드 링크가 맞지 않거나 서버에 연결할 수 없어요. 대시보드의 임베드 버튼에서 링크를 다시 만들어 주세요."); errEl.hidden = false; } }
   }
   let last = performance.now(), raf = 0;
   const clock = () => { const d = new Date(); return (d.getHours() * 60 + d.getMinutes()) / 1440; };

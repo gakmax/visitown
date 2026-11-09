@@ -30,7 +30,9 @@ export function LandingCta({ locale }: { locale: Locale }) {
 
 type Live = { town: string; badge: string; online: number | null; tour: PublicSite[]; origin: string };
 export function LandingLive({ locale }: { locale: Locale }) {
-  const T = useT(locale); const cfg = useCfg(); const [st, setSt] = useState<Live | null>(null);
+  const T = useT(locale); const cfg = useCfg(); const [st, setSt] = useState<Live | null>(null); const [busy, setBusy] = useState(false);
+  // 마을 iframe(/embed)이 처음 연결에 거듭 실패하면 postMessage로 알려 준다(shell/embed.ts). 사람이 몰려 연결 상한을 넘은 경우라 데모 마을로 넘긴다(로드맵 61)
+  useEffect(() => { const on = (e: MessageEvent) => { const f = document.getElementById('town') as HTMLIFrameElement | null; if (e.origin === location.origin && e.source === f?.contentWindow && e.data?.vt === 'embed-down') setBusy(true); }; window.addEventListener('message', on); return () => window.removeEventListener('message', on); }, []);
   useEffect(() => {
     if (!cfg) return; const { api, site, embed, live } = cfg;
     const townUrl = (sid?: string | null) => { if (!live) return '/demo'; const u = new URL(`/embed/${encodeURIComponent(embed)}`, location.origin); u.searchParams.set('api', api); u.searchParams.set('site', site); if (sid) u.searchParams.set('me', sid); u.searchParams.set('brand', '0'); return u.pathname + u.search; }; // 이 페이지가 Visitown이라 마을 안 브랜드 링크는 뺀다
@@ -49,12 +51,12 @@ export function LandingLive({ locale }: { locale: Locale }) {
     }
     return () => { dead = true; timers.forEach(clearTimeout); };
   }, [cfg]);
-  const live = cfg?.live ?? true;
+  const live = (cfg?.live ?? true) && !busy;
   const townHref = (id: string) => cfg?.local ? `/town/${encodeURIComponent(id)}?api=${encodeURIComponent(cfg.api)}` : `/town/${encodeURIComponent(id)}`;
   return <>
     <section>
-      <div className="town-head"><span id="liveLine">{live ? <><b>LIVE</b> {T("지금 이 페이지를 보고 있는 사람들이에요.")}</> : <><b>DEMO</b> {T("아직 이 페이지에 추적이 연결되지 않아 가상 방문자 마을을 보여 드려요.")}</>}</span><span className="count" id="count">{st?.online != null ? <><i />{T("지금 {0}명", {0:st.online})}</> : null}</span></div>
-      <div className={'town px' + (live ? '' : ' demo')} id="townBox"><iframe id="town" title={T("지금 이 페이지의 방문자 마을")} loading="eager" src={st?.town || undefined} /></div>
+      <div className="town-head"><span id="liveLine">{live ? <><b>LIVE</b> {T("지금 이 페이지를 보고 있는 사람들이에요.")}</> : <><b>DEMO</b> {busy ? T("지금 사람이 많아 실시간 마을 대신 가상 방문자 마을을 보여 드려요.") : T("아직 이 페이지에 추적이 연결되지 않아 가상 방문자 마을을 보여 드려요.")}</>}</span><span className="count" id="count">{st?.online != null ? <><i />{T("지금 {0}명", {0:st.online})}</> : null}</span></div>
+      <div className={'town px' + (live ? '' : ' demo')} id="townBox"><iframe id="town" title={T("지금 이 페이지의 방문자 마을")} loading="eager" src={busy ? '/demo' : st?.town || undefined} /></div>
       <p className="muted" id="meLine">{live ? T("왕관을 쓰고 ME 표를 단 금빛 캐릭터가 당신이에요. 이 페이지에 들어온 순간 마을에 입장했고, 창을 닫으면 떠나요.") : T("실제 사이트에 설치하면 진짜 방문자가 이렇게 보여요.")}</p>
     </section>
     <section className="feats">

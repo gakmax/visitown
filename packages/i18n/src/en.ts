@@ -573,6 +573,7 @@ export const EN: Record<string, string> = {
   "취소": "Cancel",
   "지금 이 페이지를 보고 있는 사람들이에요.": "These are the people viewing this page right now.",
   "아직 이 페이지에 추적이 연결되지 않아 가상 방문자 마을을 보여 드려요.": "Tracking isn't connected to this page yet, so here's a town of simulated visitors.",
+  "지금 사람이 많아 실시간 마을 대신 가상 방문자 마을을 보여 드려요.": "Lots of people are here right now, so here's a town of simulated visitors instead of the live one.",
   "지금 {0}명": "{0} here now",
   "지금 이 페이지의 방문자 마을": "This page's visitor town, live",
   "왕관을 쓰고 ME 표를 단 금빛 캐릭터가 당신이에요. 이 페이지에 들어온 순간 마을에 입장했고, 창을 닫으면 떠나요.": "The golden character with the crown and ME tag is you. You entered the town the moment you opened this page, and you'll leave when you close it.",

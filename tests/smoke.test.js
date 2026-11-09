@@ -156,6 +156,18 @@ test('랜딩(/): CSP 아래에서 오류 없이 뜨고 수집 서버의 SDK·마
   } finally { srv.proc.kill(); }
 });
 
+test('랜딩(/): 마을 연결이 사이트당 SSE 상한(503)에 막히면 데모 마을로 바꾼다(로드맵 61, 레딧 몰림)', async () => {
+  const srv = await startServer({ MAX_SSE_PER_SITE: '0' }); try {
+    const api = 'http://localhost:' + new URL(srv.base).port;
+    const { key } = await (await fetch(srv.base + '/api/sites/site_demo/embed?token=dev', { method: 'POST' })).json();
+    const { page, ctx, clean } = await open(`/?api=${encodeURIComponent(api)}&site=site_demo&key=${key}`, 1000);
+    await page.waitForFunction(() => /\/demo$/.test(document.getElementById('town').src), null, { timeout: 15000 });
+    assert.match(await page.textContent('#liveLine'), /DEMO.*사람이 많아/);
+    await clean(/favicon|\/api\/events|\/stream|503/);
+    await ctx.close();
+  } finally { srv.proc.kill(); }
+});
+
 // ---- 임베드(로드맵 19·56 /embed/[key], 엔진만)와 공개 마을(/town/[slug], 서버 렌더링 + OG)
 test('임베드·공개 마을: /embed/[key]가 엔진만으로 마을을 그리고(ME·이름표·브랜드), 옛 ?embed= 주소도 같은 화면, /town/[slug]는 이름·접속자 수를 OG로 준다', async () => {
   const srv = await startServer(); try {
