@@ -1,0 +1,1 @@
+{ "compilerOptions": { "strict": true, "noEmit": true, "target": "es2017", "module": "esnext", "moduleResolution": "bundler", "lib": ["es2017", "dom"], "types": [], "baseUrl": ".", "paths": { "@visitown/sdk": ["../../sdk/visitown.d.ts"] } }, "files": ["sdk-usage.ts"] }

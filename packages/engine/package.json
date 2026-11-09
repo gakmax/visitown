@@ -1,0 +1,23 @@
+{
+  "name": "@visitown/engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Visitown 캔버스 엔진(팔레트·지도·스토어·월드). React·DOM을 모른다. 웹 앱(apps/web)은 TS 소스를 그대로 가져오고(exports.import), 테스트는 npm run build가 만든 dist/index.cjs·dist/types를 쓴다",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./src/index.ts",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --format=cjs --platform=neutral --target=es2022 --outfile=dist/index.cjs --log-level=warning && tsc -p . --declaration --emitDeclarationOnly --noEmit false --outDir dist/types"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "typescript": "^5.9.3"
+  }
+}

@@ -1,0 +1,77 @@
+/* 디자인 시스템 페이지(예전 src/ds.html). 공통 토큰·버튼·노치는 shell.css(이 앞에) */
+/* ---- 디자인 시스템 페이지 ---- */
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-pixel);font-size:14px;line-height:1.5;
+  background-image:linear-gradient(45deg,var(--bg-2) 25%,transparent 25%,transparent 75%,var(--bg-2) 75%),linear-gradient(45deg,var(--bg-2) 25%,transparent 25%,transparent 75%,var(--bg-2) 75%);
+  background-size:8px 8px;background-position:0 0,4px 4px}
+*{box-sizing:border-box}
+button,input,textarea{font:inherit;color:inherit}
+a{color:var(--ink)}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border-bottom:2px solid var(--edge);background:var(--panel)}
+.top h1{margin:0;font-family:var(--font-tiny);font-size:12px;letter-spacing:.04em;flex:1}
+.top a{font-size:12px;color:var(--ink-2)}
+.wrap{display:grid;grid-template-columns:180px 1fr;gap:16px;max-width:1100px;margin:0 auto;padding:16px}
+nav.side{display:flex;flex-direction:column;gap:6px;align-self:start;position:sticky;top:16px}
+nav.side a{display:block;padding:8px 10px;text-decoration:none;border:2px solid transparent;font-size:13px}
+nav.side a:hover{border-color:var(--edge)}
+nav.side a[aria-current=page]{background:var(--gold);border-color:var(--edge)}
+nav.side .soon{padding:8px 10px;font-size:12px;color:var(--ink-2)}
+main{min-width:0;animation:fadeIn var(--t-ui) ease-out}
+main h2{margin:0 0 4px;font-size:20px}
+main .lead{margin:0 0 16px;color:var(--ink-2);font-size:13px}
+.card{background:var(--panel);border:2px solid var(--edge);box-shadow:0 3px 0 var(--edge);padding:12px 14px}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-bottom:16px}
+.bar label{display:flex;align-items:center;gap:8px;font-size:13px}
+.bar input[type=range]{accent-color:var(--accent);width:140px}
+#scope{width:100%;height:64px;display:block;background:var(--panel-2);border:2px solid var(--edge);image-rendering:pixelated;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.snd{display:flex;flex-direction:column;gap:6px}
+.snd .hd{display:flex;align-items:center;gap:8px}
+.snd .hd b{flex:1;font-size:14px}
+.snd code{font-family:var(--font-tiny);font-size:9px;color:var(--ink-2)}
+.snd p{margin:0;font-size:12px;color:var(--ink-2);min-height:2.6em}
+.snd .act{display:flex;gap:6px;margin-top:2px}
+.snd .act .btn{flex:1;justify-content:center}
+.snd.ring{animation:ring var(--t-slow) ease-out}
+@keyframes ring{from{background:var(--hl)}}
+.snd.edited b::after{content:' *';color:var(--danger-ink)}
+#editor{margin-top:16px;display:flex;flex-direction:column;gap:8px;animation:popIn var(--t-ui) ease-out}
+#editor textarea{width:100%;min-height:180px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;background:var(--panel-2);border:2px solid var(--edge);padding:8px;resize:vertical}
+#editor textarea:focus-visible{outline:2px solid var(--sky);outline-offset:-4px}
+#editor .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.msg{font-size:12px;color:var(--ink-2)} .msg.err{color:var(--danger-ink)} .msg.fade{animation:fadeIn var(--t-ui) ease-out}
+.hint{font-size:12px;color:var(--ink-2);margin-top:16px}
+.top .toggle{font-size:12px}
+/* 컴포넌트 페이지: 예시(.demo) + 코드(.code) 묶음 */
+.specs{display:flex;flex-direction:column;gap:16px}
+.spec{display:flex;flex-direction:column;gap:10px}
+.spec h3{margin:0;font-size:15px}
+.spec>p{margin:0;font-size:12px;color:var(--ink-2)}
+.spec ul{margin:0;padding-left:18px;font-size:12px;color:var(--ink-2)} .spec li{margin:2px 0}
+.demo{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:14px;background:var(--panel-2);border:2px dashed var(--line)}
+.demo .msg{flex-basis:100%}
+.code{position:relative}
+.code pre{margin:0;padding:10px 12px;padding-right:64px;background:var(--bg-2);border:2px solid var(--edge);font-family:ui-monospace,Menlo,Consolas,monospace;font-size:12px;line-height:1.5;overflow:auto;white-space:pre}
+.code .btn{position:absolute;top:6px;right:6px;min-height:26px;padding:2px 8px;font-size:11px}
+table.map{border-collapse:collapse;font-size:12px;width:100%} table.map td,table.map th{border:2px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+table.map th{background:var(--panel-2);font-weight:normal;color:var(--ink-2)} table.map code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px}
+/* 색 */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.tok{display:flex;flex-direction:column;gap:8px}
+.tok .hd{display:flex;align-items:baseline;gap:8px} .tok .hd b{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;flex:1}
+.tok p{margin:0;font-size:12px;color:var(--ink-2);min-height:2.6em}
+.tok .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sw{display:flex;flex-direction:column;gap:2px;padding:0;border:0;background:none;cursor:pointer;text-align:left;font-size:11px;color:var(--ink-2)}
+.sw .chip{height:44px;border:2px solid var(--edge);display:grid;place-items:center;font-size:14px}
+.sw:hover .chip{transform:translateY(-1px)} .sw .chip{transition:transform var(--t-fast)}
+.sw:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+.sw .cr{font-family:var(--font-tiny);font-size:8px} .sw .cr.low{color:var(--danger-ink)}
+@media (max-width:720px){
+  .wrap{grid-template-columns:1fr;padding:12px 16px}
+  nav.side{position:static;flex-direction:row;flex-wrap:wrap}
+}
+/* 이 페이지의 카드·코드 상자도 픽셀 노치(shell.css의 노치 선언과 같다) */
+.card,.code pre{
+  --sx:0px;--sy:0px;--m:min(2px,var(--sx));
+  clip-path:polygon(2px 0,calc(100% - 2px) 0,100% 2px,100% max(2px,var(--sy)),calc(100% + var(--sx) - var(--m)) max(2px,var(--sy)),calc(100% + var(--sx)) calc(max(2px,var(--sy)) + var(--m)),calc(100% + var(--sx)) calc(100% + var(--sy) - 2px),calc(100% + var(--sx) - 2px) calc(100% + var(--sy)),calc(var(--sx) + 2px) calc(100% + var(--sy)),var(--sx) calc(100% + var(--sy) - 2px),var(--sx) min(100%,calc(100% + var(--sy) - 2px)),var(--m) 100%,0 calc(100% - 2px),0 2px)}
+kbd{--sy:2px} .card{--sy:3px}

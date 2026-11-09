@@ -1,0 +1,37 @@
+/* 랜딩(/)·공개 마을(/town/[slug])·404 레이아웃(예전 landing/index.html). 토큰·버튼·노치는 shell.css */
+html{background:var(--bg)}
+body{margin:0;padding:0 16px 48px;background:var(--bg);color:var(--ink);font-family:var(--font-pixel);font-size:14px;line-height:1.6;
+  background-image:linear-gradient(45deg,rgba(0,0,0,.05) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.05) 75%),linear-gradient(45deg,rgba(0,0,0,.05) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.05) 75%);background-size:16px 16px;background-position:0 0,8px 8px}
+*{box-sizing:border-box}
+a{color:var(--ink)}
+.wrap{max-width:960px;margin:0 auto}
+.hero{display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;padding:44px 0 22px}
+.hero .lg-ink{fill:var(--ink)} .hero svg{display:block;width:318px;max-width:100%;height:auto}
+.tagline{margin:0;font-size:15px;color:var(--ink-2)}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn{min-height:38px;padding:8px 14px}
+.town-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin:0 0 8px;font-size:13px}
+.town-head b{font-family:var(--font-tiny);font-size:12px;color:var(--ink)}
+.count{display:inline-flex;align-items:center;gap:6px;background:var(--gold);border:2px solid var(--edge);padding:2px 8px;font-size:12px;color:#3b2f3a}
+.count:empty{display:none}
+.count i{width:8px;height:8px;background:var(--danger);border:1px solid #3b2f3a;display:inline-block;animation:blink 1.2s steps(2) infinite}
+@keyframes blink{50%{opacity:.3}}
+.town{position:relative;aspect-ratio:16/9;background:var(--stage);overflow:hidden}
+.town iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:transparent}
+.town.demo iframe{pointer-events:auto}
+.muted{color:var(--ink-2);font-size:12px;margin:8px 0 0}
+.feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:34px 0 0}
+.feat{padding:16px 16px 14px;display:flex;flex-direction:column;gap:6px}
+.feat h2{margin:0;font-size:14px;display:flex;align-items:center;gap:8px} .feat h2 img{width:24px;height:24px;image-rendering:pixelated}
+.feat p{margin:0;font-size:13px;color:var(--ink-2)}
+.tour{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px} .tour-item{display:flex;flex-direction:column;gap:2px;padding:10px 12px;background:var(--panel-2);border:2px solid var(--edge);text-decoration:none;font-size:13px} .tour-item small{color:var(--ink-2);font-size:11px}
+.sec{margin:34px 0 0;padding:18px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.sec h2{margin:0;font-size:15px}
+.sec p{margin:0;font-size:13px;color:var(--ink-2)}
+pre{margin:0;padding:10px 12px;background:var(--panel-2);border:2px solid var(--line);font-size:12px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--ink)}
+.badge-prev{display:flex;align-items:center;gap:12px;flex-wrap:wrap} .badge-prev img{image-rendering:pixelated;height:38px}
+.badge-prev[hidden]{display:none}
+footer{margin:36px 0 0;text-align:center;font-size:12px;color:var(--ink-2)} footer a{color:var(--ink-2)}
+/* 공개 마을 페이지 */
+.town-page .hero{padding:28px 0 14px;gap:8px} .town-page .hero h1{margin:0;font-size:22px} .town-page .hero .domain{font-size:13px;color:var(--ink-2)}
+@media (max-width:640px){.hero{padding:30px 0 16px}.feats{gap:10px}}

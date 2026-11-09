@@ -1,0 +1,26 @@
+{
+  "name": "@visitown/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Visitown 웹 앱(Next 16, 로드맵 56): 랜딩(/)·대시보드(/app·/demo)·임베드(/embed/[key])·공개 마을(/town/[slug])·디자인 시스템(/design-system). CSP는 proxy.ts의 nonce",
+  "scripts": {
+    "dev": "next dev",
+    "prebuild": "npm run build --prefix ../../packages/engine",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@visitown/engine": "*",
+    "@visitown/ui": "*",
+    "next": "16.4.5",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "typescript": "^5.9.3"
+  }
+}

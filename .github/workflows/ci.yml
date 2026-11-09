@@ -1,0 +1,23 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci
+      - name: 빌드 (packages/engine·ui 번들·타입 → apps/web next build)
+        run: npm run build
+      - name: 스토어 불변식·해금·property·SDK(크기 예산 7KiB·타입)·엔진·UI 테스트
+        run: npm run test:unit
+      - name: 서버 API 계약·MCP 서버 테스트 (DB 없이)
+        run: npm run test:api
+      - name: "Playwright 스모크 (next start: /demo·/app·/embed·/town·/ 콘솔 오류 0 · CSP 위반 0)"
+        run: |
+          npx playwright install --with-deps chromium
+          npm run test:smoke

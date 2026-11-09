@@ -1,0 +1,164 @@
+<!-- 대시보드 마크업(예전 src/p1.html의 body). apps/web/components/DashboardShell.tsx가 서버에서 그대로 넣고(dangerouslySetInnerHTML), shell/dashboard.js가 id로 찾아 붙인다. 확인창(#dlg)은 dlg.html -->
+<div id="gate" hidden>
+  <section class="gate-box" aria-label="시작하기">
+    <h1 class="gate-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127 33" shape-rendering="crispEdges" role="img" aria-label="Visitown"><path fill="#3b2f3a" d="M23 0h2v1h-2zM22 1h4v1h-4zM20 2h3v1h-3zM25 2h3v1h-3zM19 3h2v1h-2zM27 3h2v1h-2zM17 4h3v1h-3zM28 4h3v1h-3zM16 5h2v1h-2zM30 5h2v1h-2zM14 6h3v1h-3zM31 6h3v1h-3zM13 7h2v1h-2zM33 7h2v1h-2zM11 8h3v1h-3zM34 8h3v1h-3zM9 9h30v1h-30zM11 10h1v1h-1zM36 10h1v1h-1zM11 11h1v1h-1zM36 11h1v1h-1zM11 12h1v1h-1zM36 12h1v1h-1zM11 13h1v1h-1zM36 13h1v1h-1zM11 14h1v1h-1zM36 14h1v1h-1zM11 15h1v1h-1zM36 15h1v1h-1zM11 16h1v1h-1zM13 16h6v1h-6zM29 16h6v1h-6zM36 16h1v1h-1zM11 17h1v1h-1zM13 17h1v1h-1zM18 17h1v1h-1zM21 17h6v1h-6zM29 17h1v1h-1zM34 17h1v1h-1zM36 17h1v1h-1zM3 18h3v1h-3zM11 18h1v1h-1zM13 18h1v1h-1zM18 18h1v1h-1zM21 18h1v1h-1zM26 18h1v1h-1zM29 18h1v1h-1zM34 18h1v1h-1zM36 18h1v1h-1zM42 18h3v1h-3zM1 19h2v1h-2zM6 19h2v1h-2zM11 19h1v1h-1zM13 19h1v1h-1zM18 19h1v1h-1zM21 19h1v1h-1zM26 19h1v1h-1zM29 19h1v1h-1zM34 19h1v1h-1zM36 19h1v1h-1zM40 19h2v1h-2zM45 19h2v1h-2zM1 20h1v1h-1zM7 20h1v1h-1zM11 20h1v1h-1zM13 20h1v1h-1zM18 20h1v1h-1zM21 20h1v1h-1zM26 20h1v1h-1zM29 20h1v1h-1zM34 20h1v1h-1zM36 20h1v1h-1zM40 20h1v1h-1zM46 20h1v1h-1zM0 21h1v1h-1zM8 21h1v1h-1zM11 21h1v1h-1zM13 21h6v1h-6zM21 21h1v1h-1zM26 21h1v1h-1zM29 21h6v1h-6zM36 21h1v1h-1zM39 21h1v1h-1zM47 21h1v1h-1zM0 22h1v1h-1zM8 22h1v1h-1zM11 22h1v1h-1zM21 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM36 22h1v1h-1zM39 22h1v1h-1zM47 22h1v1h-1zM0 23h1v1h-1zM8 23h1v1h-1zM11 23h1v1h-1zM21 23h1v1h-1zM26 23h1v1h-1zM36 23h1v1h-1zM39 23h1v1h-1zM47 23h1v1h-1zM1 24h1v1h-1zM7 24h1v1h-1zM11 24h1v1h-1zM14 24h4v1h-4zM21 24h1v1h-1zM26 24h1v1h-1zM30 24h4v1h-4zM36 24h1v1h-1zM40 24h1v1h-1zM46 24h1v1h-1zM2 25h5v1h-5zM11 25h1v1h-1zM13 25h6v1h-6zM21 25h1v1h-1zM26 25h1v1h-1zM29 25h1v1h-1zM34 25h1v1h-1zM36 25h1v1h-1zM41 25h5v1h-5zM4 26h1v1h-1zM11 26h9v1h-9zM21 26h1v1h-1zM26 26h1v1h-1zM28 26h1v1h-1zM35 26h2v1h-2zM43 26h1v1h-1zM4 27h1v1h-1zM11 27h18v1h-18zM35 27h2v1h-2zM43 27h1v1h-1zM13 28h6v1h-6zM29 28h6v1h-6zM12 29h1v1h-1zM19 29h1v1h-1zM28 29h1v1h-1zM35 29h1v1h-1zM12 30h1v1h-1zM19 30h1v1h-1zM28 30h1v1h-1zM35 30h1v1h-1zM13 31h1v1h-1zM18 31h1v1h-1zM29 31h1v1h-1zM34 31h1v1h-1zM13 32h2v1h-2zM17 32h2v1h-2zM29 32h2v1h-2zM33 32h2v1h-2z"/><path class="lg-ink" fill="#3b2f3a" d="M57 12h3v1h-3zM63 12h3v1h-3zM57 13h3v1h-3zM63 13h3v1h-3zM68 13h3v1h-3zM83 13h3v1h-3zM57 14h3v1h-3zM63 14h3v1h-3zM68 14h3v1h-3zM83 14h3v1h-3zM57 15h3v1h-3zM63 15h3v1h-3zM57 16h3v1h-3zM63 16h3v1h-3zM68 16h3v1h-3zM74 16h7v1h-7zM83 16h3v1h-3zM57 17h3v1h-3zM63 17h3v1h-3zM68 17h3v1h-3zM73 17h8v1h-8zM83 17h3v1h-3zM58 18h3v1h-3zM62 18h3v1h-3zM68 18h3v1h-3zM73 18h3v1h-3zM83 18h3v1h-3zM58 19h3v1h-3zM62 19h3v1h-3zM68 19h3v1h-3zM73 19h7v1h-7zM83 19h3v1h-3zM58 20h7v1h-7zM68 20h3v1h-3zM74 20h7v1h-7zM83 20h3v1h-3zM59 21h5v1h-5zM68 21h3v1h-3zM78 21h3v1h-3zM83 21h3v1h-3zM59 22h5v1h-5zM68 22h3v1h-3zM73 22h8v1h-8zM83 22h3v1h-3zM60 23h3v1h-3zM68 23h3v1h-3zM73 23h7v1h-7zM83 23h3v1h-3z"/><path fill="#f5a3b5" d="M23 2h2v1h-2zM21 3h6v1h-6zM20 4h8v1h-8zM18 5h12v1h-12zM17 6h14v1h-14zM15 7h18v1h-18zM14 8h20v1h-20zM30 25h4v1h-4zM29 26h6v1h-6zM29 27h6v1h-6zM29 29h6v1h-6zM29 30h6v1h-6zM30 31h4v1h-4z"/><path fill="#fff8ea" d="M12 10h24v1h-24zM12 11h24v1h-24zM12 12h2v1h-2zM16 12h1v1h-1zM19 12h1v1h-1zM22 12h14v1h-14zM12 13h2v1h-2zM16 13h1v1h-1zM19 13h1v1h-1zM22 13h14v1h-14zM12 14h24v1h-24zM12 15h24v1h-24zM12 16h1v1h-1zM19 16h10v1h-10zM35 16h1v1h-1zM12 17h1v1h-1zM19 17h2v1h-2zM27 17h2v1h-2zM35 17h1v1h-1zM12 18h1v1h-1zM19 18h2v1h-2zM27 18h2v1h-2zM35 18h1v1h-1zM12 19h1v1h-1zM19 19h2v1h-2zM27 19h2v1h-2zM35 19h1v1h-1zM12 20h1v1h-1zM19 20h2v1h-2zM27 20h2v1h-2zM35 20h1v1h-1zM12 21h1v1h-1zM19 21h2v1h-2zM27 21h2v1h-2zM35 21h1v1h-1zM12 22h9v1h-9zM27 22h9v1h-9zM12 23h9v1h-9zM27 23h9v1h-9zM12 24h2v1h-2zM18 24h3v1h-3zM27 24h3v1h-3zM34 24h2v1h-2zM12 25h1v1h-1zM19 25h2v1h-2zM27 25h2v1h-2zM35 25h1v1h-1zM20 26h1v1h-1zM27 26h1v1h-1z"/><path fill="#e8707f" d="M14 12h2v1h-2zM14 13h2v1h-2z"/><path fill="#f2c14e" d="M17 12h2v1h-2zM17 13h2v1h-2zM22 18h4v1h-4zM22 19h4v1h-4zM22 20h4v1h-4zM22 21h4v1h-4zM22 22h2v1h-2zM25 22h1v1h-1zM22 23h4v1h-4zM22 24h4v1h-4zM22 25h4v1h-4zM22 26h4v1h-4z"/><path fill="#8fcf9f" d="M20 12h2v1h-2zM20 13h2v1h-2zM3 19h3v1h-3zM42 19h3v1h-3zM2 20h5v1h-5zM41 20h5v1h-5zM1 21h7v1h-7zM40 21h7v1h-7zM1 22h7v1h-7zM40 22h7v1h-7zM1 23h7v1h-7zM40 23h7v1h-7zM2 24h5v1h-5zM41 24h5v1h-5z"/><path fill="#3fa86a" d="M89 13h3v1h-3zM89 14h3v1h-3zM89 15h3v1h-3zM88 16h6v1h-6zM97 16h6v1h-6zM106 16h3v1h-3zM114 16h3v1h-3zM119 16h7v1h-7zM88 17h6v1h-6zM96 17h8v1h-8zM106 17h3v1h-3zM114 17h3v1h-3zM119 17h8v1h-8zM89 18h3v1h-3zM96 18h3v1h-3zM101 18h3v1h-3zM106 18h3v1h-3zM110 18h3v1h-3zM114 18h3v1h-3zM119 18h3v1h-3zM124 18h3v1h-3zM89 19h3v1h-3zM96 19h3v1h-3zM101 19h3v1h-3zM106 19h3v1h-3zM110 19h3v1h-3zM114 19h3v1h-3zM119 19h3v1h-3zM124 19h3v1h-3zM89 20h3v1h-3zM96 20h3v1h-3zM101 20h3v1h-3zM106 20h3v1h-3zM110 20h3v1h-3zM114 20h3v1h-3zM119 20h3v1h-3zM124 20h3v1h-3zM89 21h3v1h-3zM96 21h3v1h-3zM101 21h3v1h-3zM106 21h3v1h-3zM110 21h3v1h-3zM114 21h3v1h-3zM119 21h3v1h-3zM124 21h3v1h-3zM89 22h5v1h-5zM96 22h8v1h-8zM106 22h11v1h-11zM119 22h3v1h-3zM124 22h3v1h-3zM90 23h4v1h-4zM97 23h6v1h-6zM107 23h4v1h-4zM112 23h4v1h-4zM119 23h3v1h-3zM124 23h3v1h-3z"/><path fill="#9fc6f2" d="M14 17h4v1h-4zM30 17h4v1h-4zM14 18h4v1h-4zM30 18h4v1h-4zM14 19h4v1h-4zM30 19h4v1h-4zM14 20h4v1h-4zM30 20h4v1h-4zM13 29h6v1h-6zM13 30h6v1h-6zM14 31h4v1h-4z"/></svg></h1>
+    <p class="gate-tag">사이트 방문자가 픽셀 마을을 걸어 다녀요.<br>설치는 스크립트 한 줄이면 돼요.</p>
+    <div class="row"><button class="btn primary" id="gateLogin">GitHub로 시작하기</button><button class="btn" id="gateDemo">데모 둘러보기</button></div>
+    <p class="err" id="gateErr" hidden></p>
+    <p class="muted gate-foot">서버 <span id="gateApi"></span> · <button type="button" class="linkish" id="gateOther">다른 서버</button></p>
+    <div class="row" id="gateRow" hidden><input id="gateApiIn" type="text" placeholder="https://수집서버주소" aria-label="수집 서버 주소"><button class="btn" id="gateGo">연결</button></div>
+    <p class="muted gate-foot gate-legal">시작하면 <a href="/legal/terms.html" target="_blank" rel="noopener">이용약관</a>과 <a href="/legal/privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의하는 거예요.</p>
+  </section>
+</div>
+<div id="app">
+  <header id="top" class="px">
+    <h1 class="sr">Visitown 대시보드</h1>
+    <div class="logo"><img id="logoImg" alt="">Visitown</div>
+    <div class="site" id="siteBox" title="데모 모드"><span class="dot" id="connDot" aria-hidden="true"></span><span id="siteName">demo-shop.com</span><span class="tag" id="siteRole" hidden></span><span class="tag lv" id="townLv" hidden>Lv.1</span><span id="connText" class="conn-text" hidden></span></div>
+    <select id="themeSel" aria-label="테마" title="테마 (숫자 1~9, T로 다음 테마)"></select>
+    <div class="stats" id="statsBox" title="누르면 통계가 열려요">
+      <div class="stat" title="실시간 접속자"><img id="icoPerson" alt="">접속자 <b id="stOnline">0</b></div>
+      <div class="stat" title="마을 시간 (데모에서는 150초가 하루)"><img id="icoClock" alt="">마을 시간 <b id="stClock" style="min-width:5ch">06:00</b><span id="stWeather" class="muted" hidden></span></div>
+      <div class="stat" title="크롤러·봇 (접속자 수에 포함하지 않음)"><img id="icoRobot" alt="">봇 <b id="stBots">0</b></div>
+      <div class="stat" title="누적 이벤트"><img id="icoBolt" alt="">이벤트 <b id="stEvents">0</b></div>
+    </div>
+    <span class="badge-demo" id="demoBadge">DEMO</span>
+  </header>
+
+  <main id="main">
+    <!-- 접근성(로드맵 57): 마을은 role=application이라 포커스가 오면 화살표가 스크린리더 대신 셸(dashboard.js)의 키보드 순회로 간다. 설명은 stageHelp, 고른 것은 선택 정보 패널(aria-live)이 읽어 준다 -->
+    <div id="stage" tabindex="0" role="application" aria-label="마을" aria-describedby="stageHelp">
+      <p id="stageHelp" class="sr">방문자가 캐릭터로 걸어 다니는 마을 그림이에요. 왼쪽·오른쪽 화살표로 방문자를, 위·아래 화살표로 건물을 차례로 골라요. 고른 것의 정보는 선택 정보 패널에 나와요. Enter는 따라가기, Esc는 선택 해제예요.</p>
+      <div id="viewport"><div id="town">
+        <canvas id="cv" width="480" height="270" aria-label="Visitown 마을. 방문자가 캐릭터로 돌아다닙니다." role="img"></canvas>
+        <div id="labels" aria-hidden="true"></div>
+      </div></div>
+        <canvas id="mini" width="96" height="54" hidden aria-label="미니맵. 누르면 그 위치로 이동해요"></canvas>
+        <div id="empty" hidden><div>아직 방문자가 없어요<small>시뮬레이션을 시작하거나 방문자를 추가해 보세요</small></div></div>
+        <button class="btn" id="recExit" hidden>녹화 모드 종료 (Esc)</button>
+        <div id="tvBar" aria-live="polite"><div class="tv-name" id="tvName"></div><div class="tv-sub" id="tvSub"></div><div class="tv-n">접속자 <b id="tvN">0</b></div><div class="tv-prog" aria-hidden="true"><i id="tvProg"></i></div><div class="tv-next" id="tvNext"></div></div>
+        <div id="connPanel" hidden>
+          <div class="cp-title">실시간 연결 설정</div>
+          <label>API 주소 <input id="cpApi" type="text" placeholder="http://localhost:8787" autocomplete="off"></label>
+          <label>사이트 ID <span class="hint">(비우면 로그인 후 목록에서 고릅니다)</span> <input id="cpSite" type="text" placeholder="site_xxxx" autocomplete="off"></label>
+          <label>개발용 토큰 <span class="hint">(Supabase 없는 로컬 서버에서만 dev. GitHub 로그인이면 비워 두세요)</span> <input id="cpToken" type="text" placeholder="" autocomplete="off"></label>
+          <div class="cp-row"><button class="btn primary" id="cpConnect">실시간 연결</button><button class="btn" id="cpSites">사이트 선택</button><button class="btn" id="cpLogout" hidden>로그아웃</button><button class="btn" id="cpDemo">데모 모드</button><button class="btn" id="cpClose">닫기</button></div>
+          <p class="hint" id="cpMsg">로컬 서버는 <code>node server/index.js</code>로 띄우고 토큰은 dev 입니다.</p>
+        </div>
+        <div id="warnBar" hidden role="alert"><span id="warnMsg"></span><button class="btn" id="warnCheck">설치 확인</button><button class="btn" id="warnClose" aria-label="닫기">×</button></div>
+        <div id="sitePanel" hidden></div>
+        <div id="replayBar" hidden>
+          <button class="btn" id="rpPlay" aria-label="재생/일시정지">❚❚</button>
+          <span class="rp-title">REPLAY</span>
+          <select id="rpRange" class="live-only" aria-label="리플레이 구간"><option value="3600000" selected>최근 1시간</option><option value="10800000">최근 3시간</option><option value="21600000">최근 6시간</option><option value="43200000">최근 12시간</option><option value="86400000">최근 24시간</option><option value="yesterday">어제 하루</option></select>
+          <span class="rp-seek"><input type="range" id="rpSeek" min="0" max="1000" value="0" aria-label="리플레이 위치"><span id="rpTicks" aria-hidden="true"></span></span>
+          <span id="rpTime" class="rp-time">00:00:00</span>
+          <span id="rpRate" class="rp-time"></span>
+          <select id="rpSpeed" aria-label="리플레이 배속"><option value="4">4x</option><option value="10">10x</option><option value="30">30x</option><option value="60" selected>60x</option><option value="120">120x</option><option value="300">300x</option></select>
+          <select id="rpLen" aria-label="영상 길이"><option value="30" selected>30초</option><option value="60">60초</option><option value="120">2분</option></select>
+          <button class="btn" id="rpExport" title="이 구간을 처음부터 끝까지 돌리며 영상(webm)으로 저장해요. 만드는 동안 탭을 그대로 두세요"><img data-ico="film" alt="">영상 저장</button>
+          <button class="btn" id="rpShare" hidden title="영상을 만든 뒤 바로 공유 창을 열어요(폰·공유를 지원하는 브라우저). 만드는 동안 탭을 그대로 두세요"><img data-ico="film" alt="">공유</button>
+          <button class="btn primary" id="rpExit">라이브로</button>
+        </div>
+    </div>
+    <div id="side">
+      <section class="panel px" aria-label="실시간 이벤트 피드">
+        <h2>LIVE FEED <span class="dup" id="dupInfo" hidden></span></h2>
+        <div id="feedLive" class="sr" role="status" aria-live="polite" aria-atomic="true"></div>
+        <ul id="feed"></ul>
+      </section>
+      <section class="panel px" id="info" aria-live="polite" aria-label="선택 정보">
+        <h2>INFO</h2>
+        <div id="infoBody"><p class="hint">캐릭터나 건물을 클릭하면 정보가 나와요. 피드 항목을 누르면 그 캐릭터를 찾아줘요.</p></div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="ctl" class="px">
+    <!-- 왼쪽: 행동 -->
+    <button class="btn primary sim-only" id="btnRun" aria-pressed="true"><img data-ico="pause" alt="">정지</button>
+    <button class="btn sim-only" id="btnAdd"><img data-ico="enter" alt="">방문자 +1</button>
+    <div class="menu sim-only">
+      <button class="btn menu-btn" aria-haspopup="true" aria-expanded="false"><img data-ico="joystick" alt="">데모<span class="menu-arr"></span></button>
+      <div class="menu-list" hidden role="group" aria-label="데모 조작">
+        <button class="btn" id="btnRemove"><img data-ico="leave" alt="">방문자 -1</button>
+        <button class="btn" id="btnEvent"><img data-ico="firework" alt="">이벤트 발생</button>
+        <button class="btn" id="btnMe"><img data-ico="me" alt="">내 캐릭터 입장</button>
+        <button class="btn" id="btnRain" aria-pressed="false" title="데모에서 비 날씨를 켜고 꺼요 (실제 마을에서는 서버가 오류 건수로 정해요)"><img data-ico="cross" alt="">비 내리기</button>
+        <button class="btn" id="btnClear"><img data-ico="trash" alt="">모두 제거</button>
+        <div class="menu-row" title="날짜와 상관없이 계절 장식을 미리 봐요 (실제 마을은 ?season=xmas 같은 주소로)">계절 <select id="seasonSel" aria-label="계절 장식 미리보기"><option value="">오늘 날짜</option><option value="halloween">할로윈</option><option value="xmas">크리스마스</option><option value="seol">설날</option></select></div>
+        <div class="menu-sep"></div>
+        <label class="slider" for="target">목표 접속자 <input type="range" id="target" min="0" max="100" value="18"> <output id="targetOut" for="target">18</output></label>
+        <div class="menu-row">속도 <div class="group" role="group" aria-label="속도">
+          <button class="btn" data-speed="1" aria-pressed="true">1x</button>
+          <button class="btn" data-speed="2" aria-pressed="false">2x</button>
+          <button class="btn" data-speed="4" aria-pressed="false">4x</button>
+        </div></div>
+      </div>
+    </div>
+    <button class="btn" id="btnReplay" title="R 키"><img data-ico="timeout" alt="">타임랩스</button>
+    <button class="btn" id="btnShot" title="지금 화면을 PNG로 저장해요 (P 키)"><img data-ico="camera" alt="">사진</button>
+    <button class="btn" id="btnStats" title="접속 중인 방문자와 오늘 통계"><img data-ico="chart" alt="">통계</button>
+    <!-- 가운데: 보기·화면 -->
+    <div class="menu">
+      <button class="btn menu-btn" aria-haspopup="true" aria-expanded="false"><img data-ico="eye" alt="">보기<span class="menu-arr"></span></button>
+      <div class="menu-list" hidden role="group" aria-label="보기 옵션">
+        <label class="toggle"><input type="checkbox" id="chkBadge" checked><img data-ico="person" alt="">인원 배지</label>
+        <label class="toggle" title="캐릭터에 붙는 표식(재방문 모자, 폰, 유입 아이콘, 외국 깃발, 유료 링). 기본값인 PC·직접 유입·신규·주 국가는 원래 안 붙어요"><input type="checkbox" id="chkMarks" checked><img data-ico="star" alt="">방문자 표시</label>
+        <label class="toggle"><input type="checkbox" id="chkLabel" checked><img data-ico="tag" alt="">건물 이름</label>
+        <label class="toggle"><input type="checkbox" id="chkBots" checked><img data-ico="robot" alt="">봇 보기</label>
+        <label class="toggle"><input type="checkbox" id="chkNight" checked><img data-ico="moon" alt="">낮·밤</label>
+        <label class="toggle" title="최근에 캐릭터가 걸어 다닌 자리를 땅에 옅게 남겨요 (반감기 30분)"><input type="checkbox" id="chkHeat"><img data-ico="foot" alt="">발자국</label>
+        <label class="toggle" title="접속자가 몰리면 쨍쨍, 최근 10분에 JS 오류가 3건 이상이면 비가 와요 (서버가 정해요)"><input type="checkbox" id="chkWeather" checked><img data-ico="spark" alt="">날씨</label>
+        <label class="toggle" title="할로윈(10/24~31)·크리스마스(12/15~31)·설날(연휴 ±2일)에 한정 장식이 생겨요"><input type="checkbox" id="chkSeason" checked><img data-ico="gift" alt="">계절 장식</label>
+        <div class="menu-sep"></div>
+        <div class="menu-row" title="조용한 8비트 루프. 낮·밤과 비 날씨를 따라가요. 임베드에서는 안 울려요">배경음 <select id="bgmSel" aria-label="배경음"><option value="">끔</option><option value="music">BGM</option><option value="ambient">환경음</option></select></div>
+        <label class="slider" id="bgmVolBox" hidden>크기 <input type="range" id="bgmVol" min="0" max="100" value="60" aria-label="배경음 크기"> <output id="bgmVolOut" for="bgmVol">60</output></label>
+        <div class="menu-sep"></div>
+        <div class="menu-row">밝기 <div class="group" role="group" aria-label="화면 밝기 (D 키로 밝게·어둡게)">
+          <button class="btn" data-shellpick="" aria-pressed="true" title="기기 설정을 따라요">자동</button>
+          <button class="btn" data-shellpick="light" aria-pressed="false">밝게</button>
+          <button class="btn" data-shellpick="dark" aria-pressed="false">어둡게</button>
+        </div></div>
+        <div class="menu-sep"></div>
+        <label class="toggle" title="입장과 소리를 고른 이벤트(기본: 구매·회원가입) 때 짧은 8비트 효과음 (봇 제외)"><input type="checkbox" id="chkSound"><img data-ico="note" alt="">소리</label>
+        <label class="toggle" title="접속자가 기준에 닿거나 알림을 켠 이벤트(기본: 구매)가 오면 브라우저 알림을 보내요"><input type="checkbox" id="chkNotify"><img data-ico="bell" alt="">알림</label>
+        <label class="slider" id="ntfBox" hidden>접속자 <input type="number" id="ntfN" min="1" max="999" value="10" aria-label="접속자 알림 기준(명)">명부터</label>
+      </div>
+    </div>
+    <div class="menu">
+      <button class="btn menu-btn" aria-haspopup="true" aria-expanded="false"><img data-ico="monitor" alt="">화면<span class="menu-arr"></span></button>
+      <div class="menu-list" hidden role="group" aria-label="화면 모드">
+        <button class="btn" id="btnFull" title="브라우저 전체화면 (F 키, Esc로 종료)"><img data-ico="expand" alt="">전체화면</button>
+        <button class="btn" id="btnRec" title="UI를 숨기고 마을만 크게 보여줍니다 (Esc로 종료)"><img data-ico="rec" alt="">녹화 모드</button>
+        <button class="btn" id="btnShare" title="지금 마을 모습에 '어제 N명이 다녀갔어요' 문구를 얹고 가로·정사각·세로 비율로 만들어 공유하거나 저장해요"><img data-ico="camera" alt="">사진 공유</button>
+        <button class="btn live-only" id="btnTv" title="사무실 TV용: 내 사이트들을 돌아가며 큰 글씨로 띄워요 (Esc로 종료)"><img data-ico="monitor" alt="">TV 모드</button>
+        <button class="btn live-only" id="btnTour" title="공개를 켠 다른 사람의 마을을 둘러봐요"><img data-ico="walk" alt="">마을 구경</button>
+        <button class="btn" id="btnEmbed" hidden title="OBS나 홈페이지에 마을만 띄우는 링크를 만들어요"><img data-ico="window" alt="">임베드 링크</button>
+        <div class="menu-sep"></div>
+        <button class="btn" id="btnDex" title="캐릭터·표식·건물·나라 도감 (B 키)"><img data-ico="book" alt="">도감</button>
+        <button class="btn" id="btnKeys" title="단축키 표 (? 키)"><img data-ico="key" alt="">단축키</button>
+      </div>
+    </div>
+    <span class="grow"></span>
+    <!-- 오른쪽: 확대·설정 -->
+    <div class="group" role="group" aria-label="확대 축소">
+      <button class="btn" id="zoomOut" aria-label="축소">-</button>
+      <button class="btn" id="zoomIn" aria-label="확대">+</button>
+    </div>
+    <div class="menu menu-right">
+      <button class="btn menu-btn" aria-haspopup="true" aria-expanded="false"><img data-ico="gear" alt="">설정<span class="menu-arr"></span></button>
+      <div class="menu-list" hidden role="group" aria-label="사이트 설정">
+        <button class="btn" id="btnPages" hidden title="내 사이트의 경로를 어느 건물로 보낼지 정합니다"><img data-ico="house" alt="">건물 설정</button>
+        <button class="btn" id="btnEvents" hidden title="구매·가입 같은 커스텀 이벤트를 지도·피드·소리·알림에 어떻게 보여 줄지 정합니다"><img data-ico="bolt" alt="">이벤트 설정</button>
+        <button class="btn" id="btnInstall" hidden title="추적 스크립트 한 줄과 플랫폼별 설치 가이드"><img data-ico="code" alt="">설치 코드</button>
+        <button class="btn" id="btnMembers" hidden title="같이 볼 사람을 초대하고 멤버를 관리해요"><img data-ico="person" alt="">멤버</button>
+        <button class="btn" id="btnNote" hidden title="배포·광고 시작 같은 표시를 기록에 남겨요. 리플레이 시간축에 눈금으로 보여요"><img data-ico="tag" alt="">메모 남기기</button>
+        <button class="btn" id="btnHooks" hidden title="슬랙·디스코드로 알림을 보내요. 탭이 닫혀 있어도 받아요"><img data-ico="bell" alt="">알림 보내기</button>
+        <div class="menu-sep live-only"></div>
+        <button class="btn live-only" id="btnDelAcct" title="내 계정과 소유한 사이트·방문자 데이터를 모두 지워요. 되돌릴 수 없어요"><img data-ico="trash" alt="">계정 삭제</button>
+        <button class="btn" id="btnConn"><img data-ico="plug" alt="">연결 설정</button>
+      </div>
+    </div>
+  </footer>
+</div>

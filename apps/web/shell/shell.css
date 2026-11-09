@@ -1,0 +1,85 @@
+/* 디자인 시스템 공통 CSS(예전 src/p1.html에서 build.sh가 뽑던 부분): 색 토큰·모션 시간·버튼·체크박스·태그·kbd·드롭다운(pxs)·확인창(#dlg)·픽셀 노치. 대시보드(dashboard.css 뒤에)·랜딩·디자인 시스템 페이지가 같이 쓴다. 규칙은 docs/motion.md·/design-system */
+.px,.stat,.badge-demo,#replayBar,#sitePanel>div,#sitePanel input,#sitePanel pre,#connPanel,#connPanel input,#warnBar,#embedErr,kbd,#ctl input[type=number],#empty>div,.pill,.btn,.pxs-btn,.pxs-list,input[type=checkbox],#info .avatar img,#feed li,#sitePanel .bt .pv,#sitePanel .et .pv,#sitePanel .et,#sitePanel .paths,#mini,.gate-box,#gate input,.menu-list,#sitePanel .dx-mark,#sitePanel .dx-b,#sitePanel .dx-t,#sitePanel .dx-head,.dlg-box{
+  --sx:0px;--sy:0px;--m:min(2px,var(--sx));
+  clip-path:polygon(2px 0,calc(100% - 2px) 0,100% 2px,100% max(2px,var(--sy)),calc(100% + var(--sx) - var(--m)) max(2px,var(--sy)),calc(100% + var(--sx)) calc(max(2px,var(--sy)) + var(--m)),calc(100% + var(--sx)) calc(100% + var(--sy) - 2px),calc(100% + var(--sx) - 2px) calc(100% + var(--sy)),calc(var(--sx) + 2px) calc(100% + var(--sy)),var(--sx) calc(100% + var(--sy) - 2px),var(--sx) min(100%,calc(100% + var(--sy) - 2px)),var(--m) 100%,0 calc(100% - 2px),0 2px)}
+:root{
+  --bg:#f1e6d2; --bg-2:#e6d8bf; --panel:#fff8ea; --panel-2:#f6ebd4; --ink:#3b2f3a; --ink-2:#6b5b64; --line:#d8c8ad;
+  --accent:#8fcf9f; --accent-2:#f5a3b5; --gold:#f2c14e; --sky:#9fc6f2; --danger:#e8707f; --danger-ink:#b32d40; --stage:#cfe0c4;
+  --edge:#3b2f3a; /* 테두리·픽셀 그림자. 글자색(--ink)과 따로 둬서 다크에서도 어둡게 남는다 */
+  --scrim:rgba(59,47,58,.35); --hl:#fff0c2; --warn-bg:#ffe3e6; --rose:#8a2d4a; --tag-bot:#dfe3ea; --warn-ink:#8a6a00;
+  --font-pixel:"Galmuri11","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  --font-tiny:"Press Start 2P","Galmuri11",monospace;
+  --s:2;
+  color-scheme:light;
+}
+:root[data-shell=dark]{
+  --bg:#1c1720; --bg-2:#221c27; --panel:#2b2331; --panel-2:#372d3e; --ink:#f1e6d2; --ink-2:#b3a3ad; --line:#4b3f52;
+  --accent:#3f7d55; --accent-2:#8f4a5e; --gold:#755818; --sky:#5a86b8; --danger:#d85a6a; --danger-ink:#e87684; --stage:#232c26;
+  --edge:#0d0a10;
+  --scrim:rgba(8,6,10,.55); --hl:#4a3d1c; --warn-bg:#4a2230; --rose:#f29ab3; --tag-bot:#3c4150; --warn-ink:#f2c14e;
+  color-scheme:dark;
+}
+kbd{font-family:var(--font-tiny);font-size:10px;padding:4px 6px;border:2px solid var(--edge);background:var(--panel-2);box-shadow:0 2px 0 var(--edge);white-space:nowrap}
+#dlg{position:fixed;inset:0;z-index:30;display:grid;place-items:center;padding:16px;background:var(--scrim)} #dlg[hidden]{display:none} /* 기본 alert·confirm 대신 쓰는 확인창. 모달 패널 위에 뜬다 */
+.dlg-box{width:min(360px,100%);background:var(--panel);border:2px solid var(--edge);box-shadow:4px 4px 0 var(--edge);padding:18px;display:flex;flex-direction:column;gap:14px;font-size:13px;line-height:1.6} .dlg-box p{margin:0;white-space:pre-line;overflow-wrap:anywhere} .dlg-box .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.pxs{display:inline-flex;max-width:100%;min-width:0}
+.pxs-btn{font-family:var(--font-pixel);font-size:12px;display:inline-flex;align-items:center;gap:6px;padding:3px 8px;min-height:30px;max-width:100%;width:100%;background:var(--panel-2);border:2px solid var(--edge);box-shadow:0 2px 0 var(--edge);cursor:pointer;color:var(--ink);text-align:left}
+.pxs-btn:active,.pxs-btn[aria-expanded=true]{transform:translateY(1px);box-shadow:0 1px 0 var(--edge);background:var(--gold)}
+.pxs-btn:disabled{opacity:.5;cursor:default}
+.pxs-btn:focus-visible{outline:3px solid var(--sky);outline-offset:-5px}
+.pxs-btn img,.pxs-list img{width:22px;height:22px;object-fit:contain;image-rendering:pixelated;flex:none}
+.pxs-val{display:grid;min-width:0} .pxs-val>span{grid-area:1/1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .pxs-val>span:not(.cur){visibility:hidden} /* 모든 항목을 겹쳐 두어 버튼 너비를 가장 긴 항목에 고정 */
+.pxs-arr{margin-left:auto;width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-top:5px solid var(--ink);flex:none;transition:transform .15s}
+.pxs-btn{transition:transform var(--t-fast),box-shadow var(--t-fast),background var(--t-ui)} .pxs-btn:hover:not(:disabled):not([aria-expanded=true]){transform:translateY(-1px);box-shadow:0 3px 0 var(--edge)} .pxs-btn[aria-expanded=true] .pxs-arr{transform:rotate(180deg)}
+.pxs-list{position:fixed;z-index:50;margin:0;padding:4px 0;box-sizing:border-box;list-style:none;background:var(--panel);border:2px solid var(--edge);box-shadow:3px 3px 0 var(--edge);max-height:280px;overflow:auto;font-family:var(--font-pixel);font-size:12px;color:var(--ink);scrollbar-width:thin;transform-origin:top left;animation:pxsIn .12s ease-out}
+.pxs-list.up{transform-origin:bottom left;animation-name:pxsInUp}
+.pxs-list.out{animation:pxsOut .09s ease-in forwards;pointer-events:none}
+@keyframes pxsIn{from{opacity:0;transform:translateY(-4px) scaleY(.92)}}
+@keyframes pxsInUp{from{opacity:0;transform:translateY(4px) scaleY(.92)}}
+@keyframes pxsOut{to{opacity:0;transform:scaleY(.95)}}
+.pxs-list li{display:flex;align-items:center;gap:6px;padding:5px 8px;cursor:pointer;white-space:nowrap;min-width:0} .pxs-list li>span{overflow:hidden;text-overflow:ellipsis}
+.pxs-list li.hi{background:var(--gold)}
+.pxs-list li[aria-selected=true]::before{content:'▸';width:8px;flex:none}
+.pxs-list li:not([aria-selected=true])::before{content:'';width:8px;flex:none}
+.pxs-list li[aria-disabled=true]{opacity:.45;cursor:not-allowed}
+.pxs-list li.locked{color:var(--ink-2)} .pxs-list li.locked img{filter:grayscale(1);opacity:.55}
+@keyframes unlockGlow{0%,50%{background:var(--gold)}} .pxs-btn.unlocked{animation:unlockGlow var(--t-slow) ease-out 3}
+.btn{font-family:var(--font-pixel);font-size:13px;padding:6px 12px;background:var(--panel-2);border:2px solid var(--edge);box-shadow:0 3px 0 var(--edge);cursor:pointer;min-height:36px;display:inline-flex;align-items:center;gap:6px;transition:transform var(--t-fast),box-shadow var(--t-fast),background var(--t-ui),opacity var(--t-ui)}
+.btn:hover:not(:disabled):not([aria-pressed="true"]){transform:translateY(-1px);box-shadow:0 4px 0 var(--edge)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:active,.btn[aria-pressed="true"]{transform:translateY(2px);box-shadow:0 1px 0 var(--edge)}
+.btn.primary{background:var(--accent)} .btn.pink{background:var(--accent-2)} .btn.gold{background:var(--gold)}
+.btn[aria-pressed="true"]{background:var(--gold)}
+.btn:focus-visible,#feed li:focus-visible{outline:3px solid var(--sky);outline-offset:-5px}
+.btn img,.toggle img{width:14px;height:14px;image-rendering:pixelated;flex:none}
+a.btn{text-decoration:none}
+.group{display:inline-flex;gap:0}
+.group .btn{box-shadow:none;border-right-width:0;min-width:44px;justify-content:center}
+.group .btn:last-child{border-right-width:2px}
+.group .btn[aria-pressed="true"]{transform:none}
+.group.theme .btn{min-height:30px;padding:3px 10px;font-size:12px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 2px}
+.tag{font-size:10px;padding:1px 5px;border:1px solid var(--edge);background:var(--panel-2)}
+.tag.camp i{display:inline-block;width:7px;height:7px;margin-right:4px;border:1px solid var(--edge);vertical-align:-1px} /* 캠페인 깃발 색 */
+.tag.bot{background:var(--tag-bot)} .tag.pro{background:var(--gold);color:var(--ink)} .tag.me{background:var(--danger-ink);color:var(--panel)} .tag.rare{background:var(--sky)}
+.tag.lv{background:var(--gold);color:var(--ink)} /* 마을 레벨(로드맵 34) */
+.btn.mini{min-height:20px;padding:0 6px;font-size:10px;margin-left:4px;vertical-align:middle;--sy:2px} /* 작은 버튼: 피드 기록 카드·마을 구경 */
+.toggle{display:inline-flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;user-select:none}
+input[type=checkbox]{appearance:none;width:18px;height:18px;margin:0;border:2px solid var(--edge);background:var(--panel-2);box-shadow:0 2px 0 var(--edge);position:relative;cursor:pointer;flex:none;transition:background var(--t-ui),transform var(--t-fast),box-shadow var(--t-fast)}
+input[type=checkbox]:checked{background:var(--accent)} input[type=checkbox]:checked::after{content:'';position:absolute;inset:3px;background:var(--ink);animation:popIn var(--t-ui) ease-out}
+input[type=checkbox]:active{transform:translateY(1px);box-shadow:0 1px 0 var(--edge)} input[type=checkbox]:focus-visible{outline:2px solid var(--sky);outline-offset:-4px}
+:root{--t-fast:.08s;--t-ui:.15s;--t-slow:.25s}
+@keyframes fadeIn{from{opacity:0}} @keyframes fadeOut{to{opacity:0}}
+@keyframes popIn{from{opacity:0;transform:translateY(4px) scale(.96)}} @keyframes popOut{to{opacity:0;transform:translateY(4px) scale(.96)}}
+@keyframes riseIn{from{opacity:0;transform:translateY(12px)}} @keyframes sinkOut{to{opacity:0;transform:translateY(12px)}}
+@keyframes bump{30%{transform:scale(1.35)}} @keyframes feedIn{from{opacity:0;transform:translateY(-6px)} 0%,40%{background:var(--hl)}}
+@keyframes flash{from{opacity:.85}to{opacity:0}}
+#sitePanel,#dlg{animation:fadeIn var(--t-ui)} #sitePanel>div,#dlg>div{animation:popIn var(--t-ui) ease-out} #sitePanel.out,#dlg.out{animation:fadeOut var(--t-ui) forwards} #sitePanel.out>div,#dlg.out>div{animation:popOut var(--t-ui) forwards}
+.fade{animation:fadeIn var(--t-ui)}
+.out{pointer-events:none}
+.px{--sy:3px} .badge-demo,#mini{--sx:2px;--sy:2px} .menu-list{--sx:3px;--sy:3px} #replayBar,#connPanel,#warnBar,#empty>div,.pxs-list{--sx:3px;--sy:3px} #sitePanel>div,.dlg-box{--sx:4px;--sy:4px}
+.btn{--sy:3px;transition:transform var(--t-fast),box-shadow var(--t-fast),clip-path var(--t-fast),background var(--t-ui),opacity var(--t-ui)} .btn:hover:not(:disabled):not([aria-pressed="true"]){--sy:4px} .btn:active,.btn[aria-pressed="true"]{--sy:1px}
+.pxs-btn{--sy:2px;transition:transform var(--t-fast),box-shadow var(--t-fast),clip-path var(--t-fast),background var(--t-ui)} .pxs-btn:hover:not(:disabled):not([aria-expanded=true]){--sy:3px} .pxs-btn:active,.pxs-btn[aria-expanded=true]{--sy:1px}
+input[type=checkbox],kbd{--sy:2px} input[type=checkbox]:active{--sy:1px}
+input:focus-visible{outline:2px solid var(--sky);outline-offset:-4px}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important} .site .dot,#sitePanel .status .dot{animation:none} }

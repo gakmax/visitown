@@ -1,0 +1,9 @@
+{
+  "name": "visitown-server",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Visitown 이벤트 수집·세션·SSE 서버 (의존성 없음, Node 20+)",
+  "main": "index.js",
+  "scripts": { "start": "node index.js", "dev": "node --watch index.js" },
+  "engines": { "node": ">=20" }
+}

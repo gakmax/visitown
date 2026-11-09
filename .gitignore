@@ -1,0 +1,22 @@
+node_modules/
+.DS_Store
+*.png
+
+# 비밀값
+.env
+.env.*
+!.env.example
+
+# PWA 아이콘과 로고는 추적한다 (*.png 예외)
+!apps/web/public/icons/*.png
+!brand/*.png
+!docs/*.png
+
+# 엔진·UI 패키지 번들(테스트용)은 npm run build:packages가 만든다
+packages/engine/dist/
+packages/ui/dist/
+
+# 웹 앱(Next) 산출물
+apps/web/.next/
+apps/web/next-env.d.ts
+apps/web/tsconfig.tsbuildinfo

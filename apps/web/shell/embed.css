@@ -1,0 +1,16 @@
+/* 임베드 마을(/embed/[key] · /town/[slug]의 마을 상자, shell/embed.ts). 대시보드 CSS 없이 마을만: 배경 투명, 확대·드래그·클릭 없음 */
+html:has(.vt-embed-page),body:has(>.vt-embed-page){height:100%;margin:0;background:transparent;overflow:hidden}
+.vt-embed-page{position:fixed;inset:0}
+.vt-embed{position:absolute;inset:0;--s:1}
+.vt-embed .stage{position:absolute;inset:0;overflow:hidden}
+.vt-embed .viewport{position:absolute;inset:0;overflow:hidden;display:flex}
+.vt-embed .town{position:relative;flex:none;margin:auto;width:calc(480px * var(--s));height:calc(270px * var(--s))}
+.vt-embed canvas{display:block;width:100%;height:100%;image-rendering:pixelated;image-rendering:crisp-edges;background:#b9e2a3}
+.vt-embed .labels[hidden]{display:none}
+.vt-embed .label{position:absolute;transform:translate(-50%,-100%);pointer-events:none;white-space:nowrap;font-family:var(--font-pixel,"Galmuri11",sans-serif);
+  font-size:calc(var(--s) * 5px);line-height:1;padding:calc(var(--s) * 1px) calc(var(--s) * 2px);background:rgba(59,47,58,.78);color:#fff8ea;border-radius:calc(var(--s) * 1px)}
+.vt-embed .label span{opacity:.7;margin-left:.4em}
+.vt-embed .err{position:absolute;left:8px;top:8px;padding:6px 10px;background:#fff8ea;border:2px solid #3b2f3a;color:#e8707f;font:12px/1.4 var(--font-pixel,"Galmuri11",sans-serif);z-index:4} .vt-embed .err[hidden]{display:none}
+/* 브랜드 표시(로드맵 19): 오른쪽 아래 작은 "Visitown" 링크. 평소엔 반투명, 올리면 선명. brand=0이면 안 그린다(미니 위젯은 자기 틀에 링크가 있다) */
+.vt-embed .brand{display:inline-flex;position:absolute;right:6px;bottom:6px;align-items:center;gap:4px;padding:2px 6px 2px 4px;background:rgba(59,47,58,.72);color:#fff8ea;font:11px/16px var(--font-pixel,"Galmuri11",sans-serif);text-decoration:none;transition:background .15s;z-index:3} /* 글자는 불투명(대비 4.5:1, 로드맵 57). 흐리게 보이던 opacity 대신 바탕만 호버에서 진해진다 */
+.vt-embed .brand img{width:12px;height:12px;image-rendering:pixelated} .vt-embed .brand:hover,.vt-embed .brand:focus-visible{background:rgba(59,47,58,.95)}

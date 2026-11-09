@@ -1,0 +1,15 @@
+{
+  "name": "@visitown/sdk",
+  "version": "0.1.0",
+  "description": "Visitown 방문자 추적 SDK. 사이트 방문자를 픽셀 마을의 캐릭터로 보여준다. 의존성 없음, gzip 7KB 예산",
+  "license": "MIT",
+  "homepage": "https://visitown.vercel.app/landing/",
+  "repository": { "type": "git", "url": "https://github.com/gakmax/visitown", "directory": "sdk" },
+  "main": "visitown.js",
+  "module": "index.mjs",
+  "types": "visitown.d.ts",
+  "exports": { ".": { "types": "./visitown.d.ts", "import": "./index.mjs", "default": "./visitown.js" } },
+  "files": ["visitown.js", "index.mjs", "visitown.d.ts", "README.md"],
+  "sideEffects": true,
+  "keywords": ["analytics", "visitors", "realtime", "pixel", "visitown"]
+}

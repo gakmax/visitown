@@ -1,0 +1,18 @@
+{
+  "sites": [
+    {
+      "id": "site_demo",
+      "name": "demo-shop (local)",
+      "domain": "localhost:3000",
+      "allowed_origins": ["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:5173", "http://127.0.0.1:5173", "null"],
+      "pages": [
+        { "path": "/", "name": "메인 광장" },
+        { "path": "/products", "name": "상점", "pattern": "^/products(/|$)" },
+        { "path": "/search", "name": "도서관" },
+        { "path": "/community", "name": "커뮤니티 센터", "pattern": "^/community(/|$)" },
+        { "path": "/mypage", "name": "작은 집" },
+        { "path": "/checkout", "name": "계산대" }
+      ]
+    }
+  ]
+}

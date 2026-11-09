@@ -1,0 +1,36 @@
+'use strict';
+// User-Agent 기반 봇 판별. 이름은 대시보드의 이름표(3x5 픽셀 글자: 대문자·숫자·마침표)에 맞춘다.
+const BOTS = [
+  [/googlebot|google-inspectiontool|adsbot-google|mediapartners-google/i, 'GOOGLE'],
+  [/bingbot|bingpreview|msnbot/i, 'BING'],
+  [/gptbot|chatgpt-user|oai-searchbot/i, 'GPT'],
+  [/claudebot|anthropic-ai|claude-web/i, 'CLAUDE'],
+  [/yeti|naverbot/i, 'NAVER'],
+  [/daum|kakaotalk-scrap|kakao/i, 'DAUM'],
+  [/yandex/i, 'YANDEX'],
+  [/baiduspider/i, 'BAIDU'],
+  [/duckduckbot/i, 'DUCK'],
+  [/applebot/i, 'APPLE'],
+  [/facebookexternalhit|facebot|meta-externalagent/i, 'META'],
+  [/twitterbot/i, 'X'],
+  [/linkedinbot/i, 'LINKEDIN'],
+  [/slackbot|slack-imgproxy/i, 'SLACK'],
+  [/discordbot/i, 'DISCORD'],
+  [/telegrambot/i, 'TELEGRAM'],
+  [/whatsapp/i, 'WHATSAPP'],
+  [/pinterestbot/i, 'PINTEREST'],
+  [/ahrefsbot/i, 'AHREFS'],
+  [/semrushbot/i, 'SEMRUSH'],
+  [/mj12bot/i, 'MAJESTIC'],
+  [/dotbot/i, 'MOZ'],
+  [/petalbot/i, 'PETAL'],
+  [/bytespider/i, 'BYTE'],
+  [/perplexitybot/i, 'PERPLEXITY'],
+  [/ccbot/i, 'COMMONCRAWL'],
+  [/uptimerobot|pingdom|statuscake/i, 'UPTIME'],
+  [/headlesschrome|puppeteer|playwright|phantomjs|selenium/i, 'HEADLESS'],
+  [/curl\/|wget\/|python-requests|go-http-client|okhttp|axios\//i, 'SCRIPT'],
+  [/bot|crawler|spider|crawl|scraper/i, 'BOT'],
+];
+function detectBot(ua) { if (!ua) return null; for (const [re, name] of BOTS) if (re.test(ua)) return name; return null; }
+module.exports = { detectBot };

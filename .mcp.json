@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "visitown": {
+      "command": "node",
+      "args": ["server/mcp.js"],
+      "env": { "VISITOWN_API": "http://localhost:8787", "VISITOWN_SITE": "site_demo", "VISITOWN_TOKEN": "dev" }
+    }
+  }
+}

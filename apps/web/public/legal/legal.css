@@ -1,0 +1,29 @@
+/* Visitown 법적 문서 페이지 공통 스타일. 대시보드 팔레트(p1.html)와 맞춘다 */
+:root{--bg:#f1e6d2;--panel:#fff8ea;--ink:#3b2f3a;--ink-2:#7d6d76;--edge:#3b2f3a;--sky:#9fc6f2;--accent:#8fcf9f;--mark:#ffe9a8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1a22;--panel:#2a2330;--ink:#f1e6d2;--ink-2:#b8a9b3;--edge:#0f0b12;--mark:#5a4a1e}}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;padding:24px 16px 64px;background:var(--bg);background-image:linear-gradient(45deg,rgba(0,0,0,.05) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.05) 75%),linear-gradient(45deg,rgba(0,0,0,.05) 25%,transparent 25%,transparent 75%,rgba(0,0,0,.05) 75%);background-size:16px 16px;background-position:0 0,8px 8px;color:var(--ink);font:15px/1.7 system-ui,-apple-system,"Segoe UI",Roboto,"Apple SD Gothic Neo","Noto Sans KR",sans-serif}
+main{max-width:760px;margin:0 auto;background:var(--panel);border:2px solid var(--edge);box-shadow:4px 4px 0 var(--edge);padding:28px 24px}
+header.top{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:8px}
+header.top a.home{color:var(--ink);text-decoration:none;font-weight:700;letter-spacing:.02em}
+.lang{display:flex;gap:6px}
+.lang button{font:inherit;font-size:12px;padding:4px 10px;background:var(--bg);color:var(--ink);border:2px solid var(--edge);box-shadow:2px 2px 0 var(--edge);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--accent);box-shadow:none;transform:translate(2px,2px)}
+h1{font-size:26px;line-height:1.3;margin:12px 0 4px}
+h2{font-size:18px;margin:32px 0 8px;padding-top:12px;border-top:2px dashed var(--ink-2)}
+h3{font-size:15px;margin:20px 0 6px}
+p,li{color:var(--ink)}
+.meta{color:var(--ink-2);font-size:13px;margin:0 0 16px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:8px 0 12px}
+th,td{border:1px solid var(--ink-2);padding:6px 8px;text-align:left;vertical-align:top}
+th{background:var(--bg)}
+code{font-size:.92em;background:var(--bg);padding:1px 4px}
+.fill{background:var(--mark);padding:0 4px;border-bottom:2px solid var(--ink-2)}
+.box{border:2px solid var(--edge);padding:12px 14px;margin:12px 0;background:var(--bg)}
+nav.doc{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;margin:0 0 8px}
+nav.doc a{color:var(--ink-2)}
+a{color:var(--ink);text-decoration-thickness:1px}
+section[hidden]{display:none}
+footer{max-width:760px;margin:16px auto 0;font-size:12px;color:var(--ink-2);text-align:center}
+@media (max-width:640px){body{padding:12px 0 48px}main{border-left:0;border-right:0;box-shadow:none;padding:20px 16px}table{display:block;overflow-x:auto;white-space:normal}td,th{min-width:120px}pre{overflow-x:auto}}
