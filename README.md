@@ -181,7 +181,7 @@ npm run dev -- -p 5173                    # http://localhost:5173 (next dev)
 
 ### 배포된 사이트의 실제 방문자를 로컬 서버로 받기 (0원)
 
-Fly.io 전에는 Tailscale Funnel로 로컬 8787에 고정 공개 주소를 붙여 쓴다(2026-10-27 설정). 주소(`https://<기기>.<tailnet>.ts.net`)는 재부팅해도 유지되고, 웹 앱에는 `NEXT_PUBLIC_VT_API`로 준다.
+수집 서버는 2026-11-09부터 Fly.io(`https://visitown-api.fly.dev`, `server/fly.toml`·`server/Dockerfile`, 도쿄 nrt·shared-cpu-1x 256MB 한 대)에서 돈다. 배포는 저장소 루트에서 `fly deploy --config server/fly.toml --dockerfile server/Dockerfile .`, 비밀값은 `fly secrets`. 그 전에는 Tailscale Funnel로 로컬 8787에 고정 공개 주소를 붙여 쓴다(2026-10-27 설정). 주소(`https://<기기>.<tailnet>.ts.net`)는 재부팅해도 유지되고, 웹 앱에는 `NEXT_PUBLIC_VT_API`로 준다.
 
 ```bash
 ./dev.sh                                        # 수집 서버·대시보드 (이 PC가 켜져 있어야 한다)
@@ -392,5 +392,5 @@ MIT(`LICENSE`). SDK `@visitown/sdk`도 같다. 저장소는 아직 비공개이�
 
 ### 아직 안 된 것 (7~8단계)
 
-- 수집 서버 Fly.io 배포(설정 파일은 있음). 웹 앱은 Vercel(Root Directory `apps/web`, 2026-11-09). 수집 서버는 지금 Tailscale Funnel + 로컬 서버로 실제 방문자를 받고 있다
+- ~~배포~~ 완료(2026-11-09): 웹 앱은 Vercel(Root Directory `apps/web`), 수집 서버는 Fly.io `visitown-api` 한 대. 수평 확장(46) 실배포는 `fly scale count 2` + `PEERS=1`로 남음
 - ~~일별 집계와 정리 작업~~ 완료. `docs/supabase.sql` 아래쪽 `vt_rollup`/`vt_prune`를 SQL Editor에서 한 번 만들면 서버가 매시간 돌린다. 원본 events는 7일(`EVENT_RETENTION_DAYS`), 집계는 무기한. 보관 기간이 곧 리플레이·"어제 하루" 영상이 가능한 기간

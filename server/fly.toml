@@ -4,7 +4,7 @@ primary_region = "nrt"
 
 [build]
   [build.args]
-    NODE_VERSION = "20"
+    NODE_VERSION = "22"
 
 [env]
   PORT = "8787"

@@ -1,5 +1,5 @@
 // 수집 서버 주소. 배포하면 NEXT_PUBLIC_VT_API로 바꾼다(로컬에서 열면 대시보드·랜딩이 localhost:8787로 돌린다, 쿼리 ?api=는 개발·테스트용)
-export const DEFAULT_API = (process.env.NEXT_PUBLIC_VT_API || 'https://desktop-voqnli3.tail7bcbf1.ts.net').replace(/\/$/, '');
+export const DEFAULT_API = (process.env.NEXT_PUBLIC_VT_API || 'https://visitown-api.fly.dev').replace(/\/$/, '');
 export const LOCAL_API = 'http://localhost:8787';
 export const isLocalHost = (host: string) => /^(localhost|127\.\d+\.\d+\.\d+|)$/.test(host); // 페이지를 로컬에서 열었나(127.0.0.1 포함)
 const isLocalApi = (u: string) => /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(u);

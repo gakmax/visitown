@@ -9,3 +9,4 @@ src
 *.png
 server/.env
 server/sites.json
+.git
