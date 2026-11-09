@@ -17,7 +17,7 @@ Every visitor becomes a little character, every page becomes a building, and you
 - **Tracking SDK** (`sdk/visitown.js`): about 7 KiB gzipped (enforced by a test), batched sends, an offline queue with backoff, SPA route tracking and TypeScript types.
 - **English and Korean**: the whole UI (dashboard, landing, engine names, SDK widget) follows `Accept-Language` or a toggle, via a tiny gettext-style package (`packages/i18n`) whose dictionary is checked by tests.
 - **Accessibility**: 0 axe violations on every route (checked in CI), keyboard navigation of the canvas, and a 30-second screen-reader summary instead of a noisy live feed.
-- **Also**: horizontal scaling across instances via Supabase Realtime broadcast with a DB leader lease, a read-only MCP server (`server/mcp.js`), and 99 tests (`node:test`, fast-check property tests, Playwright smoke tests) in GitHub Actions.
+- **Also**: horizontal scaling across instances via Supabase Realtime broadcast with a DB leader lease, a read-only MCP server (`server/mcp.js`), and 108 tests (`node:test`, fast-check property tests, Playwright smoke tests) in GitHub Actions.
 
 ## Architecture
 

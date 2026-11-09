@@ -17,6 +17,8 @@ button{font:inherit;color:inherit}
 .logo{display:flex;align-items:center;gap:8px;font-family:var(--font-tiny);font-size:13px;letter-spacing:.5px}
 .logo img{width:24px;height:24px;image-rendering:pixelated}
 .site{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+/* 넓은 화면(1200px~)은 상단 바를 한 줄로: 모자라면 연결 상태 문구(데모 모드 · 가상 방문자 등)만 말줄임으로 줄어든다. 영어가 길어 DEMO 배지가 둘째 줄로 내려가던 것 */
+@media (min-width:1200px){ #top{flex-wrap:nowrap} #top>*{flex:none} #top>.site{flex:0 1 auto;min-width:0} .site>*{flex:none} .site .conn-text{flex:0 1 auto;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} }
 .site .dot{width:8px;height:8px;background:var(--accent);box-shadow:0 0 0 2px var(--panel),0 0 0 3px var(--edge);animation:blink 1.6s steps(2) infinite}
 @keyframes blink{50%{opacity:.35}}
 .stats{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
