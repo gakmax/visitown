@@ -3,8 +3,10 @@ import { headers } from 'next/headers';
 import { SHELL_APPLY } from '../lib/shell-head';
 import { requestLocale } from '../lib/locale';
 import { tr } from '@visitown/i18n';
+import { SITE_URL } from '../lib/site';
 
 const BASE_META: Metadata = {
+  metadataBase: new URL(SITE_URL), // 상대 주소 OG 이미지를 절대 주소로
   title: 'Visitown',
   manifest: '/manifest.webmanifest',
   icons: { icon: [{ url: '/icons/favicon.ico', sizes: '48x48' }, { url: '/icons/favicon-32.png', sizes: '32x32', type: 'image/png' }, { url: '/icons/favicon-16.png', sizes: '16x16', type: 'image/png' }], apple: '/icons/icon-180.png' },
@@ -13,7 +15,9 @@ const BASE_META: Metadata = {
 };
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await requestLocale();
-  return { ...BASE_META, description: tr(locale, '웹사이트 방문자를 픽셀 캐릭터로, 페이지를 마을 건물로 보여 주는 실시간 방문자 시각화. 설치는 스크립트 한 줄.') };
+  const description = tr(locale, '웹사이트 방문자를 픽셀 캐릭터로, 페이지를 마을 건물로 보여 주는 실시간 방문자 시각화. 설치는 스크립트 한 줄.');
+  // 링크 미리보기(디스코드·카카오톡·슬랙·X·레딧): 기본은 public/og.png(1200×630, 글자 없는 마을+로고라 언어 무관). 공개 마을은 자기 것으로 덮는다
+  return { ...BASE_META, description, openGraph: { type: 'website', siteName: 'Visitown', title: 'Visitown', description, images: [{ url: '/og.png', width: 1200, height: 630, alt: 'Visitown' }] }, twitter: { card: 'summary_large_image', title: 'Visitown', description, images: ['/og.png'] } };
 }
 export const viewport: Viewport = { width: 'device-width', initialScale: 1, themeColor: '#f1e6d2' };
 

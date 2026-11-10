@@ -1,6 +1,7 @@
 node_modules/
 .DS_Store
 *.png
+!apps/web/public/og.png
 
 # 비밀값
 .env
